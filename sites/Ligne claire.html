@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: החופש שבא מאין סוף</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* הגדרות טיילוינד מותאמות לסגנון Ligne claire */
+        @layer base {
+            body {
+                font-family: 'Rubik', sans-serif;
+                background-color: #f0f8ff; /* AliceBlue - צבע רקע שטוח ובהיר */
+                overflow-x: hidden; /* מונע גלילה אופקית מפרלקס */
+                cursor: none; /* מסתיר את הסמן ברירת המחדל */
+            }
+        }
+
+        /* סמן עכבר מותאם אישית - נראה תמיד */
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            transition: transform 0.1s ease-out; /* תנועה חלקה */
+            border: 2px solid #FFFFFF; /* גבול לבן */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* צל שחור לניגודיות */
+            z-index: 9999; /* תמיד למעלה */
+            transform: translate(-50%, -50%); /* ממקם את הסמן במרכזו */
+        }
+
+        /* לוחות Ligne claire - עם מסגרות עבות וצל עדין */
+        .ligne-claire-panel {
+            border: 4px solid black;
+            box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.8); /* צל קופצני קל לאפקט קומיקס */
+            background-color: white; /* צבע שטוח */
+            margin: 2rem auto; /* ממורכז */
+            padding: 2rem;
+            max-width: 90%; /* רספונסיביות */
+        }
+        @media (min-width: 768px) {
+            .ligne-claire-panel {
+                max-width: 70%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .ligne-claire-panel {
+                max-width: 60%;
+            }
+        }
+
+
+        /* שכבות רקע פרלקס - צבעים שטוחים, ז-אינדקס שלילי */
+        .parallax-layer-base {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2; /* מאחורי התוכן */
+        }
+        .parallax-layer-mid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -3; /* מאחורי ה-base */
+        }
+        .parallax-layer-far {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -4; /* מאחורי ה-mid */
+        }
+
+        /* בועות דיבור - אלמנט קומיקס קלאסי */
+        .speech-bubble {
+            position: relative;
+            background: #FFD700; /* Gold - צבע שטוח ובולט */
+            border-radius: .4em;
+            border: 4px solid black;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 500;
+            color: black; /* טקסט שחור לניגודיות */
+        }
+
+        /* יצירת קודקוד לבועת הדיבור */
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent; /* גודל הקודקוד */
+            margin-top: -20px; /* ממורכז אנכית */
+        }
+
+        /* קודקוד שמאלה (כלומר, הבועה מימין לדובר, הפונה שמאלה) */
+        .speech-bubble.point-left:after {
+            right: auto;
+            left: 0;
+            border-right-color: #FFD700;
+            border-left: 0;
+            margin-left: -20px;
+        }
+
+        /* קודקוד ימינה (כלומר, הבועה משמאל לדובר, הפונה ימינה) */
+        .speech-bubble.point-right:after {
+            left: auto;
+            right: 0;
+            border-left-color: #FFD700;
+            border-right: 0;
+            margin-right: -20px;
+        }
+    </style>
+    <script>
+        // תצורת Tailwind CSS מותאמת (JIT)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'lc-sky': '#ADD8E6', // Light Blue
+                        'lc-grass': '#90EE90', // Light Green
+                        'lc-earth': '#DAA520', // Goldenrod
+                        'lc-sun': '#FFD700', // Gold for highlights/bubbles
+                        'lc-panel-bg1': '#fdf2e9', // Very light orange/cream
+                        'lc-panel-bg2': '#e0f2f7', // Light cyan
+                        'lc-panel-bg3': '#e6f4ea', // Light green
+                        'lc-panel-bg4': '#fbe5e6', // Light pink
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-gray-900 leading-relaxed">
+
+    <!-- סמן עכבר מותאם אישית -->
+    <div id="custom-cursor" class="custom-cursor"></div>
+
+    <!-- שכבות רקע פרלקס -->
+    <div class="parallax-layer-far bg-lc-earth" id="parallax-bg-far"></div>
+    <div class="parallax-layer-mid bg-lc-grass" id="parallax-bg-mid"></div>
+    <div class="parallax-layer-base bg-lc-sky" id="parallax-bg-base"></div>
+
+    <main class="relative z-10 p-4 sm:p-8">
+
+        <!-- לוח כותרת ראשי -->
+        <section class="ligne-claire-panel bg-lc-panel-bg1 mb-12 py-8 flex flex-col items-center justify-center text-center">
+            <h1 class="text-5xl sm:text-7xl font-bold text-black mb-4 leading-tight">מאיר אבינר</h1>
+            <h2 class="text-3xl sm:text-4xl text-black font-light leading-snug">האמן הנודד: חופש כדרך חיים</h2>
+            <p class="mt-6 text-xl sm:text-2xl max-w-2xl text-black">מסע רב-גוני של אילתור, שבירת מסגרות והבאת אור אל הקצוות.</p>
+        </section>
+
+        <!-- לוח 1: הרועה והמרחב הפתוח -->
+        <section class="ligne-claire-panel bg-lc-panel-bg2 mb-12 md:flex md:flex-row-reverse md:items-center md:gap-8">
+            <div class="md:w-1/2">
+                <h3 class="text-4xl font-semibold mb-4 text-center md:text-right text-black">מגבעות בית אל לרחובות תל אביב</h3>
+                <p class="text-lg leading-relaxed mb-4 text-black">מאיר נולד למשפחה דתית-לאומית, בצל ישיבת אביו, הרב שלמה אבינר. הוא גדל בהתנחלות בית אל, רועה צאן בגליל, חי חיים כפריים, קרוב לאדמה ולשמים. בגיל 16, כ"נער גבעות", הוא פעל למען הקמת התנחלויות. אך נפשו הפרועה, המחפשת תמיד את המרחב, לא הסתפקה בגבולות גיאוגרפיים או דתיים.</p>
+                <p class="text-lg leading-relaxed text-black">היציאה בשאלה לא הייתה ויתור, אלא מסע אל חופש פנימי עמוק יותר. כמו הרוח שנושבת בין ההרים, הוא השתחרר ממסגרות, אך נשא עמו את האמונה בכוח הריפוי והיצירה. היום, בתל אביב, הוא מוצא את המרחב שלו באמנות חופשית, ללא גבולות, המשלבת את עברו עם הווה צבעוני.</p>
+            </div>
+            <div class="md:w-1/2 flex items-center justify-center mt-8 md:mt-0">
+                <div class="w-64 h-64 sm:w-80 sm:h-80 border-4 border-black bg-green-400 flex items-center justify-center text-center text-xl sm:text-2xl font-bold p-4 text-black">
+                    <p>המרחבים הפתוחים קוראים לחופש</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- לוח 2: כישרונותיו - סימפוניית אילתור -->
+        <section class="ligne-claire-panel bg-lc-panel-bg3 mb-12">
+            <h3 class="text-4xl font-semibold mb-8 text-center text-black">כישרונותיו: סימפוניית האילתור של הנפש</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="border-4 border-black p-6 bg-white flex flex-col items-center text-center">
+                    <div class="w-24 h-24 border-2 border-black rounded-full bg-yellow-200 flex items-center justify-center text-4xl mb-4 text-black">🎶</div>
+                    <h4 class="text-2xl font-semibold mb-2 text-black">אילתור</h4>
+                    <p class="text-base leading-relaxed text-black">מאיר הוא מורה דרך באמנות האילתור. הוא יוצר תפילות ספונטניות, מביע רגשות עמוקים דרך צלילים ומילים. עבורו, אילתור הוא כלי לשחרור, דרך להפוך כעס לשמחה, ופחד לאהבה.</p>
+                </div>
+                <div class="border-4 border-black p-6 bg-white flex flex-col items-center text-center">
+                    <div class="w-24 h-24 border-2 border-black rounded-full bg-red-200 flex items-center justify-center text-4xl mb-4 text-black">🎸</div>
+                    <h4 class="text-2xl font-semibold mb-2 text-black">מוזיקה</h4>
+                    <p class="text-base leading-relaxed text-black">גיטרה, חליל, כלי נשיפה אלקטרוניים - כולם כלי ביטוי בידיו. הוא יוצר אקורדים מהדהדים ומזמין קהל לצעוק יחד, או פורץ את גבולות המציאות בטראנסים מוזיקליים שסוחפים את הנפש.</p>
+                </div>
+                <div class="border-4 border-black p-6 bg-white flex flex-col items-center text-center">
+                    <div class="w-24 h-24 border-2 border-black rounded-full bg-purple-200 flex items-center justify-center text-4xl mb-4 text-black">🎭</div>
+                    <h4 class="text-2xl font-semibold mb-2 text-black">קומדיה</h4>
+                    <p class="text-base leading-relaxed text-black">הומור הוא כוח משחרר. מאיר משלב קומדיה בפעילויותיו, הופך צעקות למשחקים משעשעים, או מביא כובע עם נוצה צבעונית לכלא, כדי להכניס "הפוך" - צבע וחיוך - למקומות חשוכים.</p>
+                </div>
+                <div class="border-4 border-black p-6 bg-white flex flex-col items-center text-center">
+                    <div class="w-24 h-24 border-2 border-black rounded-full bg-green-200 flex items-center justify-center text-4xl mb-4 text-black">✍️</div>
+                    <h4 class="text-2xl font-semibold mb-2 text-black">שירה</h4>
+                    <p class="text-base leading-relaxed text-black">מילים הן כלי עוצמתי. מאיר כותב שירים ותפילות אישיות, המשקפים מסע עמוק של נפש מחפשת חופש, ביטוי ואמת. יצירותיו משלבות את הפנימי עם החיצוני, את המסורת עם החדשנות.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- לוח 3: פעילותיו - גשרים של אור -->
+        <section class="ligne-claire-panel bg-lc-panel-bg4 mb-12">
+            <h3 class="text-4xl font-semibold mb-8 text-center text-black">פועלו: גשרים של אור במקומות כבולים</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="border-4 border-black p-6 bg-white flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-2 text-black">ביקורים בבתי כלא: החופש שמעבר לחומות</h4>
+                        <p class="text-base leading-relaxed mb-4 text-black">שלוש-ארבע פעמים בשבוע, מאיר נכנס לבדו אל חומות בתי הכלא בישראל. הוא מגיע לשרון, לרמלה, למקומות שבהם התקווה דועכת. שם, הוא מנגן, שר, ומאלתר עם אסירים, יוצר מעגלי חיבוק וצחוק, ומאפשר להם "לברוח מהכלא לשעה". הפרויקט, הממומן כולו מתרומות פרטיות, מביא ריפוי עמוק. "אין קירות שאני לא יכול לעבור", הוא אומר, ומגלה את החופש הפנימי גם במקום הכבול ביותר.</p>
+                    </div>
+                    <div class="speech-bubble point-right mt-6 max-w-sm mr-auto text-black">
+                        <p class="text-sm font-medium">"העולם צריך צחוק, צבע וחופש."</p>
+                    </div>
+                </div>
+                <div class="border-4 border-black p-6 bg-white flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-2 text-black">אמנות רחוב: הבמה היא העולם כולו</h4>
+                        <p class="text-base leading-relaxed mb-4 text-black">לפני כ-15 שנה, לאחר ששבר חליל צד, יצא מאיר לרחובות תל אביב להתפרנס. הוא התחפש לקרקס, עמד ללא ניע על שלטים, וניגן על עצים ועמודים. אמנות רחוב פעלולנית זו הפכה לפלטפורמה לבטא את תפיסת עולמו – לשבור את השגרה, להפתיע, להביא את הלא צפוי אל מרכז העיר הסואן. הוא חוזר לפעילות זו מעת לעת, מנגן שירי שבת בלבוש לבן, מביא תמימות ושמחה.</p>
+                    </div>
+                    <div class="speech-bubble point-left mt-6 max-w-sm ml-auto text-black">
+                        <p class="text-sm font-medium">"להיות חופשי זה מצב תודעה."</p>
+                    </div>
+                </div>
+                <div class="border-4 border-black p-6 bg-white">
+                    <h4 class="text-2xl font-semibold mb-2 text-black">סדנאות וטקסים: נשימה וריפוי מעגלי</h4>
+                    <p class="text-base leading-relaxed text-black">מעבר להופעות, מאיר מנחה סדנאות נשימה מודעת (Breathwork), טקסי ריפוי בנשימה מעגלית ('נשימת רבים'), ותוכניות חגים ספירטואליות עמוקות. בירושלים, בבית מיציא, הוא נפגש עם מאות משתתפים לטקסי ריפוי קולי ותנועה. הוא מאמין בתרפיית קול בתנועה ובנשימה כדרך לשחרור רגשי, חיבור לעצמי ולקהילה, וכמפתח לחופש פנימי אמיתי ללא גבולות.</p>
+                </div>
+                <div class="border-4 border-black p-6 bg-white">
+                    <h4 class="text-2xl font-semibold mb-2 text-black">הופעות והרפתקאות: על במות העולם</h4>
+                    <p class="text-base leading-relaxed text-black">מאיר מופיע גם על במות קונבנציונליות יותר, לעיתים עם אחיו ואחותו, יוצר חוויה משפחתית ורב-דורית של אמנות. הוא ממשיך לכתוב ולפרסם סיפורים מרתקים מפעילויותיו, ומתאר את חייו כמסע מתמיד ללא מסגרות. הוא הולך, שוחה, יוצר, וחי כל רגע כהופעה. ה"פלואו" שלו, אותו שיר מיוטיוב, מבטא את המהות הזו – להיות בתנועה, בזרימה, תמיד חופשי, בתוך כל מסגרת ובשבירתה.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- לוח 4: פילוסופיה - האמנות כחופש -->
+        <section class="ligne-claire-panel bg-lc-panel-bg1 mb-12 flex flex-col items-center text-center">
+            <h3 class="text-4xl font-semibold mb-8 text-black">פילוסופיה: אמנות החיים, החופש הפנימי</h3>
+            <div class="max-w-3xl">
+                <p class="text-lg leading-relaxed mb-4 text-black">מאיר אבינר הוא לא רק אמן, הוא פילוסוף של חופש, מהפכן רוחני. החיפוש אחר חופש פנימי, גם במקומות כבולים ביותר, הוא ליבת דרכו. הוא דוחף לשבירת מוסכמות חברתיות, לחיבור עמוק בין מסורת יהודית עתיקה לגישות עכשוויות, ולריפוי דרך חיבור אנושי ואמנות פורצת גבולות.</p>
+                <p class="text-lg leading-relaxed mb-4 text-black">"אני מגיע לבתי כלא ומביא איתי את התחושה שאין קירות שאני לא יכול לעבור", הוא אומר. עבודתו היא הוכחה חיה לכך שהחופש האמיתי נמצא בתוך הנפש, ביכולת לאלתר, לצחוק, לשיר, ולאהוב, גם כשהעולם מנסה להכניס אותך למסגרת. זוהי אמנות החיים, במלוא הדרתה וחופש פעולתה.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <div class="border-4 border-black p-4 bg-lc-sun text-black font-semibold text-lg">חופש פנימי</div>
+                <div class="border-4 border-black p-4 bg-yellow-300 text-black font-semibold text-lg">שבירת מוסכמות</div>
+                <div class="border-4 border-black p-4 bg-pink-300 text-black font-semibold text-lg">ריפוי באמנות</div>
+                <div class="border-4 border-black p-4 bg-blue-300 text-black font-semibold text-lg">חיבור אנושי</div>
+            </div>
+        </section>
+
+        <!-- לוח 5: קישורים - נתיבי ההשראה -->
+        <section class="ligne-claire-panel bg-lc-panel-bg2 mb-12">
+            <h3 class="text-4xl font-semibold mb-8 text-center text-black">לחקור עוד: נתיבי ההשראה של מאיר</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" class="block border-4 border-black p-6 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <p class="text-2xl font-bold mb-2 text-black">פייסבוק אישי 🌐</p>
+                    <p class="text-base text-gray-700">סיפורים מרתקים, הופעות ותכנים אישיים</p>
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="block border-4 border-black p-6 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <p class="text-2xl font-bold mb-2 text-black">פודקאסט "עושים שינוי" 🎙️</p>
+                    <p class="text-base text-gray-700">ראיון מעמיק על מסע חייו הייחודי</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" class="block border-4 border-black p-6 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <p class="text-2xl font-bold mb-2 text-black">יוטיוב – פרק הפודקאסט 📺</p>
+                    <p class="text-base text-gray-700">צפו בראיון המלא והמעורר השראה</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="block border-4 border-black p-6 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <p class="text-2xl font-bold mb-2 text-black">יוטיוב – שיר "פלואו" 🎵</p>
+                    <p class="text-base text-gray-700">חוו גשם מוזיקלי וזרימה אמנותית</p>
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block border-4 border-black p-6 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <p class="text-2xl font-bold mb-2 text-black">לוח הופעות וכרטיסים 🎟️</p>
+                    <p class="text-base text-gray-700">הישאר מעודכן על מופעים קרובים ומרגשים</p>
+                </a>
+                <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="block border-4 border-black p-6 bg-white hover:bg-gray-50 transition-colors duration-200">
+                    <p class="text-2xl font-bold mb-2 text-black">מאמר במאקו (2018) 📰</p>
+                    <p class="text-base text-gray-700">הצצה לסיפורו המשפחתי ויציאתו בשאלה</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- לוח תחתון -->
+        <footer class="ligne-claire-panel bg-gray-800 text-white text-center py-8">
+            <p class="text-lg">© 2024 מאיר אבינר: האמנות כחופש. כל הזכויות שמורות ליצירה.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // לוגיקת סמן עכבר מותאם אישית
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // לוגיקת גלילה פרלקס
+        const parallaxBgBase = document.getElementById('parallax-bg-base');
+        const parallaxBgMid = document.getElementById('parallax-bg-mid');
+        const parallaxBgFar = document.getElementById('parallax-bg-far');
+
+        window.addEventListener('scroll', () => {
+            let scrollPosition = window.pageYOffset;
+
+            // התאמת ערכים לתנועת פרלקס עדינה, אופיינית לרקעים של Ligne claire
+            parallaxBgBase.style.transform = `translateY(${scrollPosition * 0.15}px)`;
+            parallaxBgMid.style.transform = `translateY(${scrollPosition * 0.25}px)`;
+            parallaxBgFar.style.transform = `translateY(${scrollPosition * 0.35}px)`;
+        });
+    </script>
+</body>
+</html>

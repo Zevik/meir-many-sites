@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - פסיפס חופשי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden;
+            background-color: #1a1a1a; /* Dark base for cubist feel */
+            color: #f5f5f5; /* Light text for contrast */
+            line-height: 1.8;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Heebo', sans-serif;
+            font-weight: 700;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #F5F5F5; /* Light border */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow for contrast */
+            transition: transform 0.1s ease-out;
+            z-index: 9999;
+        }
+
+        .cubist-shape {
+            position: absolute;
+            opacity: 0.1;
+            transform-origin: center center;
+            pointer-events: none;
+        }
+
+        /* Cubist color palette */
+        .color-a { background-color: #3d3d3d; } /* Dark charcoal */
+        .color-b { background-color: #575757; } /* Medium gray */
+        .color-c { background-color: #7a7a7a; } /* Light gray */
+        .color-d { background-color: #4a3c30; } /* Muted brown */
+        .color-e { background-color: #6a5a4a; } /* Medium brown */
+        .color-f { background-color: #8c7a6a; } /* Light brown */
+        .color-g { background-color: #2b2b2b; } /* Darker charcoal */
+        .color-highlight { background-color: #a88d5e; } /* Muted gold/ochre for Meir's vibrancy */
+        .text-highlight { color: #a88d5e; }
+
+        .cubist-bg-layer {
+            position: fixed;
+            width: 150vw; /* Wider to cover parallax movement */
+            height: 150vh; /* Taller to cover parallax movement */
+            top: -25vh; /* Center it roughly */
+            left: -25vw;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-900 text-stone-100 min-h-screen">
+
+    <div class="custom-cursor"></div>
+
+    <!-- Cubist Background Layers - Fragmented Perspectives -->
+    <div class="cubist-bg-layer rotate-[-15deg] opacity-5 color-a" data-speed="0.05"></div>
+    <div class="cubist-bg-layer rotate-[25deg] opacity-7 color-d" data-speed="0.03" style="width: 120vw; height: 120vh; top: -10vh; left: -10vw;"></div>
+    <div class="cubist-bg-layer rotate-[5deg] opacity-3 color-g" data-speed="0.07" style="width: 180vw; height: 180vh; top: -40vh; left: -40vw;"></div>
+    <div class="cubist-bg-layer rotate-[40deg] opacity-6 color-e" data-speed="0.04" style="width: 110vw; height: 110vh; top: 0vh; left: 0vw;"></div>
+    <div class="cubist-bg-layer rotate-[-50deg] opacity-4 color-b" data-speed="0.06" style="width: 130vw; height: 130vh; top: -20vh; left: -20vw;"></div>
+    <div class="cubist-bg-layer rotate-[10deg] opacity-8 color-f" data-speed="0.02" style="width: 160vw; height: 160vh; top: -30vh; left: -30vw;"></div>
+
+    <div class="relative z-0 min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 lg:p-16">
+        
+        <!-- Header - Fragmented Title -->
+        <header class="w-full max-w-4xl mx-auto mb-16 text-center pt-16">
+            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold leading-none tracking-tight text-highlight mb-4">
+                מאיר אבינר
+            </h1>
+            <p class="text-2xl sm:text-3xl md:text-4xl text-stone-300">
+                פסיפס של חופש, צבע וצליל
+            </p>
+            <div class="flex justify-center mt-8 space-x-4">
+                <div class="w-20 h-2 bg-highlight transform rotate-45"></div>
+                <div class="w-20 h-2 bg-stone-500 transform rotate-[-30deg]"></div>
+                <div class="w-20 h-2 bg-highlight transform rotate-[60deg]"></div>
+            </div>
+        </header>
+
+        <main class="w-full max-w-4xl mx-auto space-y-24">
+            
+            <!-- Section 1: שורשים ומסגרות - Roots and Frameworks -->
+            <section class="relative bg-stone-800 bg-opacity-70 p-8 sm:p-12 md:p-16 rounded-lg shadow-2xl overflow-hidden group">
+                <div class="absolute inset-0 bg-stone-700 opacity-20 transform -skew-y-3 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                <h2 class="relative text-4xl sm:text-5xl md:text-6xl text-highlight mb-8 z-10">
+                    שורשים ומסגרות
+                </h2>
+                <div class="relative text-xl sm:text-2xl text-stone-200 z-10 space-y-6">
+                    <p>
+                        נולד אל לב הפסיפס. אדמה. מסורת. גבעות שהיו לבית. אבני דרך שהונחו בקפידה.
+                        שנים של רוח מדבר, עדרי צאן וקודש. נוף פראי צייר את המרחב הפנימי.
+                        שם, בין הסלעים, התגבשה הנפש - מבקשת להתארך, להתפשט מעבר לקווים שהוגדרו.
+                    </p>
+                    <p>
+                        בחירה. נקודת שבר. קו שנשבר, התעקם, פתח פרספקטיבה חדשה.
+                        הכפר הדתי פינה מקום למרחבי הנפש הבלתי מוגדרים.
+                        מרד החופש, חיפוש אחר ה"אני" המקורי, מבעד לשברים של עבר ועתיד.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 2: אילתור ותנועה - Improvisation and Movement -->
+            <section class="relative bg-stone-700 bg-opacity-70 p-8 sm:p-12 md:p-16 rounded-lg shadow-2xl overflow-hidden group">
+                <div class="absolute inset-0 bg-stone-600 opacity-20 transform skew-y-6 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                <h2 class="relative text-4xl sm:text-5xl md:text-6xl text-highlight mb-8 z-10">
+                    אילתור ותנועה
+                </h2>
+                <div class="relative text-xl sm:text-2xl text-stone-200 z-10 space-y-6">
+                    <p>
+                        החליל נשבר, וממנו נולד נגן רחוב. הצורך לדייק את הצליל, לתקן את השבר, הפך לכור היתוך של יצירה.
+                        אילתור - לא רק כלי, אלא פילוסופיה. תפילה ספונטנית, צחוק משוחרר, קונפליקט שהופך לריקוד.
+                        החיים כסדרת אירועים בלתי צפויים, המחכים לקבל צורה ברגע האמת.
+                    </p>
+                    <p>
+                        גיטרה, חליל צד, כלי נשיפה אלקטרוניים - קולות שבוראים עולמות.
+                        הרחוב הופך לבמה, העצים לעמודים, התל אביביים לקהל.
+                        מתוך הכאוס, מתוך החופש, נבנית הרמוניה חדשה, טראנס אימפרוביזטורי של נשמה.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 3: אור בכלא - Light in Prison -->
+            <section class="relative bg-stone-800 bg-opacity-70 p-8 sm:p-12 md:p-16 rounded-lg shadow-2xl overflow-hidden group">
+                <div class="absolute inset-0 bg-stone-700 opacity-20 transform -skew-y-3 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                <h2 class="relative text-4xl sm:text-5xl md:text-6xl text-highlight mb-8 z-10">
+                    אור בכלא
+                </h2>
+                <div class="relative text-xl sm:text-2xl text-stone-200 z-10 space-y-6">
+                    <p>
+                        הקירות הכבדים. הסורגים. המצוקה. דווקא שם, במקום שבו החופש נראה כה רחוק, פורץ מאיר.
+                        לא סוהר. לא עובד סוציאלי. אמן. נכנס לבדו, מצויד בגיטרה, חיוך, וכובע נוצה.
+                        הוא מביא איתו לא רק מוזיקה, אלא את האמונה בחופש הפנימי, גם כשהגוף כבול.
+                    </p>
+                    <p>
+                        "לברוח מהכלא לשעה" - זו המתנה. אסירים ששותקים שנים פתאום שרים, צועקים, צוחקים.
+                        מעגלי חיבוק מאולתרים, תפילות ספונטניות, פלירטוט עם כאב והפיכתו לשמחה.
+                        פרויקט "סיפורים מכלא" - רישום של רגעים אלו, שברים של אור מתוך חושך.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 4: הפילוסופיה - The Philosophy -->
+            <section class="relative bg-stone-700 bg-opacity-70 p-8 sm:p-12 md:p-16 rounded-lg shadow-2xl overflow-hidden group">
+                <div class="absolute inset-0 bg-stone-600 opacity-20 transform skew-y-6 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                <h2 class="relative text-4xl sm:text-5xl md:text-6xl text-highlight mb-8 z-10">
+                    הפילוסופיה
+                </h2>
+                <div class="relative text-xl sm:text-2xl text-stone-200 z-10 space-y-6">
+                    <p>
+                        "העולם צריך צחוק, צבע וחופש." זו אינה רק אמירה, אלא דרך חיים.
+                        נשימה מודעת, תנועה, שחייה, הליכה - כל אלה כלים לשחרור, להתמרה.
+                        לשבור מסגרות, לחיות ללא תלות, לבחור באותנטיות על פני וודאות.
+                    </p>
+                    <p>
+                        החופש הפנימי אינו תלוי בנסיבות חיצוניות. הוא יכול להימצא בכל מקום.
+                        הוא נשימה עמוקה בכלא, צחוק רועם ברחוב, שיר פתאומי על עמוד תאורה.
+                        הוא האמנות שבלהיות אדם, בפסיפס הבלתי פוסק של שינוי וצמיחה.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 5: קישורים - Links -->
+            <section class="relative bg-stone-800 bg-opacity-70 p-8 sm:p-12 md:p-16 rounded-lg shadow-2xl overflow-hidden group">
+                <div class="absolute inset-0 bg-stone-700 opacity-20 transform -skew-y-3 scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                <h2 class="relative text-4xl sm:text-5xl md:text-6xl text-highlight mb-8 z-10">
+                    שברים מחוברים
+                </h2>
+                <div class="relative text-xl sm:text-2xl text-stone-200 z-10 space-y-4">
+                    <p>
+                        לצלול עמוק יותר אל תוך הפסיפס של מאיר:
+                    </p>
+                    <ul class="list-none space-y-3 text-right">
+                        <li><a href="https://www.facebook.com/meiraviner/" target="_blank" class="text-highlight hover:underline">פייסבוק - רגעים מהכלא והופעות</a></li>
+                        <li><a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="text-highlight hover:underline">פודקאסט "עושים שינוי" - פרק 182</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" class="text-highlight hover:underline">יוטיוב - ראיון פודקאסט מלא</a></li>
+                        <li><a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="text-highlight hover:underline">לוח הופעות וכרטיסים</a></li>
+                        <li><a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="text-highlight hover:underline">מאמר במאקו - סיפור משפחתי</a></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="w-full max-w-4xl mx-auto mt-24 text-center text-stone-400 text-lg">
+            <p>
+                "העולם צריך צחוק, צבע וחופש" - מאיר אבינר
+            </p>
+            <div class="flex justify-center mt-4 space-x-4">
+                <div class="w-16 h-1 bg-highlight transform rotate-[-20deg]"></div>
+                <div class="w-16 h-1 bg-stone-500"></div>
+                <div class="w-16 h-1 bg-highlight transform rotate-[20deg]"></div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const cursor = document.querySelector('.custom-cursor');
+        const cubistElements = document.querySelectorAll('.cubist-bg-layer');
+
+        document.addEventListener('mousemove', e => {
+            cursor.style.transform = `translate3d(${e.clientX - cursor.offsetWidth / 2}px, ${e.clientY - cursor.offsetHeight / 2}px, 0)`;
+        });
+
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            cubistElements.forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-speed'));
+                const transformY = -scrollY * speed;
+                el.style.transform = `translate3d(0, ${transformY}px, 0) ${el.style.transform.split(') ')[1] || ''}`;
+            });
+        });
+
+        // Initial background transform to activate parallax on load for cubist layers
+        cubistElements.forEach(el => {
+            const speed = parseFloat(el.getAttribute('data-speed'));
+            const initialTransformY = -window.scrollY * speed;
+            el.style.transform = `translate3d(0, ${initialTransformY}px, 0) ${el.style.transform}`;
+        });
+
+    </script>
+</body>
+</html>

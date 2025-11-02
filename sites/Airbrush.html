@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: נשימת חופש ברוח האווירבראש</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles & Fonts */
+        :root {
+            --cursor-size: 30px;
+        }
+        body {
+            font-family: 'Assistant', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            cursor: none; /* Hide default cursor */
+            background-color: #0d0d1a; /* Dark base for airbrush feel */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Rubik', sans-serif;
+        }
+
+        /* Custom Cursor - High Contrast REQUIRED */
+        .custom-cursor {
+            position: fixed;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+            /* REQUIRED TECHNIQUE: Light border + Dark, high-opacity box-shadow */
+            border: 2px solid #FFFFFF; /* Visible on dark backgrounds */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Visible on light backgrounds */
+            background-color: transparent; /* Transparent core */
+        }
+        .custom-cursor.active {
+            width: calc(var(--cursor-size) * 1.5);
+            height: calc(var(--cursor-size) * 1.5);
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle fill on click */
+        }
+
+        /* Airbrush specific styles */
+        .airbrush-gradient-1 {
+            background: radial-gradient(circle at top left, #a78bfa 0%, transparent 50%); /* Purple */
+            opacity: 0.3;
+        }
+        .airbrush-gradient-2 {
+            background: radial-gradient(circle at bottom right, #f472b6 0%, transparent 50%); /* Pink */
+            opacity: 0.3;
+        }
+        .airbrush-gradient-3 {
+            background: radial-gradient(circle at center, #818cf8 0%, transparent 70%); /* Indigo */
+            opacity: 0.3;
+        }
+        
+        .airbrush-glow {
+            box-shadow: 0 0 30px rgba(167, 139, 250, 0.7), /* Purple */
+                        0 0 60px rgba(244, 114, 182, 0.5), /* Pink */
+                        0 0 100px rgba(129, 140, 248, 0.3); /* Indigo */
+        }
+
+        /* Text Reveal Animation */
+        .text-reveal-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .text-reveal-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Individual text reveal within a container */
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .text-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax Layering */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        /* Custom z-index values for parallax layers */
+        .z-[-1] { z-index: -1; }
+        .z-[-2] { z-index: -2; }
+        .z-[-3] { z-index: -3; }
+        .z-[-4] { z-index: -4; }
+
+        /* Floating particles animation */
+        @keyframes float-1 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            50% { transform: translate(20px, 30px) scale(1.1); opacity: 0.6; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+        }
+        @keyframes float-2 {
+            0% { transform: translate(0, 0) scale(1.1); opacity: 0.4; }
+            50% { transform: translate(-25px, -15px) scale(1); opacity: 0.5; }
+            100% { transform: translate(0, 0) scale(1.1); opacity: 0.4; }
+        }
+        @keyframes float-3 {
+            0% { transform: translate(0, 0) scale(0.9); opacity: 0.6; }
+            50% { transform: translate(15px, -20px) scale(1); opacity: 0.7; }
+            100% { transform: translate(0, 0) scale(0.9); opacity: 0.6; }
+        }
+        .animate-float-1 { animation: float-1 15s ease-in-out infinite alternate; }
+        .animate-float-2 { animation: float-2 18s ease-in-out infinite alternate-reverse; }
+        .animate-float-3 { animation: float-3 12s ease-in-out infinite alternate; }
+
+        /* Tailwind specific override for backdrop-blur on main content to prevent blurring parallax layers */
+        main {
+            backdrop-filter: blur(4px);
+            background-color: rgba(0, 0, 0, 0.3); /* Dark transparent background for content */
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+
+    <!-- Parallax Background Layers (z-index negative to be behind content) -->
+    <!-- Layer 1: Deep Space Gradient Base -->
+    <div id="parallax-layer-1" class="parallax-layer z-[-4] bg-gradient-to-br from-[#0d0d1a] via-[#1a0f2e] to-[#2e1a3d] opacity-90"></div>
+    
+    <!-- Layer 2: Subtle Textured Image (Unsplash placeholder - No Base64) -->
+    <div id="parallax-layer-2" class="parallax-layer z-[-3] bg-[url('https://source.unsplash.com/random/1920x1080/?desert-stars,spiritual,israel,sky')] bg-cover bg-center opacity-10" data-speed="0.05"></div>
+    
+    <!-- Layer 3: Main Airbrush Glows (CSS generated) -->
+    <div id="parallax-layer-3" class="parallax-layer z-[-2] flex justify-center items-center" data-speed="0.15">
+        <div class="airbrush-gradient-1 w-3/4 h-3/4 absolute top-1/4 left-1/4 rounded-full filter blur-3xl"></div>
+        <div class="airbrush-gradient-2 w-2/3 h-2/3 absolute bottom-1/4 right-1/4 rounded-full filter blur-3xl"></div>
+        <div class="airbrush-gradient-3 w-1/2 h-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full filter blur-3xl"></div>
+    </div>
+    
+    <!-- Layer 4: Floating Abstract Particles (CSS animated) -->
+    <div id="parallax-layer-4" class="parallax-layer z-[-1]" data-speed="0.25">
+        <div class="absolute top-[10%] left-[15%] w-20 h-20 bg-purple-400 rounded-full filter blur-xl opacity-50 animate-float-1"></div>
+        <div class="absolute bottom-[20%] right-[10%] w-32 h-32 bg-pink-400 rounded-full filter blur-xl opacity-40 animate-float-2"></div>
+        <div class="absolute top-[40%] left-[45%] w-24 h-24 bg-indigo-400 rounded-full filter blur-xl opacity-60 animate-float-3"></div>
+        <div class="absolute top-[60%] left-[5%] w-16 h-16 bg-blue-300 rounded-full filter blur-xl opacity-30 animate-float-2"></div>
+        <div class="absolute bottom-[5%] right-[40%] w-28 h-28 bg-red-400 rounded-full filter blur-xl opacity-55 animate-float-1"></div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 min-h-screen text-white p-8 md:p-16 max-w-4xl mx-auto">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-center text-center pb-20 pt-40 md:pt-20 text-reveal-container">
+            <h1 class="text-6xl md:text-8xl font-bold mb-8 airbrush-glow text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300 text-reveal">מאיר אבינר</h1>
+            <p class="text-3xl md:text-4xl leading-relaxed text-gray-200 mb-10 text-reveal">נשימת חופש, אמנות נצחית</p>
+            <p class="text-lg md:text-xl max-w-2xl text-gray-300 mb-12 text-reveal">מסע של רוח, צליל, צבע ותנועה - ממרחבי המדבר אל ליבות כבולות.</p>
+            <button class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 text-reveal" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">גלו את המסע</button>
+        </section>
+
+        <!-- About Meir Section -->
+        <section id="about" class="py-20 md:py-32 border-b border-gray-700/50 text-reveal-container">
+            <h2 class="text-5xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-sky-300 text-reveal">הדרך הנפרצת</h2>
+            <p class="text-xl leading-relaxed mb-6 text-gray-200 text-reveal">מאיר אבינר, אמן רב-גוני ויוצר פורץ גבולות, מגלם בחייו יצירה בלתי פוסקת. מילדות דתית בהתנחלות כפרית, דרך חיי רועה צאן בגליל, ועד הפיכתו לקול של חופש ויצירה בתל אביב ובבתי הכלא – מסעו הוא אודיסאה של חיפוש אחר אמת פנימית ושחרור מכל מסגרת.</p>
+            <p class="text-xl leading-relaxed mb-6 text-gray-200 text-reveal">הוא המחיש בגופו ובנפשו את המעבר מ'נער גבעות' מוקף טבע פראי, אל אמן רחוב תל-אביבי המצייר בצלילים, תנועה והומור, ולבסוף, למגדלור של תקווה בחדרים אפלים – לבבות כבולים מאחורי סורג ובריח. דרכו אינה לינארית, אלא מעגלית, שבה כל תחנה מפרקת ומבנה מחדש את משמעות החופש.</p>
+            <p class="text-xl leading-relaxed text-gray-200 text-reveal">בליבו, מאיר הוא אמן אילתור, רואה בכל רגע פוטנציאל לבריאה ספונטנית – תפילה, צליל, בדיחה או חיבוק. הוא מאמין שהעולם זקוק לצחוק, צבע וחופש, וזהו מנוע הפעולה לכל יוזמותיו.</p>
+        </section>
+
+        <!-- Talents Section -->
+        <section class="py-20 md:py-32 border-b border-gray-700/50 text-reveal-container">
+            <h2 class="text-5xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300 text-reveal">פסיפס של כישרונות</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="p-8 bg-black/40 rounded-3xl airbrush-glow text-reveal">
+                    <h3 class="text-3xl font-bold mb-4 text-purple-200">אילתור: שפת הנשמה</h3>
+                    <p class="text-lg leading-relaxed text-gray-300">מאיר הוא מסטר באילתור – תפילות ספונטניות, צלילים שפורצים ממעמקים, משחקי מילים ששוברים את המתח. עבורו, אילתור הוא כלי לשחרור, דרך להפוך כעס לשמחה ופחד לאהבה, גם במקומות הכי פחות צפויים.</p>
+                </div>
+                <div class="p-8 bg-black/40 rounded-3xl airbrush-glow text-reveal">
+                    <h3 class="text-3xl font-bold mb-4 text-pink-200">מוזיקה: גשר של צלילים</h3>
+                    <p class="text-lg leading-relaxed text-gray-300">הגיטרה, החליל וכלי הנשיפה האלקטרוניים הם כלי הביטוי שלו. הוא יוצר אקורדים מהדהדים, מזמין לצעקות משותפות שהופכות לטראנס מוזיקלי, ומנגן ברחובות תל אביב עם עיניים כבולות, כשהוא עומד על ראשו.</p>
+                </div>
+                <div class="p-8 bg-black/40 rounded-3xl airbrush-glow text-reveal">
+                    <h3 class="text-3xl font-bold mb-4 text-blue-200">קומדיה: צחוק שפורק</h3>
+                    <p class="text-lg leading-relaxed text-gray-300">ההומור הוא כוח מרפא בידיו של מאיר. הוא הופך צעקות למשחקים משעשעים, מביא כובע עם נוצה צבעונית לכלא, ומפיח חיים, צבע וקלילות במקומות שבהם השמחה נדירה. הוא "מביא הפוך" – הומור במקום ייאוש.</p>
+                </div>
+                <div class="p-8 bg-black/40 rounded-3xl airbrush-glow text-reveal">
+                    <h3 class="text-3xl font-bold mb-4 text-yellow-200">שירה: מילים של עומק</h3>
+                    <p class="text-lg leading-relaxed text-gray-300">כותב שירים ותפילות אישיות המשולבות בהופעותיו. מילותיו הן השתקפות של מחשבותיו העמוקות על חופש, בחירה, ועל הדרך הייחודית שבחר ללכת בה – דרך של אמת ללא פשרות.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prison Work Section -->
+        <section class="py-20 md:py-32 border-b border-gray-700/50 text-reveal-container">
+            <h2 class="text-5xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 text-reveal">החופש שמאחורי הסורגים</h2>
+            <p class="text-xl leading-relaxed mb-6 text-gray-200 text-reveal">ליבת פועלו של מאיר היא עבודתו המסורה בבתי הכלא. 3-4 פעמים בשבוע הוא פוסע לבדו, ללא ליווי, אל תוככי כלא שרון, רמלה ואחרים. הוא אינו מגיע כמרצה או איש חינוך, אלא כאמן, כבן אדם, כדי להביא צבע, צליל וחיוך למציאות אפורה וכבויה.</p>
+            <p class="text-xl leading-relaxed mb-6 text-gray-200 text-reveal">בגיטרה ובחליל, דרך אילתור ותפילות משותפות, הוא יוצר מרחב שבו האסירים יכולים "לברוח מהכלא לשעה". הם צוחקים, בוכים, שרים, משתחררים. הוא מראה להם שחופש אמיתי הוא מצב פנימי, זמין גם בחדרים הכבולים ביותר. פרויקט "סיפורים מכלא" בפייסבוק הוא עדות מרגשת לרגעים אלו.</p>
+            <p class="text-xl leading-relaxed text-gray-200 text-reveal">פועלו ממומן כולו מתרומות פרטיות קטנות, בחירה מודעת לשמירה על עצמאות מוחלטת והיכולת לפעול מתוך חופש אמנותי טהור.</p>
+        </section>
+
+        <!-- Philosophy / Breathwork Section -->
+        <section class="py-20 md:py-32 border-b border-gray-700/50 text-reveal-container">
+            <h2 class="text-5xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-300 text-reveal">נשימה, תנועה וחופש פנימי</h2>
+            <p class="text-xl leading-relaxed mb-6 text-gray-200 text-reveal">מעבר לעבודתו עם אסירים, מאיר מנחה סדנאות נשימה מודעת (Breathwork) המהוות פן נוסף בחיפושו אחר חופש פנימי וריפוי. הוא רואה בנשימה שער לשחרור רגשי ולחיבור עמוק לגוף ולנפש, דרך המובילה לאותנטיות ושחרור מקיבעונות.</p>
+            <p class="text-xl leading-relaxed text-gray-200 text-reveal">חייו, על בחירותיהם הלא שגרתיות, הם עדות חיה לפילוסופיה זו: לחיות ללא מסגרות, בתנועה מתמדת (הליכות, שחייה), מחובר לטבע, ומעל הכל – לחתור לחופש פנימי, בכל מחיר ובכל מצב.</p>
+        </section>
+
+        <!-- Street Art / Performances Section -->
+        <section class="py-20 md:py-32 border-b border-gray-700/50 text-reveal-container">
+            <h2 class="text-5xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-amber-300 text-reveal">אמנות ברחוב, בטבע ובנשמה</h2>
+            <p class="text-xl leading-relaxed mb-6 text-gray-200 text-reveal">לפני כ-15 שנה, וגם בתקופות שונות מאז, התפרנס מאיר מהופעות רחוב שהיו יצירת אמנות בפני עצמה. הוא התחפש לקרקס, עמד ללא ניע על שלטים ועמודים בתל אביב, טיפס על עצים וניגן בחליל או בגיטרה, הופיע בפעלולים כמו עמידה על ראשו. אמנות הרחוב שלו היא ביטוי נוסף לרצון לשבור את השגרה, להביא את הלא צפוי אל המוכר, וליצור אינטראקציה אמנותית חופשית ומשוחררת עם הקהל.</p>
+            <p class="text-xl leading-relaxed text-gray-200 text-reveal">הוא המשיך להופיע, לעיתים עם אחיו ואחותו, וסיפוריו מהפעילויות הללו, כמו גם מהכלא, מתפרסמים בפייסבוק ומהווים השראה לרבים. מאיר אבינר אינו רק אמן, הוא דרך חיים, פילוסופיה של חופש והוכחה שאפשר ליצור אור גם במקומות החשוכים ביותר.</p>
+        </section>
+
+        <!-- Links Section -->
+        <section class="py-20 md:py-32 text-reveal-container">
+            <h2 class="text-5xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 text-reveal">חיבור ויצירה</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="block p-6 bg-black/40 rounded-3xl airbrush-glow hover:bg-black/60 transition duration-300 text-center text-reveal">
+                    <h3 class="text-2xl font-bold text-sky-300 mb-2">פייסבוק אישי</h3>
+                    <p class="text-lg text-gray-400">סיפורים, הופעות ועדכונים</p>
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="block p-6 bg-black/40 rounded-3xl airbrush-glow hover:bg-black/60 transition duration-300 text-center text-reveal">
+                    <h3 class="text-2xl font-bold text-amber-300 mb-2">פודקאסט "עושים שינוי"</h3>
+                    <p class="text-lg text-gray-400">ראיון מעמיק על דרכו</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" rel="noopener noreferrer" class="block p-6 bg-black/40 rounded-3xl airbrush-glow hover:bg-black/60 transition duration-300 text-center text-reveal">
+                    <h3 class="text-2xl font-bold text-red-300 mb-2">יוטיוב – פרק הפודקאסט</h3>
+                    <p class="text-lg text-gray-400">הראיון המלא בווידאו</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" rel="noopener noreferrer" class="block p-6 bg-black/40 rounded-3xl airbrush-glow hover:bg-black/60 transition duration-300 text-center text-reveal">
+                    <h3 class="text-2xl font-bold text-green-300 mb-2">יוטיוב – שיר "פלואו"</h3>
+                    <p class="text-lg text-gray-400">דוגמה ליצירתו המוזיקלית</p>
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="block p-6 bg-black/40 rounded-3xl airbrush-glow hover:bg-black/60 transition duration-300 text-center text-reveal">
+                    <h3 class="text-2xl font-bold text-purple-300 mb-2">לוח הופעות וכרטיסים</h3>
+                    <p class="text-lg text-gray-400">הצטרפו לחוויה</p>
+                </a>
+                <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" rel="noopener noreferrer" class="block p-6 bg-black/40 rounded-3xl airbrush-glow hover:bg-black/60 transition duration-300 text-center text-reveal">
+                    <h3 class="text-2xl font-bold text-indigo-300 mb-2">כתבה במאקו (2018)</h3>
+                    <p class="text-lg text-gray-400">סיפור משפחתי ויציאה בשאלה</p>
+                </a>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 mt-20 text-sm py-10 border-t border-gray-700/50 text-reveal-container">
+            <p class="text-reveal">&copy; 2024 מאיר אבינר. כל הזכויות שמורות ליצירה וחופש.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('active');
+        });
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('active');
+        });
+
+        // Parallax Scrolling Logic
+        const parallaxLayers = document.querySelectorAll('.parallax-layer');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            parallaxLayers.forEach(layer => {
+                const speed = parseFloat(layer.dataset.speed);
+                if (!isNaN(speed)) {
+                    const yPos = -scrollY * speed;
+                    layer.style.transform = `translateY(${yPos}px)`;
+                }
+            });
+        });
+
+        // Text Reveal on Scroll Logic (for containers and their children)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        };
+
+        const textRevealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Mark the container itself as visible
+                    entry.target.classList.add('visible');
+
+                    // Select all immediate children or nested children (up to one level) with 'text-reveal' class
+                    const childrenToReveal = entry.target.querySelectorAll(':scope > .text-reveal, :scope > div > .text-reveal, :scope > a.text-reveal');
+                    
+                    // Staggered reveal for children
+                    childrenToReveal.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.classList.add('visible');
+                        }, index * 150); // Staggered delay for each child
+                    });
+                    
+                    // Stop observing once visible
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and the footer that have the 'text-reveal-container' class
+        document.querySelectorAll('section.text-reveal-container, footer.text-reveal-container').forEach(el => {
+            textRevealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>

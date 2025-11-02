@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: מֵאִיש הַהוֹרִים לְאֹפֶק הַחֹפֶש</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700&family=Heebo:wght@300;400;700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        html, body {
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #8B5CF6; /* Purple for freedom */
+            border-radius: 10px;
+            border: 2px solid #0A0A0A;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #1A1A1A;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            color: #E0E0E0;
+            background-color: #0A0A0A;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rubik Mono One', monospace;
+            color: #F0F0F0;
+        }
+        .font-frank-ruhl {
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        /* Custom Cursor Styling */
+        .custom-cursor {
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8);
+            width: 24px;
+            height: 24px;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+            pointer-events: none;
+        }
+        .custom-cursor-active {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(139, 92, 246, 0.3); /* Purple glow */
+        }
+
+        /* Scroll Animation Styles */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dynamic Background Gradient Classes */
+        .gradient-bg-1 { background-image: linear-gradient(to bottom right, #0A0A0A, #1A1A1A, #2C2C2C); }
+        .gradient-bg-2 { background-image: linear-gradient(to top left, #1A1A1A, #3A1F4C, #5C2D7B); } /* Deeper purples for introspection */
+        .gradient-bg-3 { background-image: linear-gradient(to right, #2C2C2C, #0F3F3F, #1F5F5F); } /* Greenish for nature/shepherd */
+        .gradient-bg-4 { background-image: linear-gradient(to top, #0A0A0A, #4A1A1A, #7A2A2A); } /* Reddish for intensity/passion */
+        .gradient-bg-5 { background-image: linear-gradient(to bottom, #1A1A1A, #0A0A0A); } /* Simple dark fade */
+        .gradient-bg-6 { background-image: linear-gradient(to top right, #0A0A0A, #4c2f1f, #7b4c2d); } /* Orange/Brown for earth/journey */
+        .gradient-bg-7 { background-image: linear-gradient(to bottom left, #0A0A0A, #1f4c3a, #2d7b5c); } /* Green/Cyan for hope/music */
+
+
+        /* Manga Panel effect for content cards */
+        .manga-panel {
+            @apply border-2 border-white relative overflow-hidden p-6 shadow-lg bg-gray-900 bg-opacity-70 backdrop-blur-sm;
+            transform: skewY(-2deg);
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease-out;
+        }
+        .manga-panel::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent);
+            background-size: 40px 40px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+            z-index: -1;
+        }
+        .manga-panel:nth-child(even) { /* Alternate skew direction for artistic variety */
+            transform: skewY(2deg);
+        }
+
+        /* Hero section specific styling and animations */
+        .hero-title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-title-line {
+            display: block;
+            transform: translateX(100px); /* Starts off-screen to the right for RTL */
+            opacity: 0;
+            animation: slideInRTL 1.5s forwards ease-out;
+        }
+        .hero-title-line:nth-child(1) { animation-delay: 0.5s; }
+        .hero-title-line:nth-child(2) { animation-delay: 1s; }
+        .hero-title-line:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes slideInRTL {
+            0% { transform: translateX(100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Speed Lines Overlay */
+        .speed-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .speed-line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            animation: moveLine var(--animation-duration) linear infinite;
+        }
+        .speed-line-short { width: 1px; height: 50px; }
+        .speed-line-medium { width: 2px; height: 100px; }
+        .speed-line-long { width: 3px; height: 150px; }
+
+        @keyframes moveLine {
+            0% { transform: translate(var(--x-start), var(--y-start)) rotate(var(--rotate-deg)); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(var(--x-end), var(--y-end)) rotate(var(--rotate-deg)); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-[#E0E0E0] font-heebo antialiased leading-relaxed relative">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="custom-cursor fixed rounded-full z-[9999]"></div>
+
+    <!-- Main Fixed Background (dynamic with JS) -->
+    <div id="main-background" class="fixed inset-0 w-full h-full gradient-bg-1 transition-all duration-1000 ease-in-out z-[-1]"></div>
+
+    <!-- Speed Lines Overlay -->
+    <div class="speed-lines"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10 min-h-screen p-4 md:p-8 lg:p-12 max-w-7xl mx-auto flex flex-col justify-center items-center">
+
+        <!-- Hero Section: Title and Intro -->
+        <section id="hero" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative overflow-hidden">
+            <div class="hero-title-container">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-rubik-mono-one leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 mb-4 hero-title-line">
+                    מֵאִיר
+                </h1>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-frank-ruhl leading-snug mb-8 text-white drop-shadow-lg hero-title-line">
+                    מֵאִיש הַהוֹרִים לְאֹפֶק הַחֹפֶש
+                </h2>
+                <p class="text-lg md:text-2xl font-heebo max-w-2xl text-gray-200 leading-relaxed hero-title-line">
+                    סיפורו של אמן רב-גוני, פורץ גבולות ומסגרות, המחפש את החופש הפנימי בכל אדם ובכל מקום, ממעלה הגבעות ועד עומק הכלא.
+                </p>
+            </div>
+            <a href="#roots" class="mt-16 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition duration-300 scroll-animate" data-interactive>
+                התחילו את המסע
+            </a>
+        </section>
+
+        <!-- Section 1: The Roots - From the Hills -->
+        <section id="roots" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative scroll-animate">
+            <h3 class="text-4xl md:text-5xl font-rubik-mono-one mb-8 text-yellow-300 drop-shadow-md">
+                השורשים: בְּיֵית אֵל, בַּגְּבָעוֹת
+            </h3>
+            <div class="manga-panel w-full max-w-3xl text-right">
+                <p class="text-lg md:text-xl font-heebo leading-loose mb-4">
+                    בילדותו, מאיר אבינר גדל בנוף עוצר נשימה של התנחלות בית אל, בן לרב שלמה אבינר, דמות תורנית וציונית בולטת. כאן, בין הכפרים הפסטורליים והגבעות הפתוחות, נשם את אוויר הבראשית של הארץ. בגיל צעיר, הפך ל"נער גבעות", פעל יחד עם חבריו להקים נקודות התיישבות חדשות, חווה את הקשר העמוק לאדמה ולקהילה.
+                </p>
+                <p class="text-lg md:text-xl font-heebo leading-loose">
+                    כרועה צאן, סייר במרחבי הגליל עם עדרי עיזים וגמלים. חייו היו שזורים בטבע, בעבודה פיזית, בהרפתקאות אינסופיות תחת שמיים זרועי כוכבים. תקופה זו עיצבה בו את החיבור העמוק לשקט, למרחב, ולחיפוש מתמיד אחר אוטונומיה – אלמנטים שיכוננו את דרכו האמנותית העתידית.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: The Transformation - Breaking Frameworks -->
+        <section id="journey" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative scroll-animate">
+            <h3 class="text-4xl md:text-5xl font-rubik-mono-one mb-8 text-orange-400 drop-shadow-md">
+                המסע: שְׁבִירַת הַמִּסְגָּרוֹת
+            </h3>
+            <div class="manga-panel w-full max-w-3xl text-right">
+                <p class="text-lg md:text-xl font-heebo leading-loose mb-4">
+                    הבחירות של מאיר לאורך חייו היו תמיד בלתי שגרתיות. מילד שגדל בחיק הדת והמסורת, הוא יצא לדרך משלו, "יציאה בשאלה", מסע של חיפוש עצמי עמוק שהוביל אותו לעזוב את אורח החיים הדתי. אך לא מתוך התנכרות, אלא מתוך רצון עז לחופש פנימי, לחופש ביטוי, ולשחרור ממסגרות שהרגיש כובלות.
+                </p>
+                <p class="text-lg md:text-xl font-heebo leading-loose">
+                    הוא בחר בנתיב האמנות החופשית, דרך שהתחילה במקרה, כששבר חליל צד והחליט להתפרנס מהופעות רחוב כדי לשלם על הנזק. מאז, הוא לא הפסיק ליצור, לבחון, ולהתמזג עם הקהל בדרכים מפתיעות. כיום, הוא מתגורר בתל אביב, עיר של ניגודים ושל חופש, והופך את חייו עצמם ליצירת אמנות מתמשכת.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: The Voices - Talents & Expression -->
+        <section id="talents" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative scroll-animate">
+            <h3 class="text-4xl md:text-5xl font-rubik-mono-one mb-8 text-cyan-400 drop-shadow-md">
+                הקולות: כִּשָּׁרוֹן רַב-גּוֹנִי
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
+                <div class="manga-panel text-right scroll-animate bg-blue-900 bg-opacity-70 backdrop-blur-sm transform hover:scale-105 transition duration-300">
+                    <h4 class="text-2xl font-rubik-mono-one mb-4 text-purple-300">אִילְתּוּר</h4>
+                    <p class="text-md font-heebo leading-relaxed">
+                        מאיר הוא אמן אילתור בנשמתו. תפילות ספונטניות, הבעת רגשות בצליל ובמילה, שחרור כעס ושמחה. בכלא, הוא זורק כדור מילים או יוצר מעגלי חיבוק אימפרוביזציוניים שמחברים לבבות.
+                    </p>
+                </div>
+                <div class="manga-panel text-right scroll-animate bg-green-900 bg-opacity-70 backdrop-blur-sm transform hover:scale-105 transition duration-300">
+                    <h4 class="text-2xl font-rubik-mono-one mb-4 text-lime-300">מוּזִיקָה</h4>
+                    <p class="text-md font-heebo leading-relaxed">
+                        נגן גיטרה, חליל, חליל צד וכלי נשיפה אלקטרוניים. יוצר טראנסים מוזיקליים, מזמין לצעוק יחד, ואף הופיע ברחוב עם עיניים קשורות או בעמידת ראש.
+                    </p>
+                </div>
+                <div class="manga-panel text-right scroll-animate bg-yellow-900 bg-opacity-70 backdrop-blur-sm transform hover:scale-105 transition duration-300">
+                    <h4 class="text-2xl font-rubik-mono-one mb-4 text-amber-300">קוֹמֶדְיָה</h4>
+                    <p class="text-md font-heebo leading-relaxed">
+                        הומור הוא כלי ריפוי. הופך צעקות למשחקים מצחיקים, מביא כובע עם נוצה לכלא, ומפיח "הפוך" – צבע וצחוק – במקומות החשוכים ביותר.
+                    </p>
+                </div>
+                <div class="manga-panel text-right scroll-animate bg-red-900 bg-opacity-70 backdrop-blur-sm transform hover:scale-105 transition duration-300">
+                    <h4 class="text-2xl font-rubik-mono-one mb-4 text-rose-300">שִׁירָה</h4>
+                    <p class="text-md font-heebo leading-relaxed">
+                        כותב שירים ותפילות אישיות, המשלבים מחשבות ורגשות עמוקים. המילים הן מפתח לשחרור, חלק בלתי נפרד ממופעיו.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Mission - Bringing Light to Darkness -->
+        <section id="mission" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative scroll-animate">
+            <h3 class="text-4xl md:text-5xl font-rubik-mono-one mb-8 text-pink-400 drop-shadow-md">
+                הַשְּׁלִיחוּת: מֵאִיר בַּחֹשֶךְ
+            </h3>
+            <div class="manga-panel w-full max-w-3xl text-right">
+                <p class="text-lg md:text-xl font-heebo leading-loose mb-4">
+                    "העולם צריך צחוק, צבע וחופש," אומר מאיר, והוא חי את האמרה הזו בכל מאודו. ליבת פעילותו היא הביקורים התכופפים בבתי כלא ברחבי הארץ. 3-4 פעמים בשבוע, הוא נכנס לבדו, מצויד בגיטרה, חליל, והכי חשוב – בלב פתוח ורוח חופשית, כדי לפגוש אסירים. הוא שר, מנגן, מאלתר, ומצליח לחלץ מהם רגעים נדירים של שחרור רגשי, "לברוח מהכלא לשעה".
+                </p>
+                <p class="text-lg md:text-xl font-heebo leading-loose mb-4">
+                    דרך סיפורים אישיים, תפילות משותפות, וצחוק מתגלגל, הוא מפיח בהם תקווה. פרויקט "סיפורים מכלא" בפייסבוק משתף את רגעי הקסם האלה, ומראה שאפילו במקומות הכי כבולים, החופש הפנימי יכול לפרוח. פעילות זו ממומנת מתרומות פרטיות, המבטיחות את עצמאותו המוחלטת.
+                </p>
+                <p class="text-lg md:text-xl font-heebo leading-loose">
+                    בנוסף, מאיר ממשיך את אמנות הרחוב שלו בתל אביב, עולה על עצים, שלטים ועמודים, מנגן ומבצע פעלולים. הוא גם מעביר סדנאות נשימה מודעת (Breathwork), ככלי נוסף לשחרור ולריפוי.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 5: The Philosophy - Inner Freedom -->
+        <section id="philosophy" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative scroll-animate">
+            <h3 class="text-4xl md:text-5xl font-rubik-mono-one mb-8 text-indigo-400 drop-shadow-md">
+                הַפִּילוֹסוֹפְיָה: חֹפֶש פְּנִימִי
+            </h3>
+            <div class="manga-panel w-full max-w-3xl text-right">
+                <p class="text-lg md:text-xl font-heebo leading-loose mb-4">
+                    מאיר מגדיר את עצמו כמי שמחפש חופש – חופש כלכלי, גיאוגרפי, אך מעל לכל, חופש פנימי. הוא מאמין שהמסגרות החיצוניות אינן קובעות את מצב הנפש. גם בתוך תא כלא, אפשר למצוא את המרחב הפנימי לשחרור ולשמחה. הוא משתמש באמנותו – במוזיקה, בהומור, בשירה – כדי לשבור את המחיצות המדומיינות והממשיות כאחד.
+                </p>
+                <p class="text-lg md:text-xl font-heebo leading-loose">
+                    חייו הם ביטוי מתמשך לתנועה, הן פיזית (הליכות, שחייה) והן רעיונית. הוא מזמין את כולנו לבחון את המסגרות שלנו, לצחוק, ליצור, ולהעיז להיות חופשיים באמת. במאיר אבינר, האמנות והחיים מתמזגים ליצירה אחת גדולה ומרגשת, קריאה נועזת לשחרור.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 6: Links - Echoes of the Journey -->
+        <section id="links" class="w-full min-h-screen flex flex-col justify-center items-center text-center p-4 md:p-8 relative scroll-animate">
+            <h3 class="text-4xl md:text-5xl font-rubik-mono-one mb-8 text-fuchsia-400 drop-shadow-md">
+                הֲדִי הַמַּסָּע: קִשּׁוּרִים לְעוֹלָמוֹ
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl text-right">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="manga-panel text-white hover:bg-opacity-90 transform hover:scale-105 transition duration-300 bg-blue-700 bg-opacity-70 backdrop-blur-sm flex items-center justify-between p-4" data-interactive>
+                    <span class="text-xl md:text-2xl font-frank-ruhl">פייסבוק אישי</span>
+                    <svg class="h-8 w-8 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1h8a3 3 0 003-3V7a3 3 0 00-3-3H4"></path></svg>
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="manga-panel text-white hover:bg-opacity-90 transform hover:scale-105 transition duration-300 bg-teal-700 bg-opacity-70 backdrop-blur-sm flex items-center justify-between p-4" data-interactive>
+                    <span class="text-xl md:text-2xl font-frank-ruhl">פודקאסט "עושים שינוי"</span>
+                    <svg class="h-8 w-8 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1h8a3 3 0 003-3V7a3 3 0 00-3-3H4"></path></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" rel="noopener noreferrer" class="manga-panel text-white hover:bg-opacity-90 transform hover:scale-105 transition duration-300 bg-red-700 bg-opacity-70 backdrop-blur-sm flex items-center justify-between p-4" data-interactive>
+                    <span class="text-xl md:text-2xl font-frank-ruhl">וידאו: הפודקאסט ביוטיוב</span>
+                    <svg class="h-8 w-8 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1h8a3 3 0 003-3V7a3 3 0 00-3-3H4"></path></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" rel="noopener noreferrer" class="manga-panel text-white hover:bg-opacity-90 transform hover:scale-105 transition duration-300 bg-yellow-700 bg-opacity-70 backdrop-blur-sm flex items-center justify-between p-4" data-interactive>
+                    <span class="text-xl md:text-2xl font-frank-ruhl">שיר "פלואו" (יוטיוב)</span>
+                    <svg class="h-8 w-8 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1h8a3 3 0 003-3V7a3 3 0 00-3-3H4"></path></svg>
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="manga-panel text-white hover:bg-opacity-90 transform hover:scale-105 transition duration-300 bg-green-700 bg-opacity-70 backdrop-blur-sm flex items-center justify-between p-4" data-interactive>
+                    <span class="text-xl md:text-2xl font-frank-ruhl">לוח הופעות וכרטיסים</span>
+                    <svg class="h-8 w-8 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1h8a3 3 0 003-3V7a3 3 0 00-3-3H4"></path></svg>
+                </a>
+                <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" rel="noopener noreferrer" class="manga-panel text-white hover:bg-opacity-90 transform hover:scale-105 transition duration-300 bg-purple-700 bg-opacity-70 backdrop-blur-sm flex items-center justify-between p-4" data-interactive>
+                    <span class="text-xl md:text-2xl font-frank-ruhl">מאמר על חייו (מאקו)</span>
+                    <svg class="h-8 w-8 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1h8a3 3 0 003-3V7a3 3 0 00-3-3H4"></path></svg>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Custom Cursor ---
+            const cursor = document.getElementById('custom-cursor');
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+            });
+
+            document.querySelectorAll('a, button, [data-interactive]').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('custom-cursor-active'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('custom-cursor-active'));
+            });
+
+            // --- Scroll Animation ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const sectionsToAnimate = document.querySelectorAll('.scroll-animate');
+            const animationObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            sectionsToAnimate.forEach(section => {
+                animationObserver.observe(section);
+            });
+
+            // --- Dynamic Background Change on Scroll ---
+            const mainBackground = document.getElementById('main-background');
+            const bgClasses = ['gradient-bg-1', 'gradient-bg-6', 'gradient-bg-2', 'gradient-bg-7', 'gradient-bg-4', 'gradient-bg-5', 'gradient-bg-3']; // More diverse gradients
+            const sectionIds = ['hero', 'roots', 'journey', 'talents', 'mission', 'philosophy', 'links'];
+            let currentBgIndex = 0;
+
+            const bgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        const index = sectionIds.indexOf(sectionId);
+                        if (index !== -1 && index !== currentBgIndex) {
+                            mainBackground.classList.remove(bgClasses[currentBgIndex]);
+                            mainBackground.classList.add(bgClasses[index]);
+                            currentBgIndex = index;
+                        }
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // Trigger when section is roughly in the middle of the viewport
+                threshold: 0 // Only needs to enter/exit viewport center
+            });
+
+            document.querySelectorAll(sectionIds.map(id => `#${id}`).join(', ')).forEach(section => {
+                bgObserver.observe(section);
+            });
+
+
+            // --- Dynamic Speed Lines Generation ---
+            const speedLinesContainer = document.querySelector('.speed-lines');
+            const numberOfLines = 50;
+
+            for (let i = 0; i < numberOfLines; i++) {
+                const line = document.createElement('div');
+                line.classList.add('speed-line');
+
+                const type = Math.random();
+                if (type < 0.4) line.classList.add('speed-line-short');
+                else if (type < 0.8) line.classList.add('speed-line-medium');
+                else line.classList.add('speed-line-long');
+
+                const xStart = Math.random() * 100 + 'vw';
+                const yStart = Math.random() * 100 + 'vh';
+                const xEnd = (Math.random() * 100 - 50) + 'vw'; // Offset start/end for more dynamic movement
+                const yEnd = (Math.random() * 100 + 50) + 'vh'; // Ensure lines move across/off screen
+                const rotateDeg = (Math.random() * 180 - 90) + 'deg'; // More subtle angles
+                const animationDuration = (Math.random() * 15 + 10) + 's'; // 10-25s
+                const animationDelay = (Math.random() * 15) + 's'; // Stagger start times
+
+                line.style.cssText = `
+                    --x-start: ${xStart};
+                    --y-start: ${yStart};
+                    --x-end: ${xEnd};
+                    --y-end: ${yEnd};
+                    --rotate-deg: ${rotateDeg};
+                    animation-duration: ${animationDuration};
+                    animation-delay: ${animationDelay};
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                `;
+                speedLinesContainer.appendChild(line);
+            }
+        });
+    </script>
+</body>
+</html>

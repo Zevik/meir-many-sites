@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - שירת החופש</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* הגדרות צבע ופונטים כלליות */
+        :root {
+            --color-primary-dark: #2c3e50; /* כחול-אפור עמוק */
+            --color-accent-gold: #c19b6a; /* זהב עמום */
+            --color-background-light: #f0e6d2; /* קרם בהיר */
+            --color-accent-green: #6d7c43; /* ירוק אזוב */
+            --color-accent-lavender: #a9a3b2; /* לבנדר עמום */
+            --color-secondary-dark: #4a4e69; /* סגול-כחול עמוק */
+            --font-title: 'Frank Ruhl Libre', serif;
+            --font-body: 'Rubik', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-primary-dark);
+            overflow-x: hidden; /* מונע גלילה אופקית מפרלקס */
+            cursor: none; /* מסתיר את הסמן ברירת המחדל */
+            background-color: var(--color-background-light); /* צבע רקע בסיסי */
+        }
+
+        /* סמן עכבר מותאם אישית */
+        .custom-cursor-dot, .custom-cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out, transform 0.05s linear;
+        }
+        .custom-cursor-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #f0e6d2; /* צבע בהיר */
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8); /* צל כהה עבור נראות */
+            transform: translate(-50%, -50%);
+        }
+        .custom-cursor-ring {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #f0e6d2; /* צבע בהיר */
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.8); /* צל כהה עבור נראות */
+            transform: translate(-50%, -50%);
+        }
+        .custom-cursor-dot.visible, .custom-cursor-ring.visible {
+            opacity: 1;
+        }
+
+        /* רקע בסגנון ארט נובו - דפוס מורכב */
+        .art-nouveau-bg {
+            background: var(--color-background-light);
+            background-image:
+                radial-gradient(circle at 10% 20%, var(--color-accent-gold) 0%, transparent 10%),
+                radial-gradient(circle at 90% 80%, var(--color-accent-green) 0%, transparent 10%),
+                radial-gradient(circle at 40% 60%, var(--color-accent-lavender) 0%, transparent 8%),
+                linear-gradient(135deg, var(--color-primary-dark) 5%, transparent 5%),
+                linear-gradient(225deg, var(--color-secondary-dark) 5%, transparent 5%),
+                repeating-linear-gradient(45deg, var(--color-background-light) 0%, var(--color-background-light) 10px, rgba(240, 230, 210, 0.5) 10px, rgba(240, 230, 210, 0.5) 20px);
+            background-size:
+                200px 200px, 200px 200px, 150px 150px,
+                50px 50px, 50px 50px, 100% 100%;
+            background-position:
+                -50px -50px, 50px 50px, 0px 0px,
+                0 0, 0 0, 0 0;
+            animation: bg-pan 60s infinite alternate linear; /* אנימציית תזוזה איטית לרקע */
+        }
+
+        @keyframes bg-pan {
+            0% {
+                background-position:
+                    -50px -50px, 50px 50px, 0px 0px,
+                    0 0, 0 0, 0 0;
+            }
+            100% {
+                background-position:
+                    50px 50px, -50px -50px, 100px 100px,
+                    100px 100px, 100px 100px, 0 0;
+            }
+        }
+
+        /* סגנון חלקי האתר בסגנון ארט נובו */
+        .art-nouveau-section {
+            background-color: rgba(255, 255, 255, 0.85); /* רקע שקוף למחצה לקריאות טובה */
+            border-radius: 1.5rem; /* פינות מעוגלות */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15), 0 5px 5px rgba(0,0,0,0.1); /* צל רך */
+            padding: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            border: 2px solid var(--color-accent-gold); /* מסגרת דקורטיבית */
+            outline: 2px solid var(--color-secondary-dark); /* מסגרת פנימית */
+            outline-offset: -8px; /* היסט למסגרת הפנימית */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* אנימציה בריחוף */
+        }
+        .art-nouveau-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2), 0 8px 8px rgba(0,0,0,0.15);
+        }
+
+        /* קישוטי פרחים בסגנון ארט נובו (SVG מוטבע) */
+        .flourish::before, .flourish::after {
+            content: '';
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: -1;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .flourish.top-right::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23c19b6a' d='M80 0c-15 10-30 25-30 40 0 10 5 20 10 25 15 10 30 15 40 15V0z'/%3E%3Cpath fill='%236d7c43' d='M90 0c-10 5-20 15-20 30 0 8 4 15 8 20 12 8 20 10 22 10V0z'/%3E%3C/svg%3E");
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            transform: rotate(90deg);
+        }
+        .flourish.bottom-left::after {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23a9a3b2' d='M20 100c15-10 30-25 30-40 0-10-5-20-10-25-15-10-30-15-40-15V100z'/%3E%3Cpath fill='%234a4e69' d='M10 100c10-5 20-15 20-30 0-8-4-15-8-20-12-8-20-10-22-10V100z'/%3E%3C/svg%3E");
+            bottom: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            transform: rotate(90deg);
+        }
+        .flourish:hover::before, .flourish:hover::after {
+            opacity: 1;
+            transform: scale(1.05) rotate(95deg);
+        }
+
+        /* צל טקסט לקריאות טובה יותר על רקעים מורכבים */
+        h1, h2, h3 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-family: var(--font-title);
+        }
+        p, li {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* אפקט פרלקס לשכבות ספציפיות */
+        .parallax-layer {
+            transition: transform 0.1s linear; /* תנועה חלקה יותר */
+        }
+    </style>
+</head>
+<body class="selection:bg-accent-gold selection:text-white">
+    <!-- סמן עכבר מותאם אישית -->
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-ring"></div>
+
+    <!-- רקע ארט נובו במסך מלא (מקובע לפרלקס) -->
+    <div class="art-nouveau-bg fixed inset-0 z-[-1]"></div>
+
+    <!-- עטיפת תוכן ראשי -->
+    <div id="main-content" class="relative z-10 p-4 md:p-8 lg:p-12 min-h-screen flex flex-col items-center">
+
+        <!-- כותרת עליונה - כניסה מרשימה -->
+        <header class="text-center my-8 md:my-16 lg:my-24 max-w-4xl w-full">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl text-primary-dark font-bold leading-tight mb-4 tracking-wider" style="font-family: var(--font-title);">
+                <span class="text-accent-gold">שירת</span> חופש נצחי
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary-dark leading-relaxed italic" style="font-family: var(--font-title);">
+                מסעו הפרובוקטיבי והמעורר השראה של <span class="text-accent-gold font-bold">מאיר אבינר</span>
+            </p>
+            <div class="mt-8 flex justify-center space-x-4 space-x-reverse">
+                <a href="#hakefula" class="bg-accent-gold text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition duration-300 text-lg md:text-xl shadow-lg">הסיפור המלא</a>
+                <a href="#hishtalfut" class="bg-accent-green text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition duration-300 text-lg md:text-xl shadow-lg">פעילויות ומופעים</a>
+            </div>
+        </header>
+
+        <!-- אזור תוכן ראשי -->
+        <main class="max-w-4xl w-full">
+
+            <!-- קטע מבוא -->
+            <section id="hakefula" class="art-nouveau-section flourish top-right mb-16">
+                <h2 class="text-4xl md:text-5xl text-primary-dark mb-6 text-center" style="font-family: var(--font-title);">
+                    קול מהדהד בריקמת הנשמה
+                </h2>
+                <p class="text-lg md:text-xl leading-loose text-gray-800 text-right">
+                    מאיר אבינר אינו רק אמן, הוא תופעה. קולו הוא שריקת רוח חופשית שאינה נכבלת, המזמזמת מנגינות נשכחות ומחדשת תפילות עתיקות. ממעמקי המורשת הדתית-לאומית, אל מרחבי הטבע הפראיים כרועה צאן, ומשם לפעימות הלב של תל אביב ולחדרי הכלא החשוכים - מאיר משרטט דרך ייחודית, דרך של שבירת מסגרות, חופש פנימי, וריפוי דרך אילתור, צחוק ומוזיקה.
+                    כל תנועה, כל צליל, כל מילה הנשלפת מפיו, היא שער לעולם שבו השוליים הופכים למרכז והכלא הוא רק תפאורה לבמה של נשמה משוחררת.
+                </p>
+            </section>
+
+            <!-- קטע "האדמה והרועה" -->
+            <section class="art-nouveau-section flourish bottom-left mb-16 parallax-layer" data-speed="0.8">
+                <h2 class="text-4xl md:text-5xl text-accent-green mb-6 text-center" style="font-family: var(--font-title);">
+                    שורשים באדמה, נדודים ברוח
+                </h2>
+                <p class="text-lg md:text-xl leading-loose text-gray-800 text-right mb-6">
+                    הסיפור של מאיר מתחיל באדמת בית אל, שם גדל בחיק משפחה דתית-לאומית, בנו של הרב שלמה אבינר. כבר בגיל 16, כ"נער גבעות" ורועה צאן בגליל, למד את שפת הטבע והמרחבים הפתוחים. שם, בין עדרי עיזים וגמלים, נטמן זרע החופש וההסתכלות הלא שגרתית על העולם. עבודת האדמה, החיים לצד החי, וההתמודדות עם אלמנטים פראיים - כל אלה עיצבו את נפשו והטעינו אותו באנרגיה של יצירה וחיבור עמוק למהות הקיום.
+                </p>
+                <div class="relative w-full h-64 md:h-96 bg-gray-300 rounded-xl overflow-hidden shadow-inner flex items-center justify-center text-gray-600 italic">
+                    <span class="text-2xl">דימוי של רועה צאן בנוף גלילי, בהשראת ארט-נובו (צמחים פורחים, קווים זורמים)</span>
+                </div>
+            </section>
+
+            <!-- קטע "החליל השבור שהפך לתפילה" -->
+            <section class="art-nouveau-section flourish top-right mb-16 parallax-layer" data-speed="1.2">
+                <h2 class="text-4xl md:text-5xl text-accent-lavender mb-6 text-center" style="font-family: var(--font-title);">
+                    החליל השבור שהפך לתפילה
+                </h2>
+                <p class="text-lg md:text-xl leading-loose text-gray-800 text-right mb-6">
+                    הצורך לחירות אמנותית פרץ במאיר בעוצמה, כאשר שבירת חליל צד תמים הפכה לקטליזטור לשינוי גורלי. במקום עבודה שגרתית, בחר מאיר להתפרנס מהופעות רחוב. בכישרונו הרב-גוני כאמן אילתור, מוזיקאי (גיטרה, חליל, כלי נשיפה אלקטרוניים), קומיקאי ומשורר, הוא הפך את רחובות תל אביב לבמה פרטית. ניגן על עצים, עמד על שלטים, ענד כובע עם נוצה, ובהומור ובחדות-שכל, שבר את חומות השגרה והביא צחוק, צבע וחופש לכל עובר אורח.
+                </p>
+                <div class="relative w-full h-64 md:h-96 bg-gray-300 rounded-xl overflow-hidden shadow-inner flex items-center justify-center text-gray-600 italic">
+                    <span class="text-2xl">דימוי של חליל ועץ בסגנון ארט-נובו, עם תווים מוזיקליים מעופפים</span>
+                </div>
+            </section>
+
+            <!-- קטע "אור שחודר דרך הסורגים" -->
+            <section class="art-nouveau-section flourish bottom-left mb-16 parallax-layer" data-speed="0.9">
+                <h2 class="text-4xl md:text-5xl text-secondary-dark mb-6 text-center" style="font-family: var(--font-title);">
+                    אור שחודר דרך הסורגים
+                </h2>
+                <p class="text-lg md:text-xl leading-loose text-gray-800 text-right mb-6">
+                    אחד ממוקדי הפעילות המרכזיים והמרגשים ביותר של מאיר הוא עבודתו בבתי כלא. 3-4 פעמים בשבוע, הוא נכנס בשערי כלא שרון, רמלה ואחרים, ללא ליווי, ומביא עמו כדור של אילתור, גיטרה, חליל, והרבה חמלה. שם, בין קירות אטומים, הוא מזמין אסירים לצעוק, לשיר, לנגן, ליצור טראנסים מוזיקליים, ולמצוא "חופש פנימי" גם במקומות הכי כבולים. סיפוריו מהכלא, אותם הוא משתף בפייסבוק, הם עדויות מרגשות לכוחה של האמנות לרפא ולשנות, אפילו כשאסיר אילם נושך גיטרה או קבוצה של אסירים פורצת בבכי וצחוק בתפילה מאולתרת.
+                </p>
+                <div class="relative w-full h-64 md:h-96 bg-gray-300 rounded-xl overflow-hidden shadow-inner flex items-center justify-center text-gray-600 italic">
+                    <span class="text-2xl">דימוי של חלון כלא בצורת ארט-נובו, ממנו בוקע אור בוהק ופרחים פורחים</span>
+                </div>
+            </section>
+
+            <!-- קטע "נשימת הריפוי והזרימה" -->
+            <section class="art-nouveau-section flourish top-right mb-16 parallax-layer" data-speed="1.1">
+                <h2 class="text-4xl md:text-5xl text-accent-gold mb-6 text-center" style="font-family: var(--font-title);">
+                    נשימת הריפוי והזרימה
+                </h2>
+                <p class="text-lg md:text-xl leading-loose text-gray-800 text-right mb-6">
+                    מעבר לנגינה והאילתור, מאיר הוא גם מטפל מוסמך בנשימה מעגלית (Rebirthing) ובתרפיית קול בתנועה. הוא מנחה סדנאות ריפוי עמוקות, המשלבות מדיטציה, ניגונים, תנועה חופשית, וחיבור למקורות היהודיים. במפגשים אלה, הוא מאפשר למשתתפים לחוות שחרור רגשי, להתחבר לכוח החיים הפנימי שלהם, ולפרוץ דרך חסמים. ה"נשימת רבים" שלו היא מרחב קדוש שבו רוח וחומר נפגשים, וכל נשימה היא צעד נוסף לעבר חופש ושמחה.
+                </p>
+                <div class="relative w-full h-64 md:h-96 bg-gray-300 rounded-xl overflow-hidden shadow-inner flex items-center justify-center text-gray-600 italic">
+                    <span class="text-2xl">דימוי של ריאות פורחות לפרח לוטוס, עם קווים זורמים ואור נוגה</span>
+                </div>
+            </section>
+
+            <!-- קטע "פילוסופיית החופש" -->
+            <section class="art-nouveau-section flourish bottom-left mb-16 parallax-layer" data-speed="0.7">
+                <h2 class="text-4xl md:text-5xl text-primary-dark mb-6 text-center" style="font-family: var(--font-title);">
+                    פילוסופיית החופש: מעבר למסגרות
+                </h2>
+                <p class="text-lg md:text-xl leading-loose text-gray-800 text-right mb-6">
+                    הפילוסופיה של מאיר אבינר היא קריאה נועזת לחופש אמיתי - לא רק חופש חיצוני, אלא בעיקר חופש פנימי מעול המסגרות המכתיבות. הוא בוחר בחיים שאינם כבולים, מטייל, שוחה, יוצר, ומתמסר לתנועה מתמדת. הוא מאמין שהעולם זקוק לצחוק, לצבע ולחופש, ושכל אחד יכול למצוא את דרכו הייחודית לשחרור רגשי והבאת אור. מסעו הוא תזכורת מתמדת לכך שהאמנות היא לא רק יצירה אסתטית, אלא כלי עוצמתי לשינוי, לריפוי, ולחיים מלאים באותנטיות.
+                </p>
+                <div class="relative w-full h-64 md:h-96 bg-gray-300 rounded-xl overflow-hidden shadow-inner flex items-center justify-center text-gray-600 italic">
+                    <span class="text-2xl">דימוי מופשט של עוף חופש במעוף, עם כנפיים מעוטרות בקווים ארט-נובו</span>
+                </div>
+            </section>
+
+            <!-- קטע פעילויות וקישורים -->
+            <section id="hishtalfut" class="art-nouveau-section flourish top-right mb-16">
+                <h2 class="text-4xl md:text-5xl text-accent-green mb-6 text-center" style="font-family: var(--font-title);">
+                    הצטרפו למסעו של מאיר
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-primary-dark text-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between">
+                        <h3 class="text-2xl md:text-3xl text-accent-gold mb-4" style="font-family: var(--font-title);">
+                            פעילויות ואירועים
+                        </h3>
+                        <ul class="list-none space-y-3 mb-6 text-lg">
+                            <li class="flex items-center"><span class="ml-2 text-accent-gold">&bull;</span> <p>ביקורים מרפאים בבתי כלא</p></li>
+                            <li class="flex items-center"><span class="ml-2 text-accent-gold">&bull;</span> <p>סדנאות נשימה מעגלית וריפוי קולי</p></li>
+                            <li class="flex items-center"><span class="ml-2 text-accent-gold">&bull;</span> <p>הופעות רחוב ואמנות פרפורמנס</p></li>
+                            <li class="flex items-center"><span class="ml-2 text-accent-gold">&bull;</span> <p>טקסים רוחניים בחגים (יום כיפור, ט"ו בשבט)</p></li>
+                        </ul>
+                        <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block w-full text-center bg-accent-gold text-white py-3 rounded-full hover:bg-opacity-90 transition duration-300 shadow-md">
+                            לוח הופעות וכרטיסים <span class="text-xs">&rarr;</span>
+                        </a>
+                    </div>
+                    <div class="bg-secondary-dark text-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 flex flex-col justify-between">
+                        <h3 class="text-2xl md:text-3xl text-accent-lavender mb-4" style="font-family: var(--font-title);">
+                            מקורות והשראה
+                        </h3>
+                        <ul class="list-none space-y-3 mb-6 text-lg">
+                            <li class="flex items-center"><span class="ml-2 text-accent-lavender">&bull;</span> <p><a href="https://www.facebook.com/meiraviner/" target="_blank" class="hover:underline">פייסבוק אישי (סיפורים מהכלא)</a></p></li>
+                            <li class="flex items-center"><span class="ml-2 text-accent-lavender">&bull;</span> <p><a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="hover:underline">פודקאסט "עושים שינוי"</a></p></li>
+                            <li class="flex items-center"><span class="ml-2 text-accent-lavender">&bull;</span> <p><a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="hover:underline">שיר "פלואו" ביוטיוב</a></p></li>
+                            <li class="flex items-center"><span class="ml-2 text-accent-lavender">&bull;</span> <p><a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="hover:underline">מאמר על חייו (מאקו)</a></p></li>
+                        </ul>
+                        <p class="text-sm text-gray-400 mt-4 text-right">
+                            "העולם צריך צחוק, צבע וחופש." - מאיר אבינר
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- פוטר -->
+        <footer class="text-center mt-16 pb-8 text-gray-700 text-sm italic parallax-layer" data-speed="0.5">
+            <p>&copy; 2024 שירת החופש. כל הזכויות שמורות ליצירה.</p>
+        </footer>
+
+    </div> <!-- סוף עטיפת תוכן ראשי -->
+
+    <script>
+        // לוגיקה לסמן עכבר מותאם אישית
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        const cursorRing = document.querySelector('.custom-cursor-ring');
+
+        let mouseX = 0, mouseY = 0;
+        let dotX = 0, dotY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // מציג את הסמן בתנועה ראשונה
+            cursorDot.classList.add('visible');
+            cursorRing.classList.add('visible');
+        });
+
+        const animateCursor = () => {
+            // החלת שיכוך לתנועת הנקודה
+            dotX += (mouseX - dotX) * 0.15;
+            dotY += (mouseY - dotY) * 0.15;
+            cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+
+            // החלת שיכוך לתנועת הטבעת (איטי יותר לאפקט עוקב)
+            ringX += (mouseX - ringX) * 0.1;
+            ringY += (mouseY - ringY) * 0.1;
+            cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        // הסתרת הסמן בעזיבת המסמך והצגתו בחזרה בכניסה
+        document.addEventListener('mouseleave', () => {
+            cursorDot.classList.remove('visible');
+            cursorRing.classList.remove('visible');
+        });
+        document.addEventListener('mouseenter', () => {
+            cursorDot.classList.add('visible');
+            cursorRing.classList.add('visible');
+        });
+
+
+        // לוגיקה לגלילת פרלקס
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            document.querySelectorAll('.parallax-layer').forEach(layer => {
+                const speed = parseFloat(layer.dataset.speed);
+                // חישוב תזוזה הפוכה לאפקט רקע
+                const transformY = -(scrollY * (1 - speed));
+                layer.style.transform = `translateY(${transformY * 0.2}px)`; // אפקט איטי יותר
+            });
+
+            // אנימציית שקיפות לכותרת העליונה בגלילה
+            const header = document.querySelector('header');
+            const headerHeight = header.offsetHeight;
+            const opacity = Math.max(0, 1 - (scrollY / (headerHeight * 0.7))); // דוהה החוצה מהר יותר
+            header.style.opacity = opacity;
+        });
+
+        // אנימציית כניסה מבוססת גלילה לחלקים השונים
+        const sections = document.querySelectorAll('.art-nouveau-section');
+        const fadeInOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target); // מפסיק לנטר אחרי שהאלמנט נכנס לתצוגה
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.2 // מפעיל כש-20% מהאלמנט גלוי
+        });
+
+        sections.forEach(section => {
+            section.style.opacity = 0; // מתחיל שקוף
+            section.style.transform = 'translateY(50px)'; // מתחיל מעט למטה
+            section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out'; // אנימציית מעבר חלקה
+            fadeInOnScroll.observe(section);
+        });
+    </script>
+</body>
+</html>

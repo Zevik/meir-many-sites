@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - חופש נצחי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --fresco-bg-deep: #2A241F; /* חום-שחור עמוק, כמו אדמה שרופה */
+            --fresco-stone-light: #E0D9C8; /* אבן בהירה דהויה, כמו גיר על קיר */
+            --fresco-ochre: #C07C4A; /* אוכרה חמה, כמו כתובות עתיקות */
+            --fresco-sienna: #8A4F3A; /* סיינה שרופה, גוון עתיק וכבד */
+            --fresco-aqua: #5B8B9B; /* תכלת דהוי, כמו שמיים מרוחקים */
+            --fresco-gold: #D4AF37; /* זהב עמום, לניצוצות של השראה */
+            --fresco-gray-text: #BDB7B1; /* אפור בהיר, לטקסט משני */
+            --cursor-border-color: #FFFFFF;
+            --cursor-shadow-color: rgba(0,0,0,0.8);
+        }
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--fresco-bg-deep);
+            color: var(--fresco-stone-light);
+            cursor: none; /* הסתרת סמן עכבר ברירת מחדל */
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Frank Ruhl Libre', serif;
+            color: var(--fresco-ochre);
+        }
+        /* סמן עכבר מותאם אישית */
+        .custom-cursor-outer, .custom-cursor-inner {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform;
+            transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+            border-radius: 50%;
+            transform: translate(-50%, -50%); /* מרכוז הסמן על עצמו */
+        }
+        .custom-cursor-outer {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--cursor-border-color);
+            box-shadow: 0 0 0 2px var(--cursor-shadow-color);
+        }
+        .custom-cursor-inner {
+            width: 8px;
+            height: 8px;
+            background-color: var(--fresco-ochre);
+        }
+        /* אפקטי ריחוף לסמן */
+        .custom-cursor-outer.active {
+            width: 40px;
+            height: 40px;
+            border-color: var(--fresco-gold);
+            box-shadow: 0 0 0 2px var(--cursor-shadow-color), 0 0 10px var(--fresco-gold); /* הוספת זוהר */
+        }
+        .custom-cursor-inner.active {
+            background-color: var(--fresco-gold);
+            width: 12px;
+            height: 12px;
+        }
+
+        /* שכבות רקע בסגנון פרסקו */
+        .fresco-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+        .fresco-layer-1 {
+            background: linear-gradient(45deg, rgba(var(--fresco-sienna), 0.05) 0%, transparent 50%, rgba(var(--fresco-aqua), 0.05) 100%);
+            opacity: 0.08;
+        }
+        .fresco-layer-2 {
+            background: radial-gradient(circle at 70% 30%, rgba(var(--fresco-stone-light), 0.03) 0%, transparent 50%);
+            opacity: 0.05;
+            transform: scale(1.03); /* הבדל קל לעומק */
+        }
+        
+        .fresco-text-gold { color: var(--fresco-gold); }
+        .fresco-text-ochre { color: var(--fresco-ochre); }
+        .fresco-text-aqua { color: var(--fresco-aqua); }
+        .fresco-text-light { color: var(--fresco-stone-light); }
+        .fresco-border-ochre { border-color: var(--fresco-ochre); }
+        .fresco-bg-ochre { background-color: var(--fresco-ochre); }
+        .fresco-bg-deep { background-color: var(--fresco-bg-deep); }
+        .fresco-text-gray-text { color: var(--fresco-gray-text); }
+
+        /* אנימציות בעת גלילה */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; }
+        .delay-600 { transition-delay: 0.6s; }
+        .delay-700 { transition-delay: 0.7s; }
+
+        /* אפקטים של גיל וסדקים על מקטעים */
+        .fresco-section {
+            position: relative;
+            background-color: transparent; /* הרקע יבוא מה-inline style */
+            overflow: hidden; /* לוודא שאפקטי לפני/אחרי לא יצאו מגבולות */
+        }
+        .fresco-section::before,
+        .fresco-section::after {
+            content: '';
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            top: 0; right: 0; bottom: 0; left: 0;
+            border: 1px solid rgba(255, 255, 255, 0.02); /* קווי מתאר עדינים */
+            filter: blur(0.5px);
+            transform: scale(1.005) rotate(0.2deg);
+            opacity: 0.5;
+        }
+        .fresco-section::after {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transform: scale(0.995) rotate(-0.3deg);
+            opacity: 0.3;
+        }
+        .fresco-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            background-color: rgba(var(--fresco-bg-deep), 0.3); /* רקע מעט שקוף לתוכן */
+            backdrop-filter: blur(2px); /* טשטוש עדין לרקע מאחור */
+        }
+
+        /* זוהר עדין לאלמנטים אינטראקטיביים */
+        a, button, .interactive-element {
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+            z-index: 2; /* לוודא שהם מעל טקסטורות בסיס */
+            display: inline-block; /* כדי לאפשר טרנספורמציה */
+        }
+        a:hover, button:hover, .interactive-element:hover {
+            text-shadow: 0 0 8px var(--fresco-gold);
+            transform: scale(1.02);
+        }
+
+        /* אינדיקטור גלילה */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--fresco-gray-text);
+            font-size: 0.8rem;
+            z-index: 99;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out;
+        }
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 30px;
+            background-color: var(--fresco-gray-text);
+            animation: scroll-anim 1.5s infinite ease-in-out;
+        }
+        @keyframes scroll-anim {
+            0% { transform: scaleY(0); opacity: 0; }
+            50% { transform: scaleY(1); opacity: 1; }
+            100% { transform: scaleY(0); opacity: 0; }
+        }
+
+        /* התאמות רספונסיביות */
+        @media (max-width: 768px) {
+            .custom-cursor-outer, .custom-cursor-inner {
+                display: none; /* הסתרת הסמן המותאם אישית במכשירי מגע */
+            }
+            body {
+                cursor: auto; /* הצגת סמן ברירת מחדל במכשירי מגע */
+            }
+            .fresco-content {
+                padding: 1rem;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .scroll-indicator { display: none; }
+        }
+
+        /* אפקט רקע "נושם" למקטעים */
+        .breathing-background {
+            background-attachment: fixed;
+            background-size: 110% 110%; /* גדול יותר כדי לאפשר תנועה */
+            animation: breathe-bg 60s infinite alternate ease-in-out;
+            transform-origin: center center;
+        }
+        @keyframes breathe-bg {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        .fresco-block {
+            background-color: rgba(42, 36, 31, 0.7); /* Deep Sepia עם שקיפות */
+            border: 1px solid var(--fresco-ochre);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* צל עדין לעומק */
+        }
+        .fresco-block::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(var(--fresco-aqua), 0.05) 0%, transparent 50%, rgba(var(--fresco-sienna), 0.05) 100%);
+            opacity: 0.5;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .fresco-block > * {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="fresco-bg-deep text-fresco-stone-light">
+    <!-- שכבות רקע בסגנון פרסקו (קבועות לתנועת פאראלקס עדינה) -->
+    <div class="fresco-layer fresco-layer-1"></div>
+    <div class="fresco-layer fresco-layer-2"></div>
+
+    <!-- סמן עכבר מותאם אישית -->
+    <div class="custom-cursor-outer"></div>
+    <div class="custom-cursor-inner"></div>
+
+    <!-- אינדיקטור גלילה -->
+    <div class="scroll-indicator">
+        <span class="fresco-text-gray-text">גלול</span>
+    </div>
+
+    <!-- עוטף תוכן ראשי -->
+    <div class="relative z-10 p-4 md:p-8 max-w-7xl mx-auto">
+
+        <!-- מקטע פתיחה (Hero) -->
+        <section id="hero" class="fresco-section min-h-screen flex items-center justify-center text-center p-8 breathing-background"
+            style="background: linear-gradient(180deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%),
+                           radial-gradient(circle at 75% 25%, rgba(192, 124, 74, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 25% 75%, rgba(91, 139, 155, 0.1) 0%, transparent 50%);">
+            <div class="fresco-content max-w-4xl mx-auto space-y-8 fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight fresco-text-ochre fade-in delay-100">מאיר אבינר: החופש המגולף בקירות הזמן</h1>
+                <p class="text-xl md:text-2xl fresco-text-gold opacity-80 fade-in delay-200">מסע של אמן-נווד, מרועה צאן בגבעות ועד לבתי כלא, מחפש את התפילה הנסתרת בנשמת האדם.</p>
+                <div class="mt-12 fade-in delay-300">
+                    <a href="#journey" class="inline-block px-8 py-4 border-2 fresco-border-ochre text-lg md:text-xl fresco-text-stone-light hover:fresco-text-gold interactive-element">
+                        גלו את הדרך
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- מקטע המסע והשורשים -->
+        <section id="journey" class="fresco-section my-16 md:my-24 p-8 breathing-background"
+            style="background: linear-gradient(135deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%),
+                           radial-gradient(circle at 30% 70%, rgba(91, 139, 155, 0.08) 0%, transparent 60%);">
+            <div class="fresco-content max-w-4xl mx-auto text-center space-y-10">
+                <h2 class="text-4xl md:text-5xl fresco-text-ochre mb-8 fade-in">מן הגבעות הפראיות אל רחובות העיר</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg">
+                    <div class="fresco-block fade-in delay-100">
+                        <h3 class="text-2xl fresco-text-gold mb-4">רועה הלב</h3>
+                        <p class="fresco-text-gray-text leading-relaxed">
+                            נולד בצל ישיבה, בן לרב בולט, מאיר גדל בין דיר עיזים וגמלים בהתנחלות בית אל. 
+                            כנער גבעות, למד את שפת האדמה והרוח, חי בטבע קדמוני. 
+                            שם, בין הסלעים והמרחבים, נזרע זרע החופש וההתנגדות לכל מסגרת.
+                        </p>
+                    </div>
+                    <div class="fresco-block fade-in delay-200">
+                        <h3 class="text-2xl fresco-text-gold mb-4">השבר והצליל</h3>
+                        <p class="fresco-text-gray-text leading-relaxed">
+                            החליל שנשבר בטעות היה אולי ההתגלות האמיתית. 
+                            הצורך לשלם על נזק פתח בפניו עולם של אילתור, קומדיה ומוזיקת רחוב - 
+                            במה שאין לה גבולות, בה הגוף הוא כלי והצליל הוא תפילה. 
+                            זו הייתה יציאתו בשאלה, לא רק מהדת, אלא מכל המוסכמות החברתיות.
+                        </p>
+                    </div>
+                </div>
+                <p class="text-xl fresco-text-aqua italic fade-in delay-300">
+                    "האמנות שלי היא תנועה בלתי פוסקת, כמו רוח הנושבת בין העולמות."
+                </p>
+            </div>
+        </section>
+
+        <!-- מקטע כישרונות -->
+        <section id="talents" class="fresco-section my-16 md:my-24 p-8 breathing-background"
+            style="background: linear-gradient(45deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%),
+                           radial-gradient(circle at 80% 20%, rgba(138, 79, 58, 0.06) 0%, transparent 60%);">
+            <div class="fresco-content max-w-4xl mx-auto text-center space-y-10">
+                <h2 class="text-4xl md:text-5xl fresco-text-ochre mb-8 fade-in">כישרונות, כלי לשינוי</h2>
+                <p class="text-xl fresco-text-gold mb-10 fade-in delay-100">מאיר אינו אמן אחד, הוא סימפוניה של ביטויים, כל אחד מהם נועד לשבור מוסכמות ולהצית ניצוץ.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-lg">
+                    <div class="fresco-block fade-in delay-200">
+                        <h3 class="text-2xl fresco-text-gold mb-4">אילתור</h3>
+                        <p class="fresco-text-gray-text">החיים עצמם הם אילתור מתמשך. יצירת תפילות ספונטניות, הפיכת כעס לצחוק, או מעגלי חיבוקים אימפרוביזציוניים בלב הכלא.</p>
+                    </div>
+                    <div class="fresco-block fade-in delay-300">
+                        <h3 class="text-2xl fresco-text-gold mb-4">מוזיקה</h3>
+                        <p class="fresco-text-gray-text">גיטרה, חליל, כלי נשיפה אלקטרוניים. יצירת טראנסים, צעקות משותפות, נגינה על עצים - המוזיקה היא שפה עתיקה החודרת עמוק לנשמה.</p>
+                    </div>
+                    <div class="fresco-block fade-in delay-400">
+                        <h3 class="text-2xl fresco-text-gold mb-4">קומדיה</h3>
+                        <p class="fresco-text-gray-text">הומור ככלי לשחרור. הפיכת מציאות קשה למשחק משעשע, הבאת "הפוך" - צבע ושמחה למקומות החשוכים והכואבים ביותר.</p>
+                    </div>
+                    <div class="fresco-block fade-in delay-500">
+                        <h3 class="text-2xl fresco-text-gold mb-4">שירה</h3>
+                        <p class="fresco-text-gray-text">מילים מגולפות ממעמקים. כתיבת שירים ותפילות אישיות, המבטאים את החיפוש הנצחי אחר חופש, אמת ואותנטיות חסרת פשרות.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- מקטע פועליו ועסקיו -->
+        <section id="actions" class="fresco-section my-16 md:my-24 p-8 breathing-background"
+            style="background: linear-gradient(135deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%),
+                           radial-gradient(circle at 70% 30%, rgba(91, 139, 155, 0.07) 0%, transparent 60%);">
+            <div class="fresco-content max-w-4xl mx-auto text-center space-y-10">
+                <h2 class="text-4xl md:text-5xl fresco-text-ochre mb-8 fade-in">פועליו: גילוף החופש במציאות</h2>
+                <p class="text-xl fresco-text-gold mb-10 fade-in delay-100">מאיר אינו בונה עסקים, הוא בונה גשרים. גשרים של אור, צחוק ושחרור במקומות הלא צפויים ביותר.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg">
+                    <div class="fresco-block fade-in delay-200">
+                        <h3 class="text-2xl fresco-text-gold mb-4">בתי הכלא: מקדשי חופש פנימי</h3>
+                        <p class="fresco-text-gray-text leading-relaxed">
+                            3-4 פעמים בשבוע, לבדו, הוא נכנס לכלא שרון, רמלה ואחרים. 
+                            הוא מביא גיטרה וחיוך, שר, מנגן ומאלתר עם אסירים. 
+                            "לשחרר מהכלא לשעה" - זו שליחותו. 
+                            סיפורים על אסיר אילם הנושך גיטרה, או תפילה משותפת ששוברת מחסומים, 
+                            הם עדות לכוחו של המפגש האנושי.
+                            פעילות זו ממומנת מתרומות פרטיות - עדות לחופש ועצמאות.
+                        </p>
+                    </div>
+                    <div class="fresco-block fade-in delay-300">
+                        <h3 class="text-2xl fresco-text-gold mb-4">אמנות רחוב: הבמה היא העולם</h3>
+                        <p class="fresco-text-gray-text leading-relaxed">
+                            כשהרחוב הופך לקרקס, העצים לבמה, והשלטים לסטנד אפ. 
+                            נגינה על עמודים, עמידה על ראש, או הופעות שבת בלבוש לבן. 
+                            אמנות הרחוב היא המקום בו מאיר משוחרר מכל גבול, יוצר חוויה ספונטנית ומשנה את מציאות העוברים והשבים.
+                        </p>
+                    </div>
+                    <div class="fresco-block md:col-span-2 fade-in delay-400">
+                        <h3 class="text-2xl fresco-text-gold mb-4">נשימה מודעת: לשחרר את הרוח</h3>
+                        <p class="fresco-text-gray-text leading-relaxed">
+                            מאיר מעביר סדנאות נשימה (Breathwork), כחלק מהפילוסופיה הטיפולית-אמנותית שלו. 
+                            הנשימה היא שער לחופש פנימי, לכוח הריפוי ששוכן בתוכנו. 
+                            טקסים ומפגשים היוצרים מרחב לשחרור רגשי עמוק, חיבור לגוף ולנשמה.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- מקטע פילוסופיה -->
+        <section id="philosophy" class="fresco-section my-16 md:my-24 p-8 breathing-background"
+            style="background: linear-gradient(45deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%),
+                           radial-gradient(circle at 20% 80%, rgba(138, 79, 58, 0.05) 0%, transparent 60%);">
+            <div class="fresco-content max-w-4xl mx-auto text-center space-y-10">
+                <h2 class="text-4xl md:text-5xl fresco-text-ochre mb-8 fade-in">פילוסופיה: חופש, צחוק וצבע</h2>
+                <p class="text-xl fresco-text-gold mb-10 fade-in delay-100">"העולם צריך צחוק, צבע וחופש" - זו האמירה המנחה את כל פועלו של מאיר. זו קריאה לחיים משוחררים, אמיתיים, כאלה שפורצים את גבולות הכלוב המחשבתי.</p>
+                <div class="fresco-block fade-in delay-200">
+                    <h3 class="text-3xl fresco-text-aqua mb-4">חופש פנימי</h3>
+                    <p class="fresco-text-gray-text leading-relaxed text-lg">
+                        מעל הכל, מאיר מחפש את החופש הפנימי. לא רק חופש פיזי או כלכלי, אלא את היכולת להיות שלם ואותנטי בכל מצב, 
+                        גם במקומות הכבולים ביותר כמו כלא. החופש הזה הוא מצב תודעה, בחירה יומיומית, פריצת גבולות הנפש.
+                    </p>
+                </div>
+                <div class="fresco-block fade-in delay-300">
+                    <h3 class="text-3xl fresco-text-aqua mb-4">שבירת מסגרות</h3>
+                    <p class="fresco-text-gray-text leading-relaxed text-lg">
+                        מילדותו ועד היום, מאיר פורץ דרכים. יציאה בשאלה, בחירה באמנות רחוב במקום עבודה מסודרת, כניסה לבתי כלא ללא מימון ממסדי. 
+                        כל אלה הם ביטוי לרצון עז לשבור את המוסכמות ולחיות חיים לא שגרתיים, בהרמוניה עם האני האמיתי.
+                    </p>
+                </div>
+                <div class="fresco-block fade-in delay-400">
+                    <h3 class="text-3xl fresco-text-aqua mb-4">חיבור אנושי</h3>
+                    <p class="fresco-text-gray-text leading-relaxed text-lg">
+                        הליבה של עבודתו היא יצירת חיבור. דרך מוזיקה, הומור, שירה ונשימה, הוא מצליח להגיע לנשמות כואבות, 
+                        ליצור מרחב של פתיחות, אהבה ושמחה, גם בקרב אנשים שאיבדו תקווה. חיבורים אלו הם המהות של ריפוי אמיתי.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- מקטע קישורים -->
+        <section id="links" class="fresco-section my-16 md:my-24 p-8 breathing-background"
+            style="background: linear-gradient(135deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%),
+                           radial-gradient(circle at 50% 50%, rgba(91, 139, 155, 0.06) 0%, transparent 60%);">
+            <div class="fresco-content max-w-4xl mx-auto text-center space-y-10">
+                <h2 class="text-4xl md:text-5xl fresco-text-ochre mb-8 fade-in">עקבותיו הדיגיטליים</h2>
+                <p class="text-xl fresco-text-gold mb-10 fade-in delay-100">הצטרפו למסע, הקשיבו לצלילים, קראו את הסיפורים. חופש ממתין לכם בכל פינה.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-lg">
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="fresco-block interactive-element flex items-center justify-center p-6 fade-in delay-200">
+                        <span class="text-2xl fresco-text-aqua hover:fresco-text-gold">פייסבוק - סיפורים מהכלא</span>
+                    </a>
+                    <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="fresco-block interactive-element flex items-center justify-center p-6 fade-in delay-300">
+                        <span class="text-2xl fresco-text-aqua hover:fresco-text-gold">פודקאסט - "עושים שינוי"</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" rel="noopener noreferrer" class="fresco-block interactive-element flex items-center justify-center p-6 fade-in delay-400">
+                        <span class="text-2xl fresco-text-aqua hover:fresco-text-gold">יוטיוב - ראיונות והופעות</span>
+                    </a>
+                    <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="fresco-block interactive-element flex items-center justify-center p-6 fade-in delay-500">
+                        <span class="text-2xl fresco-text-aqua hover:fresco-text-gold">לוח הופעות וכרטיסים</span>
+                    </a>
+                    <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" rel="noopener noreferrer" class="fresco-block interactive-element flex items-center justify-center p-6 fade-in delay-600">
+                        <span class="text-2xl fresco-text-aqua hover:fresco-text-gold">כתבה ב-מאקו (2018)</span>
+                    </a>
+                    <a href="https://timeout.co.il/%D7%94%D7%97%D7%9C%D7%99%D7%9C%D7%9F/" target="_blank" rel="noopener noreferrer" class="fresco-block interactive-element flex items-center justify-center p-6 fade-in delay-700">
+                        <span class="text-2xl fresco-text-aqua hover:fresco-text-gold">כתבה על אמנות רחוב</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- פוטר -->
+        <footer class="fresco-section text-center p-8 mt-16 fresco-text-gray-text text-sm breathing-background"
+            style="background: linear-gradient(180deg, var(--fresco-bg-deep) 0%, rgba(var(--fresco-bg-deep), 0.8) 50%, var(--fresco-bg-deep) 100%);">
+            <div class="fresco-content fade-in delay-100">
+                <p>&copy; 2024 מאיר אבינר - כל הזכויות שמורות לחופש האדם.</p>
+                <p class="mt-2">עיצוב ויצירה בהשראת האמן והדרך.</p>
+            </div>
+        </footer>
+
+    </div> <!-- סוף עוטף תוכן ראשי -->
+
+    <script>
+        // לוגיקת סמן עכבר מותאם אישית
+        const cursorOuter = document.querySelector('.custom-cursor-outer');
+        const cursorInner = document.querySelector('.custom-cursor-inner');
+        const interactiveElements = 'a, button, input[type="submit"], input[type="button"], .interactive-element';
+
+        let mouseX = 0, mouseY = 0;
+        let outerX = 0, outerY = 0;
+
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // הזזת הסמן הפנימי ישירות עם העכבר
+            cursorInner.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+        });
+
+        // אנימציית הסמן החיצוני לעקוב עם השהייה
+        const animateCursor = () => {
+            outerX += (mouseX - outerX) * 0.1; // עקיבה חלקה לסמן החיצוני
+            outerY += (mouseY - outerY) * 0.1;
+            cursorOuter.style.transform = `translate3d(${outerX}px, ${outerY}px, 0) translate(-50%, -50%)`;
+
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor(); // התחלת לולאת האנימציה
+
+        // אפקטי ריחוף לסמן
+        document.addEventListener('mouseover', e => {
+            if (e.target.closest(interactiveElements)) {
+                cursorOuter.classList.add('active');
+                cursorInner.classList.add('active');
+            }
+        });
+
+        document.addEventListener('mouseout', e => {
+            if (e.target.closest(interactiveElements)) {
+                cursorOuter.classList.remove('active');
+                cursorInner.classList.remove('active');
+            }
+        });
+
+        // Intersection Observer לאנימציות הופעה הדרגתית (fade-in)
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            root: null, // אזור הצפייה (viewport)
+            rootMargin: '0px',
+            threshold: 0.1 // הפעל כאשר 10% מהאלמנט גלוי
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // הפסק לצפות באלמנט לאחר האנימציה
+                }
+            });
+        }, observerOptions);
+
+        fadeInElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // נראות אינדיקטור הגלילה
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) { // הסתר לאחר גלילה קלה למטה
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.pointerEvents = 'none';
+            } else {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.pointerEvents = 'auto'; // אפשר מחדש אם נגלל בחזרה למעלה
+            }
+        });
+        // בדיקה ראשונית למקרה שהמשתמש טוען את הדף כשהוא כבר גלול
+        if (window.scrollY > 100) {
+            scrollIndicator.style.opacity = '0';
+            scrollIndicator.style.pointerEvents = 'none';
+        }
+    </script>
+</body>
+</html>

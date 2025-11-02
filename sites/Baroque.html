@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: מבוך הנשמה והחופש - יצירה בארוקית דיגיטלית</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Baroque theme and utility classes not directly in Tailwind */
+        :root {
+            --color-baroque-dark: #1a0a0a; /* Deep almost black */
+            --color-baroque-gold: #b8860b; /* Darker gold */
+            --color-baroque-red: #5c0f0f; /* Deep, rich red */
+            --color-baroque-cream: #f2e2d0; /* Off-white/cream */
+            --color-baroque-blue: #2c3e50; /* Deep blue */
+            --color-baroque-accent: #ffd700; /* Bright gold for highlights */
+        }
+
+        body {
+            font-family: 'Playfair Display', serif; /* Default body font */
+            background-color: var(--color-baroque-dark);
+            color: var(--color-baroque-cream);
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden; /* Prevent horizontal scroll from parallax */
+        }
+
+        /* Custom cursor styling - High Contrast MANDATE */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999; /* Ensure it's always on top */
+            transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out; /* Smooth transition for size change */
+            border: 2px solid #FFFFFF; /* White border for visibility on dark */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow for visibility on light */
+        }
+
+        .custom-cursor.hovered {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2); /* Subtle glow on hover */
+        }
+
+        /* Custom subtle pulse animation for titles */
+        @keyframes pulse-subtle {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.005); opacity: 0.98; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 4s infinite ease-in-out;
+        }
+
+        /* Parallax layers */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Behind content */
+            pointer-events: none;
+            --parallax-y: 0px; /* Custom property for JS to update translateY */
+        }
+
+        .layer-1 {
+            background-image: linear-gradient(135deg, var(--color-baroque-dark) 0%, var(--color-baroque-blue) 100%);
+            opacity: 0.8;
+            transform: translateY(var(--parallax-y)); /* Only translateY via JS */
+        }
+        .layer-2 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="pattern-cross" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="%23ffd700" opacity="0.1"/></pattern></defs><rect x="0" y="0" width="100%" height="100%" fill="url(%23pattern-cross)"/></svg>');
+            opacity: 0.1;
+            transform: translateY(var(--parallax-y)) scale(1.05); /* Combine scale and translateY */
+        }
+        .layer-3 {
+            background-image: radial-gradient(circle at center, rgba(184,134,11,0.1) 0%, rgba(26,10,10,0) 70%);
+            opacity: 0.2;
+            transform: translateY(var(--parallax-y)) scale(1.1); /* Combine scale and translateY */
+        }
+
+        /* Custom scrollbar for artistic feel */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: var(--color-baroque-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--color-baroque-gold);
+            border-radius: 6px;
+            border: 2px solid var(--color-baroque-dark);
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: var(--color-baroque-red);
+            border-radius: 6px;
+        }
+
+        /* Text styling - ensure high contrast (light text on dark background) */
+        .text-baroque-cream { color: var(--color-baroque-cream); }
+        .text-baroque-gold { color: var(--color-baroque-gold); }
+        .bg-baroque-dark { background-color: var(--color-baroque-dark); }
+        .bg-baroque-red { background-color: var(--color-baroque-red); }
+        .bg-baroque-blue { background-color: var(--color-baroque-blue); }
+
+        /* General content styling */
+        .content-section {
+            padding: 4rem 2rem;
+            margin: 0 auto;
+            max-width: 900px; /* Constrain content width */
+            background-color: rgba(26, 10, 10, 0.75); /* Slightly transparent dark background for content */
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--color-baroque-gold);
+        }
+        .content-section p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+            color: var(--color-baroque-cream); /* High contrast */
+        }
+        .content-section h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--color-baroque-accent); /* High contrast */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 2rem;
+            font-size: 3.5rem; /* Larger for section titles */
+        }
+        .content-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-baroque-gold); /* High contrast */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            margin-bottom: 1rem;
+            font-size: 2rem; /* Sub-titles */
+        }
+
+        /* Animations for revealing content */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Specific link styles */
+        .baroque-link {
+            color: var(--color-baroque-gold); /* High contrast */
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .baroque-link::after {
+            content: '';
+            position: absolute;
+            right: 0; /* For RTL underline effect */
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-baroque-accent);
+            transition: width 0.3s ease;
+        }
+        .baroque-link:hover {
+            color: var(--color-baroque-accent); /* High contrast */
+        }
+        .baroque-link:hover::after {
+            width: 100%;
+            right: 0;
+            left: unset; /* Ensure it stays right-aligned on hover in RTL */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: var(--color-baroque-dark);
+            color: var(--color-baroque-cream); /* High contrast */
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--color-baroque-red);
+            margin-top: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+        footer .text-sm {
+            font-family: 'Playfair Display', serif;
+        }
+        footer a {
+            color: var(--color-baroque-gold); /* High contrast */
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: var(--color-baroque-accent); /* High contrast */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 2rem 1rem;
+            }
+            .content-section h2 {
+                font-size: 2.5rem;
+            }
+            .content-section h3 {
+                font-size: 1.5rem;
+            }
+            .content-section p {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 3.5rem; /* Adjust for smaller screens */
+            }
+            header p {
+                font-size: 2rem; /* Adjust for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body class="bg-baroque-dark text-baroque-cream antialiased">
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <!-- Parallax Background Layers -->
+    <div class="parallax-layer layer-1" data-speed="-0.2"></div>
+    <div class="parallax-layer layer-2" data-speed="-0.4"></div>
+    <div class="parallax-layer layer-3" data-speed="-0.6"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10 min-h-screen pt-12 pb-24">
+
+        <!-- Header - A Grand Entrance -->
+        <header class="text-center py-16 mb-24 px-4 relative overflow-hidden">
+            <h1 class="font-['Cinzel_Decorative'] text-7xl md:text-8xl text-baroque-accent drop-shadow-lg leading-tight mb-4 animate-pulse-subtle">
+                מְבוֹךְ הַנְּשָׁמָה וְהַחֹפֶשׁ
+            </h1>
+            <p class="font-['Playfair_Display'] text-3xl md:text-4xl text-baroque-gold drop-shadow-md italic mb-8">
+                מֵאִיר אָבִינֶר: יְצִירַת חַיִּים בָּארוֹקִית
+            </p>
+            <div class="w-2/3 h-1 bg-baroque-gold mx-auto my-8 opacity-70"></div>
+        </header>
+
+        <!-- Act I: Prologue / The Grand Overture -->
+        <section class="content-section fade-in">
+            <h2 class="text-center">הַמְּבוֹא הַגָּדוֹל: בְּרֵאשִׁית הַמַּסָּע</h2>
+            <p>
+                בְּפִתְחֵי הַמְּבוֹךְ הַגָּדוֹל, בּוֹ הַנֶּפֶשׁ נִצְבָּה עַל סַף הַפְּלִיאָה, נִגְלֶה לָנוּ סִפּוּרוֹ שֶׁל מֵאִיר אָבִינֶר. מִבֵּית אֵל הַנִּשְׂגָּבָה, מֵעֶרְשׂ דַּת וּמַסּוֹרֶת עֲתִיקָה, בֵּין כָּרֵי רַעְיָה וְהִתְנַחֲלֻיּוֹת שֶׁל אֶבֶן וָרוּחַ, צָמַח עֶלֶם שֶׁלִּבּוֹ בָּעַר לְחֵרוּת שֶׁלֹּא יָדַע גְּבוּל. חַיָּיו נִמְזְגוּ בְּקֶשֶׁר עָמֹק עִם הַטֶּבַע הַפְּרָאִי וְהָאָדָם הַפְּשׁוּט, עַד שֶׁרוּחוֹ מְרַדָּה אֶת כְּבָלֶיהָ. הַאִם יִתָּכֵן כִּי בְּעֹמֶק הַמַּסּוֹרֶת טָמוּן הַמַּפְתֵּחַ לְשִׁחְרוּר? מֵאִיר יָצָא אֶל הַדֶּרֶךְ הַבִּלְתִּי שְׁגִיאָה, לְהָפַךְ לְאָמָּן חָפְשִׁי, מְשֻׁחְרָר מִמִּסְגְּרוֹת, בְּלֵב תֵּל אָבִיב הַהוֹמָה, וּבְלֵב כָּל נֶפֶשׁ אֲשֶׁר נִפְגְּשָׁה עִמּוֹ.
+            </p>
+        </section>
+
+        <!-- Act II: The Labyrinth of Becoming -->
+        <section class="content-section fade-in">
+            <h2 class="text-center">מְבוֹךְ הַהֲוָיָה: הַשֶּׁבֶר וְהַנְּסִיקָה</h2>
+            <p>
+                בְּעוֹדוֹ נַעַר, בֶּן שֵׁשׁ עֶשְׂרֵה שָׁנִים בִּלְבַד, הוּא חָוָה אֶת עֹמֶק הָאָרֶץ כְּרוֹעֶה צֹאן בְּהָרֵי הַגָּלִיל הַמִּדְבָּרִיִּים, וּכְ"נַעַר גְּבָעוֹת" בִּלְבַּב הִתְנַחֲלֻיּוֹת בְּנֻיּוֹת בְּלֵיל אֶחָד. חַיָּיו נָסְקוּ כִּנְשָׁר, חָווּ הַרְפַּתְקָאוֹת וַעֲבוֹדָה חַקְלָאִית עֲתִיקָה. אַךְ בִּלְבַב נִשְׁמָתוֹ בָּעֲרָה אֵשׁ אֲחֶרֶת. שֶׁבֶר חָלִיל צַד בְּשִׁגְגָה הָפַךְ לְנְקֻדַּת מִפְנֶה, רֶגַע שֶׁל חֻלְשָׁה שֶׁהֵפַךְ לִתְחִיָּה אַמָּנוּתִית. מִמְּקוֹם הַהֶפְסֵד, בָּחַר מֵאִיר בְּדֶרֶךְ בִּלְתִּי קוֹנְבֶנְצִיאוֹנָלִית – הֹפָעוֹת רְחוֹב, נְגִינָה, שִׁירָה, כְּדֵי לְשַׁלֵּם אֶת חוֹבוֹ. הָיְתָה זוֹ יְצִיאָה מִצֵּל הַדַּת הַכּוֹפֵתֶת אֶל אוֹר הָאָמָּנוּת הַמְּשַׁחְרֶרֶת, מִמִּסְגְּרוֹת הַיּוֹם-יוֹם אֶל רִבּוּי פָּנִים שֶׁל יְצִירָה וְחֵרוּת.
+            </p>
+        </section>
+
+        <!-- Act III: The Symphony of Talents -->
+        <section class="content-section fade-in">
+            <h2 class="text-center">סִימְפוֹנְיַת הַכִּשְׁרוֹנוֹת: הָרִיקוּד הָאֵינְסוֹפִי</h2>
+            <p>
+                כִּי הָאָמָּן הַזֶּה אֵינוֹ מְסֻגָּל לִגְבוּל. בְּיָדָיו, הַמַּבְּטָא שֶׁל הַנֶּפֶשׁ הוֹפֵךְ לְמַעֲשֶׂה.
+            </p>
+            <h3 class="text-right">אִילְתּוּר: הָרִיקוּד הַסְּפוֹנְטָנִי</h3>
+            <p>
+                הוּא רוֹאֶה עַצְמוֹ כְּרַב אָמָּנֵי הָאִילְתּוּר, יוֹצֵר תְּפִלּוֹת סְפוֹנְטָנִיּוֹת כְּמוֹ לַחַשׁ רוּחַ קַלָּה, מְבַטֵּא רְגָשׁוֹת עַזִּים דֶּרֶךְ צְלִילִים וּמִלִּים, וּמִשְׁתַּמֵּשׁ בּוֹ כְּכְלִי לְשִׁחְרוּר כַּעַס אוֹ לְהַעֲלָאָה אֶל מְרוֹמֵי הַשִּׂמְחָה הַטְּהוֹרָה. בְּלֵב כְּלָאוֹת הַבָּרְזֶל, הוּא זוֹרֵק כַּדּוּר עִם מִלִּים אקראיות, אוֹ יוֹצֵר מַעְגְּלֵי חִבּוּק אִימְפְּרוֹבִיזָצְיוֹנִיִּים, הַמְּשַׁבְּרִים אֶת כָּל חוֹמוֹת הַנֶּפֶשׁ.
+            </p>
+            <h3 class="text-right">מוּסִיקָה: מַנְגִּינוֹת הַנְּשָׁמָה</h3>
+            <p>
+                נַגַּן מִקְצוֹעִי עַל גִּיטָרָה, חָלִיל, חָלִיל צַד וּכְלֵי נְשִׁיפָה אֶלֶקְטְרוֹנִיִּים. בְּקוֹלוֹ וּבִכְלָיו, הוּא יוֹצֵר אקורדים מְהַפְנְתִים, מַזְמִין אֲסִירִים לִצְעֹק יַחַד – צְעָקַת שִׁחְרוּר – אוֹ יוֹצֵר טְרַאנְסִים מוּסִיקָלִיִּים הַסּוֹחֲפִים אֶל מֶרְחֲבֵי תּוֹדָעָה אֲחֵרִים. בֶּעָבָר, נִגֵּן בְּהֹפָעוֹת רְחוֹב, גַּם בְּעֵינַיִם כְּבוּלוֹת אוֹ בַּעֲמִידָה עַל רֹאשׁוֹ – מַרְאֶה בָּארוֹקִי שֶׁל הֲפוּךְ וְהִתְרַסְקוּת גְּבוּלוֹת.
+            </p>
+            <h3 class="text-right">קוֹמֶדְיָה: צְחוֹק שֶׁמְּשַׁבֵּר כְּבָלִים</h3>
+            <p>
+                בְּכָל פְּעֻלָּה, מִתְגַּלֵּחַ הומור חד, מֵהָפַךְ צְעָקוֹת לְמִשְׂחָקִים מַצְחִיקִים אוֹ לְהָבִיא כּוֹבַע עִם נוֹצָה לַכֶּלֶא. הוּא מֵבִיא "הָפוּךְ" – צֶבַע, הומור וְאוֹר לִמְקוֹמוֹת חֲשׁוּכִים, בּוֹרֵא בְּיָדָיו תֵּאַטְרוֹן שֶׁל שִׂמְחָה בְּלֵב הַצִּינוֹק.
+            </p>
+            <h3 class="text-right">שִׁירָה: מִלִּים מְחוֹרָזוֹת בְּזָהָב</h3>
+            <p>
+                כּוֹתֵב שִׁירִים וּתְפִלּוֹת אִישִׁיּוֹת, שֶׁהֵן אֵין אֶלָּא הִתְגַּלּוּת נִשְׁמָתוֹ, וּמְשַׁלֵּב אוֹתָם בְּהֹפָעוֹתָיו. הוּא מִשְׁתַּמֵּשׁ בַּמִּלִּים כְּחֶרֶב חַדָּה לְבַטֵּא מַחְשָׁבוֹת וּרְגָשׁוֹת עֲמֻקִּים, חרוטות בְּמַצָּע זָהָב.
+            </p>
+        </section>
+
+        <!-- Act IV: Chambers of Liberation -->
+        <section class="content-section fade-in">
+            <h2 class="text-center">חַדְרֵי הַשִּׁחְרוּר: הָאוֹר שֶׁבַּצִּינוֹק</h2>
+            <p>
+                מֵאִיר אֵינוֹ מְבַקֵּשׁ נַחַת. הוּא מְבַקֵּשׁ שִׁחְרוּר. מַעֲשָׂיו הֵם עֵדוּת חַיָּה לִתְפִיסַת עוֹלָם שֶׁפּוֹרֶצֶת אֶת גְּבוּלוֹת הַנּוֹרְמָלִי.
+            </p>
+            <h3 class="text-right">בִּקּוּרִים בְּבָתֵּי כֶּלֶא: הַבְּרִיחָה מֵהַכֶּלֶא לְשָׁעָה</h3>
+            <p>
+                שְׁלוֹשָׁה-אַרְבָּעָה פְּעָמִים בְּשָׁבוּעַ, כְּמַלְאַךְ גּוֹאֵל, מַגִּיעַ מֵאִיר לְכִלְאוֹת הָאָרֶץ. לְבַדּוֹ, בְּלִי לִוּוּי, הוּא נוֹשֵׂא עִמּוֹ חָלִיל וְגִּיטָרָה, וּמַנְגִּינָה שֶׁל חֵרוּת. הוּא שָׁר, מְנַגֵּן וּמְאַלְתֵּר עִם אֲסִירִים, בּוֹרֵא מֶרְחַב שֶׁל שִׁנּוּי רִגְשִׁי, "לִבְרֹחַ מֵהַכֶּלֶא לְשָׁעָה". סִפּוּרִים מְפֻרְסָמִים מְסַפְּרִים עַל אָסִיר אִלֵּם שֶׁנּוֹשֵׁךְ גִּיטָרָה בְּלַהַט יְצִירָה, וְעַל תְּפִלּוֹת מְשֻׁתָּפוֹת הַמְּעוֹרְרוֹת בְּכִי וְשִׂמְחָה בָּאוֹתָהּ נְשִׁימָה. פְּעֻלָּה זוֹ מְמֻמֶּנֶת מִתְּרוּמוֹת פְּרָטִיּוֹת, שֶׁמְּשַׁמְּרוֹת אֶת עַצְמָאוּתוֹ, כְּדֵי שֶׁלֹּא יִהְיֶה כָּפוּף לְמַסְגְּרוֹת מְדִינִיּוֹת.
+            </p>
+            <h3 class="text-right">אָמָּנוּת רְחוֹב: הַבָּמָה הַפְּרוּשָׂה</h3>
+            <p>
+                לִפְנֵי חֲמִשָּׁה עָשָׂר שָׁנָה, הוֹפִיעַ בְּרָחוֹבוֹת תֵּל אָבִיב כְּדֶמוּת קִרְקַסִית, עוֹמֵד בְּלִי נוֹעַ עַל שִׁלְטֵי רְחוֹב, מְנַגֵּן חָלִיל אוֹ גִּיטָרָה עַל עֵצִים וַעֲמוּדִים – מַרְאֶה בָּארוֹקִי שֶׁל אָדָם בְּהוֹמֶה שֶׁמְּבַקֵּשׁ לְהָפַךְ אֶת הָעוֹלָם לְתֵאַטְרוֹן. הוּא שִׁלֵּב פְּעָלוֹנוֹת כְּמוֹ עֲמִידָה עַל רֹאשׁ, מְבִיאוֹ הַלַּהַט הָאָמָּנוּתִי לְכָל פּוּנָּה.
+            </p>
+            <h3 class="text-right">סַדְנָאוֹת נְשִׁימָה מוּדַעַת: הַאֲוִיר שֶׁל הַנְּשָׁמָה</h3>
+            <p>
+                כְּחֵלֶק מֵחַיָּיו הַבִּלְתִּי שְׁגִיאָה, מֵאִיר מַעֲבִיר סַדְנָאוֹת נְשִׁימָה (Breathwork) – פְּעֻלָּה אָמָּנוּתִית-טִיפּוּלִית הַמְּבִיאָה לְשִׁחְרוּר רִגְשִׁי עָמֹק וּלְחִבּוּר מְחֻדָּשׁ לָעֶצֶם הַפְּנִימִי.
+            </p>
+        </section>
+
+        <!-- Act V: The Echo of Freedom -->
+        <section class="content-section fade-in">
+            <h2 class="text-center">הֵד הַחֹפֶשׁ: קְרִיאָה לְהִתְחַדְּשׁוּת</h2>
+            <p>
+                "הָעוֹלָם צָרִיךְ צְחוֹק, צֶבַע וְחֹפֶשׁ", מַכְרִיז מֵאִיר. וּבִדְבָרָיו אֵלֶּה טָמוּן כָּל סִפּוּרוֹ. בְּחִירָתוֹ לָחֹפֶשׁ מִכָּל מִסְגֶּרֶת, תְּנוּעָתוֹ הַפִּיזִית הַמִּתְמֶדֶת – הֲלִיכוֹת וּשְׂחִיתָה – הֵם סִמְלֵי הַחֹפֶשׁ הַפְּנִימִי, חֹפֶשׁ שֶׁאֵינוֹ נִתָּן לִכְבּוֹל, חֹפֶשׁ שֶׁמֵּאִיר מַגִּישׁ לְכָל נֶפֶשׁ שֶׁנִּפְגֶּשֶׁת עִמּוֹ. בְּהַגִּיעָה לִמְקוֹמוֹת חֲשׁוּכִים וּבְהַאֲרַתָם בְּאוֹר הַיְּצִירָה, מְזַכֵּךְ מֵאִיר אֶת הָעוֹלָם וְאֶת הַנְּשָׁמָה. יִהְיוּ נָא דְּבָרָיו וּמַעֲשָׂיו לְקְרִיאָה לְחֵרוּת, לְצֶבַע, וּלְשִׂמְחָה אֵינְסוֹפִית.
+            </p>
+            <div class="w-full h-1 bg-baroque-red mx-auto my-8 opacity-70"></div>
+            <h3 class="text-center">קִישׁוּרִים לְעוֹלָמוֹ שֶׁל מֵאִיר</h3>
+            <ul class="text-center mt-8 space-y-4 text-xl">
+                <li><a href="https://www.facebook.com/meiraviner/" target="_blank" class="baroque-link">פייסבוק אישי</a></li>
+                <li><a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="baroque-link">פודקאסט "עושים שינוי" (פרק 182)</a></li>
+                <li><a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" class="baroque-link">יוטיוב - פרק הפודקאסט</a></li>
+                <li><a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="baroque-link">יוטיוב - שיר "פלואו"</a></li>
+                <li><a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="baroque-link">לוח הופעות וכרטיסים</a></li>
+                <li><a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="baroque-link">מאמר על חייו (מאקו, 2018)</a></li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="font-['Playfair_Display'] text-sm">
+        <p>&copy; 2024 יצירה בארוקית דיגיטלית בהשראת מאיר אבינר. כל הזכויות שמורות.</p>
+    </footer>
+
+    <script>
+        // Custom Cursor Logic
+        const customCursor = document.getElementById('custom-cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        const speed = 0.2; // Smoothness factor
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            customCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(animateCursor);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            animateCursor(); // Start cursor animation
+
+            const clickableElements = document.querySelectorAll('a, button, input[type="submit"], .content-section');
+            clickableElements.forEach(el => {
+                el.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
+            });
+
+            // Parallax Scrolling Logic using CSS custom properties
+            const parallaxLayers = document.querySelectorAll('.parallax-layer');
+
+            function updateParallax() {
+                const scrollY = window.scrollY;
+                parallaxLayers.forEach(layer => {
+                    const speed = parseFloat(layer.getAttribute('data-speed'));
+                    const yPos = -(scrollY * speed);
+                    layer.style.setProperty('--parallax-y', `${yPos}px`);
+                });
+            }
+
+            window.addEventListener('scroll', updateParallax);
+            updateParallax(); // Initial call to set position
+
+            // Intersection Observer for fade-in animations
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.3, // Trigger when 30% of the item is visible
+                rootMargin: "0px 0px -100px 0px" // Start 100px before reaching the bottom of the viewport
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('is-visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+
+</body>
+</html>

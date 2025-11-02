@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - משיכות מכחול של חופש</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #0d121c; /* Deep, dark canvas */
+            color: #e0e7ff; /* Light, almost white text */
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-image: radial-gradient(at 0% 0%, #1a2a40 0%, transparent 50%), radial-gradient(at 100% 100%, #1a2a40 0%, transparent 50%);
+            background-blend-mode: multiply;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Frank Ruhl Libre', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Painted text effect */
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            color: transparent;
+        }
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8);
+            transform: translate(-50%, -50%); /* Center the cursor */
+        }
+        /* Scrolled parallax elements */
+        .parallax-bg-1 {
+            transform: translate3d(0, var(--scroll-y-1, 0px), 0);
+        }
+        .parallax-bg-2 {
+            transform: translate3d(0, var(--scroll-y-2, 0px), 0);
+        }
+        /* Keyframes for oil blobs */
+        @keyframes blob-move-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 70px) scale(1.1); }
+        }
+        @keyframes blob-move-2 {
+            0% { transform: translate(0, 0) scale(1.1); }
+            100% { transform: translate(-60px, -40px) scale(1); }
+        }
+        @keyframes blob-move-3 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -80px) scale(1.2); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-[#0d121c] to-[#1a2a40] min-h-screen text-gray-100 antialiased relative">
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="fixed pointer-events-none rounded-full transition-transform duration-100 ease-out z-[9999] custom-cursor"></div>
+
+    <!-- Background texture/elements - fixed for oil painting feel -->
+    <div class="fixed inset-0 overflow-hidden z-[-1] opacity-50">
+        <!-- Noise texture (SVG data URI) -->
+        <div class="absolute w-[200vw] h-[200vh] top-[-50vh] left-[-50vw] bg-cover bg-center" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.7\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.1\'/%3E%3C/svg%3E');"></div>
+        <!-- Oil blobs for subtle movement -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full opacity-20 blur-xl animate-[blob-move-1_15s_infinite_alternate]"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-orange-500 rounded-full opacity-20 blur-xl animate-[blob-move-2_18s_infinite_alternate]"></div>
+        <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-green-500 rounded-full opacity-20 blur-xl animate-[blob-move-3_12s_infinite_alternate]"></div>
+    </div>
+
+    <main class="relative z-10 p-8 md:p-16 max-w-4xl mx-auto space-y-24">
+
+        <!-- Header Section - Title Card -->
+        <header class="text-center py-16 relative overflow-hidden rounded-lg shadow-2xl bg-[#1d2a3d] border border-[#2d4059]">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#2a3f5a] to-[#1d2a3d] opacity-80 z-0"></div>
+            <h1 class="text-5xl md:text-7xl font-bold text-yellow-300 relative z-10 leading-tight">
+                מאיר אבינר<br>
+                <span class="block text-2xl md:text-4xl mt-4 text-orange-300 text-stroke">משיכות מכחול של חופש</span>
+            </h1>
+            <p class="mt-8 text-xl md:text-2xl text-gray-200 relative z-10 leading-relaxed max-w-2xl mx-auto">
+                אמן רב-תחומי, נווד ברוח, מחולל שינוי – בחיפוש תמידי אחר צבע, צחוק וחופש פנימי.
+            </p>
+        </header>
+
+        <!-- Section 1: המסע - The Journey -->
+        <section class="relative p-8 md:p-12 bg-[#2d3d52] rounded-lg shadow-xl border border-[#3f5068] group">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-blue-300 group-hover:text-blue-200 transition-colors duration-300">
+                <span class="text-stroke">המסע</span> – בין עפר לקודש, מחופש לכבלים
+            </h2>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-200 mb-6">
+                מנופי הרי שומרון, בין עדרי צאן ושבילי עפר – נבטה נשמה חלוצה. מבית אל של קודש, אל חיים כפריים ודתיים תחת צילו של רב בולט, החלה דרכו. בגיל שש עשרה, "נער גבעות" היה, בונה ומקים, קרוב לאדמה ולטבע, נושם את רוח ההרפתקה והעבודה המסורתית. אך הרוח, כמהה למרחבים רחבים יותר, הובילה אותו למסע של שבירה ובנייה, של יציאה מהמוכר אל הלא-נודע.
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-200">
+                היום, בתל אביב התוססת, מאיר הוא אמן חופשי, משוחרר ממסגרות, אך מחובר עמוק לשורשיו. הוא גשר חי בין עולמות – בין דת לחילוניות, בין הכפר לעיר, בין הכלא לחופש. מסעו הוא פלטת צבעים עשירה, המציירת את דיוקן האדם המחפש את אמת ליבו.
+            </p>
+            <div class="absolute bottom-4 left-4 w-32 h-32 bg-yellow-600 rounded-full opacity-10 blur-xl group-hover:opacity-20 transition-opacity duration-500 parallax-bg-1" style="--scroll-y-1: calc(var(--scroll-y, 0) * 0.05px);"></div>
+            <div class="absolute top-4 right-4 w-24 h-24 bg-green-600 rounded-full opacity-10 blur-xl group-hover:opacity-20 transition-opacity duration-500 parallax-bg-2" style="--scroll-y-2: calc(var(--scroll-y, 0) * 0.03px);"></div>
+        </section>
+
+        <!-- Section 2: כישרונות - Talents as brushstrokes -->
+        <section class="relative p-8 md:p-12 bg-[#3f5068] rounded-lg shadow-xl border border-[#4a6078] group">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-yellow-300 group-hover:text-yellow-200 transition-colors duration-300">
+                <span class="text-stroke">כישרונות</span> – כלים ליצירה וריפוי
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] transition-colors duration-300">
+                    <h3 class="text-3xl font-bold mb-4 text-orange-300">אילתור</h3>
+                    <p class="text-lg leading-relaxed text-gray-200">
+                        האילתור – נשימה. תפילה ספונטנית הנשפכת כזרם צבע. כדור מילים חופשי המרפא, מפיג כעס, מזמין שמחה. בכלא, הוא זורק כדור מילים אקראיות, או יוצר מעגלי חיבוק מאולתרים, שובר את הדממה בכוח היצירה הרגעית.
+                    </p>
+                </div>
+                <div class="p-6 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] transition-colors duration-300">
+                    <h3 class="text-3xl font-bold mb-4 text-blue-300">מוזיקה</h3>
+                    <p class="text-lg leading-relaxed text-gray-200">
+                        צלילי גיטרה, לחני חליל צד, כלי נשיפה אלקטרוניים – מוזיקה שהיא גשר בין נשמות. אקורדים המזמינים צעקה משותפת, טראנסים מוזיקליים המפרקים חומות. בעבר, הופיע ברחובות – מנגן עם עיניים כבולות, עומד על הראש, מוזיקה שהיא אמירה חופשית.
+                    </p>
+                </div>
+                <div class="p-6 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] transition-colors duration-300">
+                    <h3 class="text-3xl font-bold mb-4 text-green-300">קומדיה</h3>
+                    <p class="text-lg leading-relaxed text-gray-200">
+                        הומור – כובע עם נוצה בלב הכלא. צחוק שהופך צעקה למשחק, מביא "הפוך" – צבע וחיים למקומות החשוכים ביותר. יכולתו להפוך את הכבד לקליל, את העצוב למצחיק, היא כלי רב עוצמה לשחרור וריפוי.
+                    </p>
+                </div>
+                <div class="p-6 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] transition-colors duration-300">
+                    <h3 class="text-3xl font-bold mb-4 text-red-300">שירה</h3>
+                    <p class="text-lg leading-relaxed text-gray-200">
+                        מילים חרוטות כפסוקי תפילה אישית, שירים הנאמרים בלחש או בצעקה. מחשבות עמוקות המטפטפות על דפי הנפש, יוצרות עולם של משמעות. שירתו היא ביטוי לחופש, לכאב ולשמחה, המוצאת הד בלבבות רבים.
+                    </p>
+                </div>
+            </div>
+            <p class="mt-8 text-xl md:text-2xl text-gray-200 relative z-10 leading-relaxed max-w-2xl mx-auto text-center font-bold">
+                "העולם צריך צחוק, צבע וחופש."
+            </p>
+        </section>
+
+        <!-- Section 3: פועלו - Actions as painted scenes -->
+        <section class="relative p-8 md:p-12 bg-[#2d3d52] rounded-lg shadow-xl border border-[#3f5068] group">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-orange-300 group-hover:text-orange-200 transition-colors duration-300">
+                <span class="text-stroke">פועלו</span> – אמנות ללא גבולות
+            </h2>
+            <div class="space-y-12">
+                <!-- Prison Visits -->
+                <div class="flex flex-col md:flex-row items-start md:space-x-8 rtl:space-x-reverse">
+                    <div class="flex-shrink-0 mb-4 md:mb-0 w-full md:w-1/3 text-center md:text-right">
+                        <h3 class="text-3xl font-bold text-blue-300">בתי כלא</h3>
+                        <p class="text-gray-400 text-lg">חופש מאחורי סורגים</p>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <p class="text-lg leading-relaxed text-gray-200 mb-4">
+                            בתי כלא – לא סוף, אלא התחלה. 3-4 פעמים בשבוע, מאיר נכנס לבדו, מביא את האור למקומות החשוכים ביותר. הוא שר, מנגן ומאלתר עם אסירים, יוצר מרחב שבו הגוף אמנם כלוא, אך הרוח מרחפת. זהו "פרויקט סיפורים מכלא", הממומן מתרומות קטנות, שומר על עצמאות ומאפשר ריפוי רגשי, "לברוח מהכלא לשעה".
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Street Art -->
+                <div class="flex flex-col md:flex-row items-start md:space-x-8 rtl:space-x-reverse">
+                    <div class="flex-shrink-0 mb-4 md:mb-0 w-full md:w-1/3 text-center md:text-right">
+                        <h3 class="text-3xl font-bold text-green-300">אמנות רחוב</h3>
+                        <p class="text-gray-400 text-lg">העיר כקנבס</p>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <p class="text-lg leading-relaxed text-gray-200 mb-4">
+                            רחובות תל אביב כקנבס פתוח. לפני 15 שנה, לאחר ששבר חליל צד, בחר מאיר לשלם את הנזק בנגינת רחוב, ולא בעבודה מסורתית. הוא טיפס על עצים, עמד על שלטים ועמודים, מנגן ומופיע. אמנות רחוב נושמת, חיה, פורצת גבולות המוסכמות, משלבת פעלולים כמו עמידה על ראש או נגינת שירי שבת בלבוש לבן.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Workshops & Performances -->
+                <div class="flex flex-col md:flex-row items-start md:space-x-8 rtl:space-x-reverse">
+                    <div class="flex-shrink-0 mb-4 md:mb-0 w-full md:w-1/3 text-center md:text-right">
+                        <h3 class="text-3xl font-bold text-yellow-300">סדנאות והופעות</h3>
+                        <p class="text-gray-400 text-lg">חיבור דרך היצירה</p>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <p class="text-lg leading-relaxed text-gray-200 mb-4">
+                            מאיר מעביר סדנאות נשימה מודעת (Breathwork) כחלק מפעילותו האמנותית-טיפולית, ומופיע עם אחיו ואחותו, מספר סיפורים מרתקים מחייו ופועלו. פעילויותיו הן ביטוי חי לתפיסת עולמו: חיים ללא מסגרות, תנועה פיזית (הליכות, שחייה) וחופש פנימי, ככלים לשחרור רגשי והבאת אור למקומות חשוכים.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-48 h-4 bg-yellow-700 rounded-full opacity-10 blur-md group-hover:w-64 transition-all duration-500"></div>
+        </section>
+
+        <!-- Section 4: קישורים - Palette of connections -->
+        <section class="relative p-8 md:p-12 bg-[#3f5068] rounded-lg shadow-xl border border-[#4a6078] group">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-blue-300 group-hover:text-blue-200 transition-colors duration-300">
+                <span class="text-stroke">חיבורים</span> – משיכות מכחול דיגיטליות
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="block p-5 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] hover:scale-[1.02] transition-all duration-300 flex items-center rtl:flex-row-reverse justify-between group">
+                    <span class="text-xl font-semibold text-gray-100 group-hover:text-white">פייסבוק אישי</span>
+                    <svg class="w-6 h-6 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"></path></svg>
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="block p-5 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] hover:scale-[1.02] transition-all duration-300 flex items-center rtl:flex-row-reverse justify-between group">
+                    <span class="text-xl font-semibold text-gray-100 group-hover:text-white">פודקאסט "עושים שינוי"</span>
+                    <svg class="w-6 h-6 text-purple-400 group-hover:text-purple-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm-2 14.5v-9L16 12l-6 4.5z"></path></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" rel="noopener noreferrer" class="block p-5 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] hover:scale-[1.02] transition-all duration-300 flex items-center rtl:flex-row-reverse justify-between group">
+                    <span class="text-xl font-semibold text-gray-100 group-hover:text-white">יוטיוב – שיר "פלואו"</span>
+                    <svg class="w-6 h-6 text-red-400 group-hover:text-red-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M10 16.5v-9L16 12l-6 4.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="block p-5 bg-[#2d3d52] rounded-md shadow-inner border border-[#3f5068] hover:bg-[#394960] hover:scale-[1.02] transition-all duration-300 flex items-center rtl:flex-row-reverse justify-between group">
+                    <span class="text-xl font-semibold text-gray-100 group-hover:text-white">לוח הופעות וכרטיסים</span>
+                    <svg class="w-6 h-6 text-orange-400 group-hover:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-9-8h8v2h-8zm0 4h8v2h-8zm-4-4h2v2H8zm0 4h2v2H8z"></path></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 text-gray-400 text-sm">
+            <p>&copy; 2024 מאיר אבינר - כל הזכויות שמורות ליצירה החופשית.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Custom Cursor JS
+        const customCursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+        });
+
+        // Parallax Scrolling JS
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            document.documentElement.style.setProperty('--scroll-y', `${scrollY}`);
+
+            // Apply parallax to background elements
+            document.querySelectorAll('.parallax-bg-1').forEach(el => {
+                el.style.setProperty('--scroll-y-1', `${scrollY * 0.05}px`);
+            });
+            document.querySelectorAll('.parallax-bg-2').forEach(el => {
+                el.style.setProperty('--scroll-y-2', `${scrollY * 0.03}px`);
+            });
+        });
+
+    </script>
+</body>
+</html>

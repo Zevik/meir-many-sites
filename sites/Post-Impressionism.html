@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: ציור דיגיטלי של חופש פנימי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;470;700&family=Frank+Ruhl+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden; /* Prevent horizontal scroll from parallax/animations */
+            background-color: #0b0c10; /* Dark overall background */
+            color: #e0e0e0; /* Light text for contrast */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-weight: 700;
+        }
+
+        /* Custom Cursor Styling */
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF; /* Light border */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow */
+            transition: transform 0.1s ease-out, opacity 0.2s ease-out;
+            z-index: 9999;
+            transform: translate(-50%, -50%); /* Center the cursor */
+            opacity: 1;
+        }
+
+        /* Post-Impressionist inspired background gradient animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient {
+            background: linear-gradient(-45deg, #1f2937, #3b0764, #7f1d1d, #065f46);
+            background-size: 400% 400%;
+            animation: gradientShift 25s ease infinite;
+        }
+
+        /* Post-Impressionist texture overlay */
+        .texture-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239CA3AF' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zm1 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Custom scroll animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dynamic background for sections, mimicking layered brushstrokes */
+        .section-bg-1 {
+            background: radial-gradient(circle at 10% 10%, #0c4a6e, transparent),
+                        radial-gradient(circle at 90% 90%, #6d28d9, transparent),
+                        linear-gradient(135deg, #1e3a8a, #0c0a09);
+        }
+        .section-bg-2 {
+            background: radial-gradient(circle at 80% 20%, #b45309, transparent),
+                        radial-gradient(circle at 20% 80%, #16a34a, transparent),
+                        linear-gradient(45deg, #71321d, #14532d);
+        }
+        .section-bg-3 {
+            background: radial-gradient(circle at 50% 50%, #92400e, transparent),
+                        linear-gradient(225deg, #2b2b2b, #831843);
+        }
+        .section-bg-4 {
+            background: radial-gradient(circle at 30% 70%, #facc15, transparent),
+                        radial-gradient(circle at 70% 30%, #581c87, transparent),
+                        linear-gradient(315deg, #4f46e5, #ec4899);
+        }
+        .section-bg-5 {
+            background: radial-gradient(circle at 15% 85%, #881337, transparent),
+                        radial-gradient(circle at 85% 15%, #059669, transparent),
+                        linear-gradient(90deg, #1f2937, #4c0519);
+        }
+
+        /* Overlapping elements */
+        .overlap-card {
+            position: relative;
+            z-index: 10;
+        }
+        .overlap-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            bottom: -10px;
+            left: -10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            transform: rotate(2deg);
+            z-index: -1;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        .overlap-card::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            bottom: -15px;
+            left: -15px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 1.2rem;
+            transform: rotate(-3deg);
+            z-index: -2;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="selection:bg-yellow-400 selection:text-black">
+    <div class="custom-cursor"></div>
+
+    <!-- Background Layers for Parallax -->
+    <div class="fixed inset-0 w-full h-full animated-gradient z-[-2] opacity-80" data-parallax-speed="0.2"></div>
+    <div class="fixed inset-0 w-full h-full texture-overlay z-[-1] opacity-20" data-parallax-speed="0.1"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10 min-h-screen pt-16 pb-24">
+
+        <!-- Hero Section -->
+        <header class="relative flex items-center justify-center min-h-screen text-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 to-purple-900 opacity-70"></div>
+            <div class="container mx-auto px-4 relative z-20">
+                <h1 class="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight fade-in-up">
+                    מאיר אבינר: חופש בציור דיגיטלי
+                </h1>
+                <p class="text-2xl md:text-3xl text-gray-200 mb-10 tracking-wide fade-in-up delay-150">
+                    מסע של צבע, צליל ונשמה
+                </p>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed fade-in-up delay-300">
+                    בגבול שבין רועה צאן לרחובות תל אביב הסואנים, בין קודש לחול, נולדת אמנות ששוברת מסגרות. מאיר אבינר – אדם, אמן, מגדלור של חופש פנימי. כאן נצייר את מסעו במכחולי הדיגיטל, כל קטע – משיחת צבע.
+                </p>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-400 fade-in-up delay-500">
+                <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </header>
+
+        <!-- Section 1: שורשים ורוחב שדות -->
+        <section class="min-h-screen flex items-center py-20 px-4 relative section-bg-1 bg-blend-multiply shadow-xl">
+            <div class="absolute inset-0 opacity-70"></div>
+            <div class="container mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 relative z-10">
+                <div class="md:w-1/2 lg:w-2/5 overlap-card p-8 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl fade-in-up">
+                    <h2 class="text-5xl font-bold text-amber-300 mb-6 leading-tight">
+                        שורשים ורוחב שדות
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-4">
+                        בנופי בית אל התחבאה נשמה פראית. נער גבעות, רועה צאן, בין העיזים לגמלים, במרחבי הגליל הפתוחים. שם, מול המדבר והשמיים, ניצת ניצוץ החופש הראשון.
+                    </p>
+                    <p class="text-md md:text-lg text-gray-300 leading-relaxed">
+                        מניגוני הרוח למורשת עתיקה, נרקמו צלילים ראשוניים של יציאה אל הלא נודע. חומר הגלם של החיים נטול הגבולות, נאסף תחת שמש לוהטת.
+                    </p>
+                </div>
+                <div class="md:w-1/2 lg:w-3/5 md:pr-10 text-center md:text-right fade-in-up delay-200">
+                    <div class="w-full h-80 bg-gradient-to-tl from-green-700 to-emerald-900 rounded-lg shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://source.unsplash.com/random/800x600/?desert,sheep,israel')"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl text-white font-bold opacity-80">
+                            <span class="rotate-3 -translate-y-4">מרחבי גליל</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: אילתור כמכחול -->
+        <section class="min-h-screen flex items-center py-20 px-4 relative section-bg-2 bg-blend-multiply shadow-xl">
+            <div class="absolute inset-0 opacity-70"></div>
+            <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+                <div class="md:w-1/2 lg:w-3/5 md:pl-10 text-center md:text-left fade-in-up">
+                    <div class="w-full h-80 bg-gradient-to-br from-indigo-700 to-purple-800 rounded-lg shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://source.unsplash.com/random/800x600/?music,flute,guitar')"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl text-white font-bold opacity-80">
+                            <span class="-rotate-6 translate-y-4">צלילי חופש</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 lg:w-2/5 overlap-card p-8 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl fade-in-up delay-200">
+                    <h2 class="text-5xl font-bold text-teal-300 mb-6 leading-tight">
+                        אילתור כמכחול
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-4">
+                        מילים הופכות ללחן, צלילים פורצים מרגש, תפילה ספונטנית שאינה יודעת גבול. האילתור אינו רק כלי, הוא דרך חיים, פעימת לב אמנותית.
+                    </p>
+                    <p class="text-md md:text-lg text-gray-300 leading-relaxed">
+                        שחרור כעס, התפרצות שמחה – הכל ציור רגעי במרחב. ככדור מתגלגל בבתי כלא, נושא מילים אקראיות, או מעגל חיבוקים הנארג לפתע. קשת בענן של הרגע. גיטרה, חליל, קול – מיתרים לנשמה.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: צבע וצחוק מאחורי הסורגים -->
+        <section class="min-h-screen flex items-center py-20 px-4 relative section-bg-3 bg-blend-multiply shadow-xl">
+            <div class="absolute inset-0 opacity-70"></div>
+            <div class="container mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 relative z-10">
+                <div class="md:w-1/2 lg:w-2/5 overlap-card p-8 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl fade-in-up">
+                    <h2 class="text-5xl font-bold text-red-300 mb-6 leading-tight">
+                        צבע וצחוק <br class="hidden md:block"/> מאחורי הסורגים
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-4">
+                        שערי כלא נפתחים, ואמן אחד נושא עימו לא רק גיטרה, אלא שמש. בכלא 'שרון', ב'רמלה', הוא אי מואר של חופש, של רגע של בריחה.
+                    </p>
+                    <p class="text-md md:text-lg text-gray-300 leading-relaxed">
+                        תרומות קטנות הופכות לביקורים תכופים, שבהם אסיר אילם נושך גיטרה, או קבוצה שלמה פורצת בבכי ושמחה כאחד. הוא מוצא את החופש הפנימי גם במקומות הכבולים ביותר, מצייר תקווה בצבעי הומור ומוזיקה, מזכיר לכולם שגם מאחורי הסורגים, הנשמה חופשיה.
+                    </p>
+                </div>
+                <div class="md:w-1/2 lg:w-3/5 md:pr-10 text-center md:text-right fade-in-up delay-200">
+                    <div class="w-full h-80 bg-gradient-to-tr from-rose-800 to-zinc-900 rounded-lg shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://source.unsplash.com/random/800x600/?prison,music,hope')"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl text-white font-bold opacity-80">
+                            <span class="rotate-2 translate-y-2">אור בכלא</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: הבמה - עץ, שלט, או עמוד -->
+        <section class="min-h-screen flex items-center py-20 px-4 relative section-bg-4 bg-blend-multiply shadow-xl">
+            <div class="absolute inset-0 opacity-70"></div>
+            <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+                <div class="md:w-1/2 lg:w-3/5 md:pl-10 text-center md:text-left fade-in-up">
+                    <div class="w-full h-80 bg-gradient-to-tl from-blue-700 to-pink-800 rounded-lg shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://source.unsplash.com/random/800x600/?street-art,tel-aviv,performance')"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl text-white font-bold opacity-80">
+                            <span class="-rotate-4 -translate-y-3">רחובות כבמה</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 lg:w-2/5 overlap-card p-8 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl fade-in-up delay-200">
+                    <h2 class="text-5xl font-bold text-yellow-300 mb-6 leading-tight">
+                        הבמה - עץ, שלט, או עמוד
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-4">
+                        רחובות תל אביב – גלריית אמנות אינסופית. הוא טיפס על עצים, עמד על שלטים, הפך עמודים לבמה מאולתרת.
+                    </p>
+                    <p class="text-md md:text-lg text-gray-300 leading-relaxed">
+                        חליל צד שנשבר, פתח דרך חדשה – הופעות רחוב כפרנסה, כאמירה, כהצהרת חופש. לבוש לבן, מנגן שירי שבת, עומד על הראש – כל תנועה היא משיחת צבע, כל צליל – גילוי לב. אמנות שנושמת את האוויר של העיר, נפרשת לעיני כל, ללא מחיצות.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: נשימה, תנועה, וריפוי -->
+        <section class="min-h-screen flex items-center py-20 px-4 relative section-bg-5 bg-blend-multiply shadow-xl">
+            <div class="absolute inset-0 opacity-70"></div>
+            <div class="container mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 relative z-10">
+                <div class="md:w-1/2 lg:w-2/5 overlap-card p-8 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl fade-in-up">
+                    <h2 class="text-5xl font-bold text-green-300 mb-6 leading-tight">
+                        נשימה, תנועה, וריפוי
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-4">
+                        מעבר לכל הופעה, לכל צחוק, שוכנת עבודה עמוקה עם הנשמה. סדנאות נשימה מודעת, תנועה חופשית, חיבור למהות הפנימית.
+                    </p>
+                    <p class="text-md md:text-lg text-gray-300 leading-relaxed">
+                        ריפוי דרך הקשבה לגוף, לשקט שבין הנשימות, למקצב הפנימי. כאן, החופש הוא פנימי, עמוק, משוחרר מכל כבל. תרפיה של קול, של תנועה, של אמת חשופה. מסע אל מרכז העצמי, ציור מחדש של הגוף והרוח.
+                    </p>
+                </div>
+                <div class="md:w-1/2 lg:w-3/5 md:pr-10 text-center md:text-right fade-in-up delay-200">
+                    <div class="w-full h-80 bg-gradient-to-br from-lime-700 to-indigo-900 rounded-lg shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://source.unsplash.com/random/800x600/?meditation,breathwork,healing')"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl text-white font-bold opacity-80">
+                            <span class="rotate-1 translate-y-1">מדיטציה פנימית</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Links Section -->
+        <footer class="py-20 px-4 relative bg-gradient-to-t from-gray-950 to-gray-800 text-center shadow-inner">
+            <div class="container mx-auto relative z-10">
+                <h3 class="text-5xl font-bold text-gray-100 mb-10 fade-in-up">
+                    המשך המסע
+                </h3>
+                <p class="text-xl text-gray-300 mb-12 fade-in-up delay-100">
+                    לגעת בעוד משיכות צבע: לגלות, להקשיב, להתחבר.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer"
+                       class="overlap-card p-6 bg-blue-700 bg-opacity-70 rounded-xl shadow-lg hover:bg-blue-800 hover:scale-105 transition-all duration-300 ease-in-out block fade-in-up delay-200">
+                        <h4 class="text-2xl font-bold text-white mb-2">פייסבוק אישי</h4>
+                        <p class="text-gray-200">סיפורים מהכלא, הופעות, תכנים אישיים</p>
+                    </a>
+                    <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer"
+                       class="overlap-card p-6 bg-red-700 bg-opacity-70 rounded-xl shadow-lg hover:bg-red-800 hover:scale-105 transition-all duration-300 ease-in-out block fade-in-up delay-300">
+                        <h4 class="text-2xl font-bold text-white mb-2">פודקאסט "עושים שינוי"</h4>
+                        <p class="text-gray-200">ראיון מפורט על חייו ופילוסופיית החופש</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" rel="noopener noreferrer"
+                       class="overlap-card p-6 bg-yellow-700 bg-opacity-70 rounded-xl shadow-lg hover:bg-yellow-800 hover:scale-105 transition-all duration-300 ease-in-out block fade-in-up delay-400">
+                        <h4 class="text-2xl font-bold text-white mb-2">יוטיוב - פרק הפודקאסט</h4>
+                        <p class="text-gray-200">צפייה בראיון המלא</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" rel="noopener noreferrer"
+                       class="overlap-card p-6 bg-purple-700 bg-opacity-70 rounded-xl shadow-lg hover:bg-purple-800 hover:scale-105 transition-all duration-300 ease-in-out block fade-in-up delay-500">
+                        <h4 class="text-2xl font-bold text-white mb-2">יוטיוב - שיר "פלואו"</h4>
+                        <p class="text-gray-200">דוגמה ליצירה מוזיקלית</p>
+                    </a>
+                    <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer"
+                       class="overlap-card p-6 bg-green-700 bg-opacity-70 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transition-all duration-300 ease-in-out block fade-in-up delay-600">
+                        <h4 class="text-2xl font-bold text-white mb-2">לוח הופעות וכרטיסים</h4>
+                        <p class="text-gray-200">עדכונים ורכישת כרטיסים למופעים</p>
+                    </a>
+                    <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" rel="noopener noreferrer"
+                       class="overlap-card p-6 bg-gray-600 bg-opacity-70 rounded-xl shadow-lg hover:bg-gray-700 hover:scale-105 transition-all duration-300 ease-in-out block fade-in-up delay-700">
+                        <h4 class="text-2xl font-bold text-white mb-2">מאמר במאקו (2018)</h4>
+                        <p class="text-gray-200">סיפור משפחתי ויציאה בשאלה</p>
+                    </a>
+                </div>
+            </div>
+            <p class="text-gray-500 text-sm mt-20 fade-in-up delay-800">
+                <br/>&copy; 2024 יצירה דיגיטלית בהשראת מאיר אבינר. כל הזכויות שמורות.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const customCursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+        });
+
+        // Parallax Effect Logic
+        const parallaxElements = document.querySelectorAll('[data-parallax-speed]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.getAttribute('data-parallax-speed'));
+                element.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+
+        // Fade-in-up on scroll animation
+        const fadeInElements = document.querySelectorAll('.fade-in-up');
+        const options = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of element visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: stop observing once it's visible if it's a one-time animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        fadeInElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Initial check for elements already in viewport
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>

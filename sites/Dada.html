@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: אמנות הפירוק וההרכבה מחדש</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Rubik+One&family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Varela Round', sans-serif;
+            background-color: #0d0d0d; /* Dark background */
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden; /* Prevent horizontal scroll from random elements */
+        }
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF; /* Light border */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow for contrast */
+            transform: translate(-50%, -50%);
+            transition: width 0.1s ease, height 0.1s ease;
+            z-index: 9999;
+        }
+        .custom-cursor.active {
+            width: 40px;
+            height: 40px;
+        }
+        .font-rubik { font-family: 'Rubik One', sans-serif; }
+        .font-hachi { font-family: 'Hachi Maru Pop', cursive; }
+        .font-varela { font-family: 'Varela Round', sans-serif; }
+
+        .dada-element {
+            position: absolute;
+            opacity: 0.8;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            cursor: pointer;
+        }
+        .dada-element:hover {
+            transform: scale(1.05) rotate(2deg) !important;
+            opacity: 1;
+        }
+        .no-scroll {
+            overflow: hidden;
+        }
+        /* Custom scrollbar for better aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body class="text-gray-200 antialiased no-scroll">
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Fixed Background Elements (Dada Collage) -->
+    <div class="fixed inset-0 w-full h-full -z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Tristan_Tzara_by_Man_Ray.jpg/800px-Tristan_Tzara_by_Man_Ray.jpg')] bg-cover bg-center opacity-10 blur-sm scale-110"></div>
+        
+        <!-- Abstract Shapes -->
+        <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-red-600 opacity-20 rotate-45"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-48 h-20 bg-blue-500 opacity-20 -rotate-12"></div>
+        <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-yellow-400 opacity-20 rotate-90 transform -translate-x-1/2 -translate-y-1/2"></div>
+
+        <!-- Image fragments of Meir from source (example URLs, not directly provided as images but as links) -->
+        <!-- Since direct image links were not provided in the 'Recommended images for the site' section, I'll use abstract representations or placeholders based on context. The user provided Facebook and Mako links that contain images. I'll pick a few generic ones based on the theme. -->
+        <img src="https://m.media-amazon.com/images/I/71u9s8w+UJL._AC_UF894,1000_QL80_.jpg" alt="דמות אמנותית" class="absolute top-10 right-10 w-48 h-auto rotate-3 opacity-30 object-cover">
+        <img src="https://cdn.pixabay.com/photo/2016/09/22/08/42/cello-1687353_1280.jpg" alt="מוזיקה וצליל" class="absolute bottom-20 left-20 w-64 h-auto -rotate-6 opacity-20 object-cover">
+        <img src="https://cdn.pixabay.com/photo/2017/08/04/18/00/prison-2581691_1280.jpg" alt="כלא וחופש" class="absolute top-1/3 left-1/4 w-56 h-auto rotate-12 opacity-15 object-cover">
+    </div>
+
+    <div class="relative z-10 p-4 md:p-8 min-h-screen flex flex-col items-center justify-center">
+
+        <!-- Main Title - Dada Style -->
+        <h1 class="font-rubik text-6xl md:text-8xl text-red-500 text-center mb-12 leading-none dada-element" style="top: 5%; right: 5%; transform: rotate(5deg);">
+            מאיר<br>אבינר:<br>התרסה
+        </h1>
+
+        <!-- Dada text block 1: Deconstructing Freedom -->
+        <div class="dada-element bg-gray-900/70 p-6 shadow-xl max-w-sm md:max-w-md w-full rounded-lg absolute -right-20 top-20 md:top-40 md:-right-40 text-right" style="transform: rotate(-7deg); width: clamp(250px, 80vw, 400px);">
+            <p class="font-hachi text-3xl text-yellow-300 mb-4 leading-relaxed">
+                חופש זה כלא, כלא זה חופש.<br>
+                הכלוב הפתוח - מסגרת,<br>
+                המסגרת - שער לריק.<br>
+            </p>
+            <p class="font-varela text-lg text-gray-300">
+                למה לרוץ כשאפשר לרחף? למה ללכת כשאפשר לשבור קירות עם הצחוק?
+                ההיגיון הוא המלכודת הכי יפה שבנינו לעצמנו.
+            </p>
+        </div>
+
+        <!-- Dada text block 2: Improvisation & Chaos -->
+        <div class="dada-element bg-gradient-to-br from-blue-700/70 to-blue-900/70 p-6 shadow-xl max-w-sm md:max-w-md w-full rounded-lg absolute -left-10 bottom-10 md:bottom-20 md:-left-20 text-left" style="transform: rotate(10deg); width: clamp(250px, 80vw, 400px);">
+            <p class="font-rubik text-4xl text-white mb-4 leading-snug">
+                תוהו ובוהו - <br>
+                הסדר האמיתי.<br>
+                אילתור - <br>
+                המבנה היחיד.
+            </p>
+            <p class="font-hachi text-lg text-gray-200">
+                החליל השבור יצר את מנגינת הרחוב. <br>
+                הכלא לימד את ריקוד הנשימה.
+            </p>
+        </div>
+
+        <!-- Dada text block 3: Journey & Transformation -->
+        <div class="dada-element bg-white/10 backdrop-blur-sm p-6 shadow-xl max-w-xs md:max-w-sm w-full rounded-full absolute right-1/4 top-1/2 transform -translate-y-1/2 -mr-10 md:-mr-20 text-center" style="transform: rotate(-20deg); width: clamp(200px, 60vw, 300px);">
+            <p class="font-varela text-xl text-green-300 leading-tight">
+                מנער גבעות לרועה צאן.<br>
+                מרועה צאן למשורר תל אביבי.<br>
+                המסע הוא נקודה, הנקודה היא מסע.<br>
+            </p>
+        </div>
+
+        <!-- Dada Image Placeholder/Fragment (styled div) -->
+        <div class="dada-element bg-red-800/80 w-40 h-40 md:w-60 md:h-60 flex items-center justify-center absolute top-1/3 left-1/3 rounded-full shadow-lg" style="transform: rotate(30deg);">
+            <span class="font-rubik text-white text-xl md:text-3xl">צחוק</span>
+        </div>
+        <div class="dada-element bg-blue-800/80 w-32 h-32 md:w-48 md:h-48 flex items-center justify-center absolute bottom-1/4 right-1/4 rounded-lg shadow-lg" style="transform: rotate(-45deg);">
+            <span class="font-hachi text-white text-lg md:text-2xl">צבע</span>
+        </div>
+
+        <!-- Interactive element: "Cut-Up" button -->
+        <button id="cutUpBtn" class="dada-element font-rubik text-3xl md:text-5xl text-black bg-red-400 hover:bg-red-300 py-4 px-8 rounded-full shadow-2xl transition-all duration-300 ease-in-out absolute bottom-5 left-1/2 transform -translate-x-1/2 z-20" style="transform: rotate(3deg);">
+            קצוץ מילים!
+        </button>
+
+        <!-- Cut-Up Text Display Area -->
+        <div id="cutUpOutput" class="absolute inset-0 flex flex-wrap justify-center items-center pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out z-30">
+            <!-- Cut-up words will be injected here by JS -->
+        </div>
+
+        <!-- Social Links - Dada Style (scattered, not in a footer) -->
+        <div class="absolute bottom-4 right-4 text-left dada-element" style="transform: rotate(8deg);">
+            <p class="font-hachi text-sm md:text-base text-gray-400 mb-1">
+                הדהודים:
+            </p>
+            <a href="https://www.facebook.com/meiraviner/" target="_blank" class="block font-varela text-white hover:text-red-500 transition-colors duration-200 text-sm md:text-base mb-1">פייסבוק - פרגמנטים</a>
+            <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="block font-varela text-white hover:text-red-500 transition-colors duration-200 text-sm md:text-base mb-1">פודקאסט - שבר מציאות</a>
+        </div>
+        <div class="absolute top-4 left-4 text-right dada-element" style="transform: rotate(-12deg);">
+            <p class="font-hachi text-sm md:text-base text-gray-400 mb-1">
+                מקטעי יצירה:
+            </p>
+            <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="block font-varela text-white hover:text-blue-500 transition-colors duration-200 text-sm md:text-base mb-1">יוטיוב - פלואו אקראי</a>
+            <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block font-varela text-white hover:text-blue-500 transition-colors duration-200 text-sm md:text-base">מופעים - מתיחות זמן</a>
+        </div>
+
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+        document.addEventListener('mousedown', () => cursor.classList.add('active'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+        // Dada Elements Random Position/Rotation on Load and Click
+        const dadaElements = document.querySelectorAll('.dada-element');
+
+        const randomizeElement = (element) => {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const elRect = element.getBoundingClientRect();
+
+            // Random rotation (between -30 and 30 degrees)
+            const randomRotation = Math.random() * 60 - 30;
+
+            // Random position. Ensure it's mostly within bounds, but can slightly go off for Dada effect
+            let randomX, randomY;
+
+            if (element.id === 'cutUpBtn') {
+                // Keep the button somewhat central at the bottom
+                randomX = (viewportWidth / 2) + (Math.random() * 100 - 50); // +/- 50px from center
+                randomY = viewportHeight - (elRect.height / 2) - (Math.random() * 50 + 20); // Near bottom, +/- 50px
+            } else if (element.tagName === 'H1') {
+                // Keep H1 at the top right area
+                randomX = (viewportWidth * 0.8) + (Math.random() * 100 - 50);
+                randomY = (viewportHeight * 0.15) + (Math.random() * 50 - 25);
+            } else if (element.classList.contains('absolute')) {
+                // For other absolute positioned elements, apply more randomness
+                randomX = Math.random() * (viewportWidth - elRect.width) * 0.9 + (viewportWidth * 0.05);
+                randomY = Math.random() * (viewportHeight - elRect.height) * 0.9 + (viewportHeight * 0.05);
+            } else {
+                 // For static elements, apply less aggressive transformations
+                randomX = elRect.left + (Math.random() * 40 - 20); // Small nudge
+                randomY = elRect.top + (Math.random() * 40 - 20);
+            }
+
+            element.style.transform = `translate(${randomX - elRect.left}px, ${randomY - elRect.top}px) rotate(${randomRotation}deg)`;
+            element.style.left = '0px'; // Reset left/top as we use translate for positioning
+            element.style.top = '0px';
+        };
+
+
+        dadaElements.forEach(el => {
+            // Initial random placement (only for elements with absolute positioning that are not hardcoded with position)
+            if (el.classList.contains('dada-element') && el.style.position === 'absolute') {
+                const initialX = Math.random() * 80 + 10; // 10% to 90%
+                const initialY = Math.random() * 80 + 10; // 10% to 90%
+                const initialRotation = Math.random() * 60 - 30; // -30 to 30 degrees
+
+                el.style.right = `${initialX}%`; // Use right for RTL layout
+                el.style.top = `${initialY}%`;
+                el.style.transform = `translateY(-50%) rotate(${initialRotation}deg)`; // Adjust initial transform
+                el.style.position = 'absolute'; // Ensure it's absolute
+                
+                // For main title and other specific elements, preserve their general area
+                if (el.tagName === 'H1' || el.id === 'cutUpBtn') {
+                    // Specific initial positions for key elements
+                } else {
+                    el.style.right = `${Math.random() * 70}%`;
+                    el.style.top = `${Math.random() * 70}%`;
+                }
+            }
+
+            el.addEventListener('click', (e) => {
+                if (e.target.id !== 'cutUpBtn') { // Don't randomize button on its own click
+                    const randomRotation = Math.random() * 20 - 10; // -10 to 10 degrees
+                    const randomX = Math.random() * 50 - 25; // -25 to 25 pixels
+                    const randomY = Math.random() * 50 - 25; // -25 to 25 pixels
+                    el.style.transform += ` translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
+                    el.style.opacity = Math.random() * 0.4 + 0.6; // 0.6 to 1.0 opacity
+                }
+            });
+        });
+
+        // Dada Cut-Up Text Generator
+        const cutUpPhrases = [
+            "העולם צריך צחוק, צבע וחופש.",
+            "חופש זה מצב פנימי, גם במקומות כבולים כמו כלא.",
+            "לשבור מסגרות עם הומור, מוזיקה ויצירה.",
+            "אילתור ראשון במעלה: תפילות ספונטניות, רגשות דרך צלילים ומילים.",
+            "הופעות רחוב: עמידה על ראש, נגינה בעיניים כבולות.",
+            "נשימה מעגלית: ריפוי והתחדשות.",
+            "מביא 'הפוך' - צבע והומור למקומות חשוכים.",
+            "המסע הוא נקודה, הנקודה היא מסע.",
+            "האין סוף הוא רק קו ישר שמסתובב.",
+            "המציאות היא רק חלום ששכחנו לשכוח.",
+            "הגבול הוא רק רעיון שנעלם כשאתה קופץ."
+        ];
+
+        const cutUpBtn = document.getElementById('cutUpBtn');
+        const cutUpOutput = document.getElementById('cutUpOutput');
+        let cutUpInterval;
+
+        cutUpBtn.addEventListener('click', () => {
+            clearInterval(cutUpInterval); // Clear any existing interval
+            cutUpOutput.innerHTML = '';
+            cutUpOutput.style.opacity = '1';
+            
+            const numWordsToShow = Math.floor(Math.random() * 5) + 3; // 3 to 7 words
+            const selectedWords = [];
+
+            // Randomly select words from phrases
+            for (let i = 0; i < numWordsToShow; i++) {
+                const randomPhrase = cutUpPhrases[Math.floor(Math.random() * cutUpPhrases.length)];
+                const words = randomPhrase.split(' ');
+                const randomWord = words[Math.floor(Math.random() * words.length)];
+                selectedWords.push(randomWord);
+            }
+
+            // Display words with random positions and rotations
+            selectedWords.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.textContent = word;
+                span.className = `absolute font-rubik text-2xl md:text-5xl text-white whitespace-nowrap leading-none transition-all duration-500 ease-out`;
+                span.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`; // Random vibrant color
+                span.style.right = `${Math.random() * 80 + 10}%`; // From 10% to 90%
+                span.style.top = `${Math.random() * 80 + 10}%`; // From 10% to 90%
+                span.style.transform = `rotate(${Math.random() * 90 - 45}deg) scale(${Math.random() * 0.5 + 0.8})`; // Scale 0.8-1.3
+                span.style.zIndex = index + 100;
+                cutUpOutput.appendChild(span);
+            });
+
+            // Fade out after a few seconds
+            cutUpInterval = setTimeout(() => {
+                cutUpOutput.style.opacity = '0';
+                setTimeout(() => cutUpOutput.innerHTML = '', 700); // Clear after fade out
+            }, 3000);
+        });
+
+        // Initialize positions for all dada elements on load
+        window.addEventListener('load', () => {
+            dadaElements.forEach(el => {
+                if (el.classList.contains('dada-element') && el.style.position === 'absolute') {
+                    // Already set in CSS, or if we want more dynamic range
+                    // For now, rely on initial CSS and small click transforms
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

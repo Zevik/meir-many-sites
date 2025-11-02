@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מעגלי חופש: נקודות במסעו של מאיר אבינר</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts */
+        .font-frank-ruhl { font-family: 'Frank Ruhl Libre', serif; }
+        .font-heebo { font-family: 'Heebo', sans-serif; }
+
+        /* General Body Styling */
+        body {
+            overflow-x: hidden; /* Prevent horizontal scroll from subtle animations */
+            cursor: none; /* Hide default cursor */
+            background-color: #1c1917; /* Tailwind stone-900 equivalent */
+        }
+
+        /* Custom Cursor Styling */
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform;
+            transition: transform 0.1s linear; /* Smoother movement */
+            border: 2px solid rgba(255, 255, 255, 0.9); /* Light border */
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.7); /* Dark shadow for contrast */
+            transform: translate(-50%, -50%); /* Center cursor on its own coordinates */
+            opacity: 1; /* Ensure visibility by default */
+        }
+        
+        #custom-cursor.active {
+            transform: translate(-50%, -50%) scale(1.5); /* Larger on click/hover */
+        }
+
+        /* Background Canvas for Generative Dots */
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            display: block; /* Ensure canvas is block level */
+        }
+
+        /* Section Specific Dot Patterns and Animations */
+        .section-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind section content but above main canvas */
+            opacity: 0.1; /* Subtle */
+            background-image: radial-gradient(circle at 50% 50%, rgba(255, 165, 0, 0.1) 2px, transparent 2px); /* Orange dots */
+            background-size: 30px 30px;
+            animation: moveDots 20s linear infinite alternate;
+        }
+
+        .section-background.alt {
+            background-image: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.1) 2px, transparent 2px); /* Green dots */
+        }
+
+        @keyframes moveDots {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* Responsive typography adjustments for larger screens */
+        h1 { font-size: 3rem; } /* Default large */
+        h2 { font-size: 2.25rem; }
+        h3 { font-size: 1.875rem; }
+        p { font-size: 1.125rem; line-height: 1.75rem; }
+        
+        @media (min-width: 768px) { /* md breakpoint */
+            h1 { font-size: 4rem; }
+            h2 { font-size: 3rem; }
+            h3 { font-size: 2.25rem; }
+            p { font-size: 1.25rem; line-height: 2rem; }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            h1 { font-size: 5rem; }
+            h2 { font-size: 3.5rem; }
+            h3 { font-size: 2.5rem; }
+        }
+        @media (min-width: 1280px) { /* xl breakpoint */
+            h1 { font-size: 6rem; }
+            h2 { font-size: 4rem; }
+            h3 { font-size: 2.75rem; }
+        }
+    </style>
+</head>
+<body class="font-heebo text-amber-100 bg-stone-900 leading-relaxed">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Background Canvas for Generative Dots -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-0 min-h-screen p-4 md:p-8 lg:p-12">
+
+        <header class="text-center py-16 mb-12 relative overflow-hidden">
+            <!-- Decorative tilted background element for header -->
+            <div class="absolute inset-0 bg-stone-800 opacity-70 z-0 transform -rotate-3 scale-105"></div>
+            <h1 class="font-frank-ruhl text-orange-400 text-5xl md:text-7xl font-bold mb-4 relative z-10 drop-shadow-lg">
+                מעגלי חופש: נקודות במסעו של מאיר אבינר
+            </h1>
+            <p class="text-xl md:text-2xl text-emerald-300 relative z-10 drop-shadow-md">
+                סיפור באריגת נשמה: צבעים, צלילים וחופש פנימי
+            </p>
+        </header>
+
+        <main class="max-w-4xl mx-auto space-y-24">
+
+            <!-- Section 1: Introduction - The Seeker's Land -->
+            <section class="relative bg-stone-800 bg-opacity-70 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                <div class="section-background"></div>
+                <h2 class="font-frank-ruhl text-orange-300 text-4xl md:text-5xl mb-6 text-center relative">
+                    בארץ שבה סיפורים חרוטים באדמה
+                </h2>
+                <p class="text-lg md:text-xl mb-4 relative">
+                    בארץ שבה כל נקודה היא הד לתפילה עתיקה וכל קו מספר על מסע, נולד רועה. מאיר אבינר, כנחל מתפתל, עבר דרך נופים חיצוניים ופנימיים. כל בחירה, כל צליל, כל צחוק - נקודה על המפה הגדולה של נשמתו, המצוירת בצבעי אדמה ורוח.
+                </p>
+                <p class="text-lg md:text-xl relative">
+                    מגבעות בית אל, שם נשם את אוויר ההר ורעה עיזים וגמלים. הקרקע הקשה לימדה אותו חופש ראשוני, שקט של יחיד עם הרוח, ואת הקצב המהפנט של החיים הפשוטים.
+                </p>
+            </section>
+
+            <!-- Section 2: Roots and Transformations - Breaking Circles -->
+            <section class="relative bg-stone-800 bg-opacity-70 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                <div class="section-background alt"></div>
+                <h2 class="font-frank-ruhl text-emerald-300 text-4xl md:text-5xl mb-6 text-center relative">
+                    שבירת מעגלים ויצירת תבניות חדשות
+                </h2>
+                <p class="text-lg md:text-xl mb-4 relative">
+                    הנקודות הראשונות בציור חייו היו מעגלי החיים הדתיים והמסורת המשפחתית, אך רוחו חיפשה מרחבים חדשים, שבילים שלא סומנו במפות קדומות. הוא פרץ את המעגלים הישנים, לא מתוך כעס, אלא מתוך כמיהה בוערת לחופש פנימי אמיתי. נקודות התפזרו, יצרו צורות חדשות, תבניות לא צפויות, חופשיות מכל כבילה.
+                </p>
+                <p class="text-lg md:text-xl relative">
+                    חופש - לא רק בהעדר כבלים, אלא ביכולת לאלתר, לצחוק, לנגן את פעימות הלב הפנימיות ביותר, בכל מקום ובכל עת. זוהי דרכו - לבחור באמת הפנימית על פני המוסכמות החיצוניות.
+                </p>
+            </section>
+
+            <!-- Section 3: The Weaver of Sounds and Laughter - Talents -->
+            <section class="relative bg-stone-800 bg-opacity-70 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                <div class="section-background"></div>
+                <h2 class="font-frank-ruhl text-orange-300 text-4xl md:text-5xl mb-6 text-center relative">
+                    אמן האילתור וקולות הריפוי
+                </h2>
+                <p class="text-lg md:text-xl mb-4 relative">
+                    מאיר הפך לכלי של יצירה ספונטנית. ידיו רוקדות על מיתרי הגיטרה, רוחו שרה דרך חליל צד וכלי נשיפה אלקטרוניים, מילים נשזרות לשירה נוגעת, וצחוק פורץ גבולות. הוא מאלתר תפילות ספונטניות, הופך צעקות למשחקים משעשעים, ויוצר טראנסים מוזיקליים שסוחפים את הקהל למסע.
+                </p>
+                <p class="text-lg md:text-xl relative">
+                    כל תו, כל בדיחה, כל מילה - נקודה של אור הנזרקת אל החלל, יוצרת גשרים בלתי נראים בין נשמות. הוא מביא "הפוך" - צבע והומור - למקומות החשוכים ביותר, ומאמין בכוחה של אמנות לשנות, לרפא ולשחרר.
+                </p>
+            </section>
+
+            <!-- Section 4: Pathways of Light - Actions and Impact -->
+            <section class="relative bg-stone-800 bg-opacity-70 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                <div class="section-background alt"></div>
+                <h2 class="font-frank-ruhl text-emerald-300 text-4xl md:text-5xl mb-6 text-center relative">
+                    מסעות האור: מבתי כלא לרחובות העיר
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg md:text-xl relative">
+                    <div>
+                        <h3 class="font-frank-ruhl text-2xl md:text-3xl text-orange-400 mb-3">ביקורים בבתי כלא: לברוח לשעה</h3>
+                        <p class="mb-4">
+                            מסעו הוביל אותו למקומות חשוכים, אל מאחורי סורגי הכלא, שם נשמות כלואות מייחלות לאור. הוא מגיע מספר פעמים בשבוע, שר, מנגן ומאלתר עם אסירים כדי ליצור שינוי רגשי, לתת להם "לברוח מהכלא לשעה". פרויקט "סיפורים מכלא" מפיץ את קולותיהם וחוויותיהם.
+                        </p>
+                        <p>
+                            זוהי עבודה הממומנת מתרומות פרטיות, מתוך אמונה בעצמאות ובכוחו של חיבור אנושי פשוט להאיר את האפלה.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-frank-ruhl text-2xl md:text-3xl text-orange-400 mb-3">אמנות רחוב: פעימת החופש בעיר</h3>
+                        <p class="mb-4">
+                            ברחובות תל אביב, הוא רועה צאן של עוברי אורח, מנגן על עצים, עומד על עמודים - כל הופעה היא נקודת אור מפתיעה בנוף האורבני. לפני שנים התפרנס מהופעות רחוב, מתחפש לקרקס, מנגן עם עיניים כבולות או עומד על ראשו.
+                        </p>
+                        <p>
+                            זו אמנות ששוברת את השגרה, מזמינה התבוננות מחודשת על החיים ומזכירה שהחופש יכול ללבוש צורות בלתי צפויות, גם בלב העיר ההומה.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-8 text-lg md:text-xl relative">
+                    <h3 class="font-frank-ruhl text-2xl md:text-3xl text-orange-400 mb-3 text-center">סדנאות נשימה מודעת: מסע פנימה</h3>
+                    <p class="text-center">
+                        במעגלי הנשימה המודעת (Breathwork), הוא מנחה מסעות פנימיים, שם כל נשימה היא נקודה חדשה המציירת דרך לריפוי עמוק ולחיבור לאמת הפנימית. סדנאות אלו הן חלק בלתי נפרד מפעילותו האמנותית-טיפולית, ומהוות עדות נוספת לחיפושו הבלתי פוסק אחר חופש ושחרור.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 5: The Philosophy of Dots - Conclusion -->
+            <section class="relative bg-stone-800 bg-opacity-70 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                <div class="section-background"></div>
+                <h2 class="font-frank-ruhl text-orange-300 text-4xl md:text-5xl mb-6 text-center relative">
+                    החופש הפנימי: מפת הנשמה
+                </h2>
+                <p class="text-lg md:text-xl mb-4 relative">
+                    מאיר אבינר - אמן החרות. מפה חיה של נקודות, המציירות יחד תמונה של אדם שמצא את הריקוד הייחודי שלו בין מסורת לחידוש, בין כבילה לשחרור. הוא בוחר בחיים ללא מסגרות, עם דגש על תנועה פיזית (הליכות, שחייה) וחופש פנימי.
+                </p>
+                <p class="text-lg md:text-xl relative">
+                    הוא מזכיר לנו שהעולם זקוק לצחוק, צבע וחופש. ושהחופש האמיתי מצוי בתוכנו, מחכה שנגלה אותו, נקודה אחר נקודה, פעימה אחר פעימה.
+                </p>
+            </section>
+
+            <!-- Section 6: Connection Points - Links -->
+            <section class="relative bg-stone-800 bg-opacity-70 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden text-center">
+                <div class="section-background alt"></div>
+                <h2 class="font-frank-ruhl text-emerald-300 text-4xl md:text-5xl mb-8 relative">
+                    נקודות חיבור
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" class="block bg-stone-700 hover:bg-stone-600 transition-colors duration-300 p-6 rounded-xl shadow-lg text-orange-300 hover:text-orange-200">
+                        <h3 class="font-frank-ruhl text-2xl mb-2">פייסבוק אישי</h3>
+                        <p class="text-amber-100">סיפורים מכלא, הופעות ותכנים</p>
+                    </a>
+                    <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="block bg-stone-700 hover:bg-stone-600 transition-colors duration-300 p-6 rounded-xl shadow-lg text-orange-300 hover:text-orange-200">
+                        <h3 class="font-frank-ruhl text-2xl mb-2">פודקאסט "עושים שינוי"</h3>
+                        <p class="text-amber-100">ראיון מפורט על חייו</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" class="block bg-stone-700 hover:bg-stone-600 transition-colors duration-300 p-6 rounded-xl shadow-lg text-orange-300 hover:text-orange-200">
+                        <h3 class="font-frank-ruhl text-2xl mb-2">יוטיוב - פרק הפודקאסט</h3>
+                        <p class="text-amber-100">וידאו מלא ומרתק</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="block bg-stone-700 hover:bg-stone-600 transition-colors duration-300 p-6 rounded-xl shadow-lg text-orange-300 hover:text-orange-200">
+                        <h3 class="font-frank-ruhl text-2xl mb-2">יוטיוב - שיר "פלואו"</h3>
+                        <p class="text-amber-100">דוגמה ליצירתו המוזיקלית</p>
+                    </a>
+                    <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block bg-stone-700 hover:bg-stone-600 transition-colors duration-300 p-6 rounded-xl shadow-lg text-orange-300 hover:text-orange-200">
+                        <h3 class="font-frank-ruhl text-2xl mb-2">לוח הופעות וכרטיסים</h3>
+                        <p class="text-amber-100">עדכונים על מופעים קרובים</p>
+                    </a>
+                    <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="block bg-stone-700 hover:bg-stone-600 transition-colors duration-300 p-6 rounded-xl shadow-lg text-orange-300 hover:text-orange-200">
+                        <h3 class="font-frank-ruhl text-2xl mb-2">מאמר במאקו (2018)</h3>
+                        <p class="text-amber-100">סיפור משפחתי ויציאה בשאלה</p>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center py-16 mt-24 text-stone-500 text-sm">
+            <p>&copy; 2024 יצירה בהשראת מסעו של מאיר אבינר. כל הזכויות שמורות ליקום הפנימי.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+            // Set left and top directly, CSS transform will handle centering
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('active');
+        });
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('active');
+        });
+        // Hide cursor when leaving the window, show when entering
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+        });
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+        });
+
+
+        // Generative Background Dots on Canvas
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+        let dots = [];
+        const numDots = 150; // Number of background dots
+        const dotSize = 2; // Max radius for dots
+        // Colors array for canvas dots - semi-transparent to blend
+        const dotColors = ['rgba(255, 165, 0, 0.05)', 'rgba(34, 197, 94, 0.05)', 'rgba(255, 255, 255, 0.03)', 'rgba(251, 191, 36, 0.05)']; // Orange, Green, White, Amber
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initDots(); // Reinitialize dots to distribute them correctly across new dimensions
+        }
+
+        class Dot {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * dotSize + 1;
+                this.color = dotColors[Math.floor(Math.random() * dotColors.length)];
+                this.dx = (Math.random() - 0.5) * 0.2; // Small random horizontal movement
+                this.dy = (Math.random() - 0.5) * 0.2; // Small random vertical movement
+                this.opacity = Math.random() * 0.5 + 0.1; // Random opacity for subtle effect
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color.replace(/[^,]+(?=\))/, this.opacity); // Ensure correct opacity is used
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.dx;
+                this.y += this.dy;
+
+                // Simple bounce off canvas edges
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.dx *= -1;
+                }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.dy *= -1;
+                }
+
+                this.draw();
+            }
+        }
+
+        function initDots() {
+            dots = []; // Clear existing dots
+            for (let i = 0; i < numDots; i++) {
+                dots.push(new Dot());
+            }
+        }
+
+        function animateDots() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].update(); // Update and redraw each dot
+            }
+            requestAnimationFrame(animateDots); // Loop animation
+        }
+
+        // Initialize and animate on load and resize
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Initial call to set canvas size and create dots
+        animateDots(); // Start the animation loop
+
+    </script>
+</body>
+</html>

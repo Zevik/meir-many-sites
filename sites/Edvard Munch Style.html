@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: צרחה פנימית, חופש אינסופי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Noto+Serif+Hebrew:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles and custom fonts */
+        body {
+            cursor: none;
+            overflow-x: hidden;
+            font-family: 'Assistant', sans-serif;
+            background-color: #0d0d0d; /* Dark base for Munch style */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif Hebrew', serif;
+        }
+
+        /* Custom Cursor Styling */
+        #custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #e02424; /* Vibrant red border for high contrast */
+            box-shadow: 0 0 0 2px rgba(20,20,20,0.9), /* Dark shadow for high contrast on light backgrounds */
+                        0 0 10px rgba(224, 36, 36, 0.7); /* Inner glow effect */
+            transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            transform: translate(-50%, -50%); /* Centers the cursor on the mouse pointer */
+            will-change: transform;
+        }
+        /* Cursor interaction state */
+        .interactive-hover #custom-cursor {
+            width: 36px;
+            height: 36px;
+            border-color: #f7d04d; /* Changes color on interactive elements */
+            box-shadow: 0 0 0 2px rgba(20,20,20,0.9),
+                        0 0 15px rgba(247, 208, 77, 0.8);
+        }
+
+        /* Munchian Background Layers */
+        .munch-bg-layer {
+            position: fixed;
+            inset: 0;
+            will-change: transform, opacity;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Text shadow for headings for depth, Munch-like */
+        .text-shadow-munch {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7), 
+                         -2px -2px 4px rgba(224,36,36,0.3);
+        }
+
+        /* Keyframe animations */
+        @keyframes pulse-munch {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.95; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pulse-munch {
+            animation: pulse-munch 4s infinite ease-in-out;
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+            25% { transform: translateY(-10px) translateX(10px) scale(1.02); }
+            50% { transform: translateY(0) translateX(0) scale(1); }
+            75% { transform: translateY(10px) translateX(-10px) scale(0.98); }
+        }
+        .animate-float-slow {
+            animation: float-slow 10s infinite ease-in-out;
+        }
+        
+        @keyframes ping-slow {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+        .animate-ping-slow {
+            animation: ping-slow 3s infinite ease-in-out;
+        }
+
+        /* Abstract Munch "Scream" elements emanating from the main title */
+        .main-title-scream {
+            position: relative;
+            z-index: 1; /* Ensure title is above its pseudo-elements */
+        }
+        .main-title-scream::before {
+            content: '';
+            position: absolute;
+            top: -20%; /* Relative to parent title */
+            right: -10%;
+            width: 80%;
+            height: 80%;
+            background: linear-gradient(135deg, rgba(224,36,36,0.8), rgba(247,208,77,0.7));
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            filter: blur(25px);
+            opacity: 0.6;
+            transform: rotate(-15deg);
+            z-index: -1;
+            animation: float-slow 8s infinite ease-in-out;
+        }
+        .main-title-scream::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 90%;
+            height: 90%;
+            background: linear-gradient(45deg, rgba(77,88,100,0.8), rgba(30,30,40,0.7));
+            border-radius: 30% 70% 50% 50% / 60% 40% 60% 40%;
+            filter: blur(30px);
+            opacity: 0.5;
+            transform: rotate(20deg);
+            z-index: -1;
+            animation: float-slow 9s infinite ease-in-out reverse;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-200 selection:bg-yellow-400 selection:text-gray-900">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Munchian Background Layers with Parallax -->
+    <div id="bg-layer-1" class="munch-bg-layer z-[-50] bg-gradient-to-br from-indigo-950 to-purple-950 opacity-70"></div>
+    <div id="bg-layer-2" class="munch-bg-layer z-[-40] bg-gradient-to-tl from-red-900 via-amber-800 to-orange-900 opacity-60 blur-md" style="transform: rotate(5deg) scale(1.1);"></div>
+    <div id="bg-layer-3" class="munch-bg-layer z-[-30] bg-gradient-to-b from-gray-800 to-gray-900 opacity-50 blur-lg" style="transform: scale(1.05);"></div>
+    <div id="bg-layer-4" class="munch-bg-layer z-[-20] bg-gradient-to-tr from-yellow-700 to-lime-800 opacity-40 blur-xl" style="transform: rotate(-3deg) scale(1.15);"></div>
+
+    <main class="relative z-10 p-8 md:p-16 lg:p-24 min-h-screen flex flex-col justify-center items-center">
+        <section class="max-w-4xl w-full text-center mb-20 munch-section">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-yellow-300 mb-8 leading-tight text-shadow-munch animate-pulse-munch main-title-scream">
+                מאיר אבינר: צרחה פנימית, חופש אינסופי
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                היופי שבשינוי, הכאב שבפרידה, והחופש הנמצא גם במעמקי הכלא. מאיר אבינר - אמן רב-תחומי ונודד, איש של סתירות והרמוניות. נולד בצל הקודש, גדל בין סלעי הגבעות, הפך לרועה צאן המקשיב לרוח. אך קול אחר קרא לו, קול של שבירה ולידה מחדש, קול של צרחה אילמת ההופכת למנגינת חופש.
+            </p>
+        </section>
+
+        <section class="max-w-4xl w-full my-20 bg-gray-900/50 backdrop-blur-sm p-8 md:p-12 rounded-lg shadow-2xl relative border-t-2 border-red-700/60 munch-section hover:scale-[1.005] transition-transform duration-300">
+            <h2 class="text-4xl md:text-5xl font-bold text-red-400 mb-6 text-shadow-munch">ההתעוררות: קירות נשברים, חליל נשבר</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-loose">
+                בגיל שש עשרה, היתה לו דרך, אך הדרך נסדקה. חליל צד, כלי נשיפה, נשבר לרסיסים, והצליל נדם. הרחוב קרא, והבמה היתה כל עץ, כל שלט, כל עמוד בתל אביב. שם, בין המולת העיר, החלה האמנות – מופעי רחוב פראיים, עמידה על ראש, נגינה בעיניים עצומות. חיפוש בלתי פוסק אחר ביטוי, אחר האמת העירומה ששוברת את המסגרות.
+            </p>
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-yellow-600/30 rounded-full blur-3xl animate-float-slow" style="animation-delay: 0.5s;"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-600/30 rounded-full blur-3xl animate-float-slow" style="animation-delay: 2s;"></div>
+        </section>
+
+        <section class="max-w-4xl w-full my-20 bg-gray-900/50 backdrop-blur-sm p-8 md:p-12 rounded-lg shadow-2xl relative border-l-2 border-blue-600/60 munch-section hover:scale-[1.005] transition-transform duration-300">
+            <h2 class="text-4xl md:text-5xl font-bold text-blue-300 mb-6 text-shadow-munch">החופש שבכלא: בין סורגים לנפש</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-loose">
+                שם, מאחורי הסורגים, במקום שבו החופש נראה כה רחוק, מאיר מוצא את השביל. הוא מגיע לכלא, לא כמבקר, אלא כגשר. עם גיטרה, חליל, וליצנות קוסמית, הוא פורט על נימי הנפש של האסירים. תפילות מאולתרות, צעקות שהופכות לשירה, רגעים של צחוק ושחרור. "חופש הוא מצב פנימי", הוא לוחש, והקירות העבים רוטטים מהדהוד האמת הזו.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <div class="relative w-40 h-40 bg-red-700/40 rounded-full flex items-center justify-center p-4 border-2 border-red-500 hover:scale-105 transition-transform duration-200 interactive-element">
+                    <span class="text-yellow-200 text-3xl font-bold">צחוק</span>
+                    <div class="absolute inset-0 bg-red-800/20 rounded-full animate-ping-slow"></div>
+                </div>
+                <div class="relative w-40 h-40 bg-indigo-700/40 rounded-full flex items-center justify-center p-4 border-2 border-blue-500 hover:scale-105 transition-transform duration-200 interactive-element">
+                    <span class="text-yellow-200 text-3xl font-bold">שירה</span>
+                    <div class="absolute inset-0 bg-blue-800/20 rounded-full animate-ping-slow" style="animation-delay: 1s;"></div>
+                </div>
+                <div class="relative w-40 h-40 bg-green-700/40 rounded-full flex items-center justify-center p-4 border-2 border-green-500 hover:scale-105 transition-transform duration-200 interactive-element">
+                    <span class="text-yellow-200 text-3xl font-bold">חופש</span>
+                    <div class="absolute inset-0 bg-green-800/20 rounded-full animate-ping-slow" style="animation-delay: 0.5s;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl w-full my-20 bg-gray-900/50 backdrop-blur-sm p-8 md:p-12 rounded-lg shadow-2xl relative border-r-2 border-yellow-600/60 munch-section hover:scale-[1.005] transition-transform duration-300">
+            <h2 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-6 text-shadow-munch">צלילי הנשמה: אמן של אילתור</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-loose">
+                הוא מנצח על סימפוניית הנפש - אמן אילתור, משחרר רגשות דרך צלילים, מילים ותנועה. גיטרה בוכה, חליל צוחק, קומדיה שחותכת עמוק, ושירה המרפאת. טקסי נשימה מעגלית, סדנאות קול ותנועה. הוא מחבר בין עולמות, בין העתיק לחדש, בין הקודש לחול, תמיד בתנועה, תמיד באילתור, תמיד בחיפוש אחר הקסם שבבריאה ספונטנית.
+            </p>
+            <div class="relative h-48 w-full mt-10">
+                <div class="absolute inset-0 flex justify-around items-center">
+                    <div class="w-16 h-16 bg-red-500/50 rounded-full blur-xl animate-float-slow" style="animation-delay: 0s;"></div>
+                    <div class="w-20 h-20 bg-blue-500/50 rounded-full blur-xl animate-float-slow" style="animation-delay: 2s;"></div>
+                    <div class="w-12 h-12 bg-green-500/50 rounded-full blur-xl animate-float-slow" style="animation-delay: 4s;"></div>
+                    <div class="w-24 h-24 bg-yellow-500/50 rounded-full blur-xl animate-float-slow" style="animation-delay: 1s;"></div>
+                </div>
+                <div class="absolute inset-0 flex justify-around items-center text-gray-100 text-lg font-bold opacity-80">
+                    <span class="animate-pulse">מוזיקה</span>
+                    <span class="animate-pulse" style="animation-delay: 1s;">קומדיה</span>
+                    <span class="animate-pulse" style="animation-delay: 2s;">שירה</span>
+                    <span class="animate-pulse" style="animation-delay: 3s;">אילתור</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl w-full my-20 bg-gray-900/50 backdrop-blur-sm p-8 md:p-12 rounded-lg shadow-2xl relative border-b-2 border-green-600/60 munch-section hover:scale-[1.005] transition-transform duration-300">
+            <h2 class="text-4xl md:text-5xl font-bold text-green-300 mb-6 text-shadow-munch">הריקוד נמשך: חופש כדרך חיים</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-loose">
+                על עצים, על במות, ובמעמקי הנפש – מאיר אבינר ממשיך במסעו. חייו הם יצירה מתמשכת, ריקוד חופשי מהגדרות. הוא מזמין את כולנו לחפש את ה"הפוך" – את הצבע, את הצחוק, את השחרור, גם במקומות הכי חשוכים. כי העולם זקוק לחופש, והחופש, הוא אומר, מתחיל בפנים.
+            </p>
+        </section>
+
+        <footer class="max-w-4xl w-full mt-20 text-center text-gray-400">
+            <h3 class="text-3xl font-bold text-yellow-300 mb-6 text-shadow-munch">לחיבור עמוק יותר, הצטרפו למסע:</h3>
+            <div class="flex flex-wrap justify-center gap-6 text-lg md:text-xl">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition-colors duration-200 interactive-element">פייסבוק אישי</a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition-colors duration-200 interactive-element">פודקאסט "עושים שינוי"</a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:text-red-300 transition-colors duration-200 interactive-element">לוח הופעות וכרטיסים</a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:text-green-300 transition-colors duration-200 interactive-element">יוטיוב - שיר "פלואו"</a>
+            </div>
+            <p class="mt-8 text-sm text-gray-500">&copy; 2024 יצירה בהשראת מסעו של מאיר אבינר.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.getElementById('custom-cursor');
+            const bgLayers = document.querySelectorAll('.munch-bg-layer');
+            const interactiveElements = document.querySelectorAll('a, button, .interactive-element'); 
+
+            // Cursor movement
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+            });
+
+            // Cursor hover effect on interactive elements
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    document.body.classList.add('interactive-hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('interactive-hover');
+                });
+            });
+
+            // Parallax scrolling for background layers
+            window.addEventListener('scroll', () => {
+                const scrollPos = window.scrollY;
+                bgLayers.forEach((layer, index) => {
+                    const speed = (index + 1) * 0.03; /* Adjust speed as needed for a more subtle effect */
+                    /* Preserve other transforms like rotate/scale by parsing the current transform */
+                    const currentTransform = layer.style.transform;
+                    const translateYMatch = currentTransform.match(/translateY\(([^)]+)\)/);
+                    let otherTransforms = currentTransform;
+                    if (translateYMatch) {
+                        otherTransforms = currentTransform.replace(translateYMatch[0], '').trim();
+                    }
+                    layer.style.transform = `translateY(${scrollPos * speed}px) ${otherTransforms}`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

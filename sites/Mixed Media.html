@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - אמן החופש הפנימי</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='80' text-anchor='middle' dominant-baseline='central'%3E%F0%9F%A7%A1%3C/text%3E%3C/svg%3E" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for mixed media - high contrast and artistic */
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            color: #f3f4f6; /* Light text */
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Frank Ruhl Libre', serif; /* A bit more formal/classic for titles */
+            color: #a7f3d0; /* Soft green accent */
+        }
+
+        .amatic-font {
+            font-family: 'Amatic SC', cursive; /* Playful, hand-written style */
+            letter-spacing: 2px;
+        }
+
+        .section-separator {
+            height: 100vh; /* Full viewport height for sections */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            scroll-snap-align: start; /* For scroll-snap effect */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect for backgrounds */
+            color: #f3f4f6;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        .content-card {
+            background-color: rgba(30, 30, 30, 0.9); /* Slightly transparent dark card */
+            border: 1px solid rgba(167, 243, 208, 0.3); /* Soft green border */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 15px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .bg-element {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Ensure background elements are behind content */
+            pointer-events: none;
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Custom cursor styles */
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: transparent;
+            border: 2px solid #FFFFFF; /* White border for visibility on dark */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow for visibility on light */
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        #custom-cursor.grow {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(167, 243, 208, 0.3); /* Accent color on hover */
+            border-color: #a7f3d0;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8), 0 0 10px rgba(167, 243, 208, 0.7);
+        }
+    </style>
+</head>
+<body class="overflow-y-scroll" style="cursor: none;">
+
+    <!-- Background Elements for Mixed Media feel -->
+    <!-- These are placeholders. In a real scenario, use abstract art textures or patterns relevant to Meir Aviner. -->
+    <div class="bg-element" style="background-image: url('https://picsum.photos/id/237/1920/1080?grayscale&blur=2');"></div>
+    <div class="bg-element opacity-10" style="background-image: url('https://picsum.photos/id/238/1920/1080?grayscale&blur=1'); transform: scaleX(-1);"></div>
+    <div class="bg-element opacity-[0.05]" style="background-image: url('https://picsum.photos/id/240/1920/1080?grayscale&blur=3'); transform: rotate(15deg) scale(1.1);"></div>
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <main class="relative z-10 min-h-screen flex flex-col items-center">
+
+        <!-- Intro Section -->
+        <section class="section-separator min-h-screen w-full flex flex-col justify-center items-center text-center p-8 bg-gray-900" style="background-image: url('https://picsum.photos/id/1060/1920/1080?grayscale');">
+            <div class="gradient-overlay"></div>
+            <div class="relative z-20 max-w-4xl mx-auto p-6 md:p-10 bg-black bg-opacity-70 rounded-xl shadow-lg border border-teal-400 border-opacity-30">
+                <h1 class="text-6xl md:text-8xl amatic-font text-teal-300 mb-6 drop-shadow-lg leading-tight">מאיר אבינר</h1>
+                <h2 class="text-3xl md:text-5xl frank-font text-white mb-8 drop-shadow-md leading-relaxed">אמן החופש הפנימי - קולאז' של נשמה</h2>
+                <p class="text-lg md:text-xl rubik-font text-gray-200 leading-loose">
+                    מסע בין עולמות: רועה צאן בגליל, נער גבעות, ישיבת תורה – עד לבמות תל אביב ובתי הכלא. מאיר אבינר הוא סיפור חיים של בחירה, אילתור וחופש בלתי מתפשר.
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="#roots" class="btn-primary hover:scale-105 transition-transform duration-300">המסע מתחיל</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roots & Rebellion Section -->
+        <section id="roots" class="section-separator w-full bg-gray-950 text-gray-200" style="background-image: url('https://picsum.photos/id/10/1920/1080?grayscale');">
+            <div class="gradient-overlay"></div>
+            <div class="content-card">
+                <h3 class="text-4xl amatic-font text-teal-400 mb-6">משורשי האדמה אל מרחבי הנשמה</h3>
+                <p class="text-lg rubik-font leading-relaxed mb-4">
+                    בילדותו, בבית אל, היה מאיר רועה צאן, אדמה סדוקה תחת רגליו ושמיים פתוחים מעליו. נער גבעות שראה בחופש מעשה יומיומי. אבל הלב ביקש מרחבים נוספים – חופש לא רק חיצוני, אלא גם פנימי, כזה ששובר תבניות ומוסכמות.
+                </p>
+                <p class="text-lg rubik-font leading-relaxed">
+                    מסעו מישיבת עטרת ירושלים לליבו הפועם של תל אביב אינו נטישה, אלא התרחבות. חיפוש מתמיד אחר ביטוי אמיתי, חף ממסגרות, מחבר בין עולמות שנראים מנוגדים – קודש וחול, יחיד וציבור, טבע וכרך.
+                </p>
+            </div>
+        </section>
+
+        <!-- The Improviser Section -->
+        <section id="improviser" class="section-separator w-full bg-gray-800 text-gray-200" style="background-image: url('https://picsum.photos/id/111/1920/1080?grayscale&blur=1');">
+            <div class="gradient-overlay"></div>
+            <div class="content-card">
+                <h3 class="text-4xl amatic-font text-teal-400 mb-6">אמן האלתור והצליל</h3>
+                <p class="text-lg rubik-font leading-relaxed mb-4">
+                    גיטרה, חליל, כלי נשיפה אלקטרוניים – אלו רק כלים בידיו של מאיר. הכלי האמיתי הוא נשמתו. דרכה הוא מאלתר תפילות ספונטניות, הופך צעקות למנגינות קומיות ויוצר טראנסים מוזיקליים שסוחפים את הקהל.
+                </p>
+                <p class="text-lg rubik-font leading-relaxed mb-4">
+                    הוא קומיקאי שמביא צבע והומור למקומות הכי חשוכים, ומשורר שלוכד רגשות עמוקים במילים פשוטות. האילתור הוא דרכו לחיות, לנשום וליצור – חופשי, כאן ועכשיו.
+                </p>
+                <div class="mt-8">
+                    <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="btn-secondary hover:scale-105 transition-transform duration-300">האזנה ל"פלואו"</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Freedom in Chains Section -->
+        <section id="prison-work" class="section-separator w-full bg-gray-900 text-gray-200" style="background-image: url('https://picsum.photos/id/409/1920/1080?grayscale');">
+            <div class="gradient-overlay"></div>
+            <div class="content-card">
+                <h3 class="text-4xl amatic-font text-teal-400 mb-6">לשבור כלא - עם צחוק, צליל ונשימה</h3>
+                <p class="text-lg rubik-font leading-relaxed mb-4">
+                    שלוש וארבע פעמים בשבוע, נכנס מאיר לבתי כלא. לבדו. הוא לא רואה חומות, אלא בני אדם. עם גיטרה, חליל, הומור מתפרץ וסיפורים מהלב, הוא מאלתר עם אסירים, מזמין אותם לצעוק, לשיר, לצחוק ולבכות.
+                </p>
+                <p class="text-lg rubik-font leading-relaxed">
+                    "לברוח מהכלא לשעה" – זו המתנה שהוא מעניק. לא בריחה פיזית, אלא רוחנית. היכולת למצוא חופש פנימי גם במקום הכי כבול, להרגיש אנושי, לחלום, להתחבר. פעילותו זו ממומנת כולה מתרומות פרטיות, מתוך אמונה בחופש אמנותי ורצון להביא אור למקומות חשוכים.
+                </p>
+                <div class="mt-8">
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" class="btn-primary hover:scale-105 transition-transform duration-300">לסיפורים מהכלא</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Healer & Seeker Section -->
+        <section id="healer" class="section-separator w-full bg-gray-800 text-gray-200" style="background-image: url('https://picsum.photos/id/1069/1920/1080?grayscale&blur=2');">
+            <div class="gradient-overlay"></div>
+            <div class="content-card">
+                <h3 class="text-4xl amatic-font text-teal-400 mb-6">הנשימה, הקול והתנועה - שער לריפוי</h3>
+                <p class="text-lg rubik-font leading-relaxed mb-4">
+                    מעבר לאמן, מאיר הוא מנחה ומטפל בנשימה מעגלית, תרפיית קול ותנועה. הוא מאמין בכוחם של הגוף והנפש להשתחרר, לרפא את עצמם, ולגלות את החופש הטמון בכל אחד מאיתנו.
+                </p>
+                <p class="text-lg rubik-font leading-relaxed">
+                    בסדנאותיו ובטקסיו, בירושלים וברחבי הארץ, הוא יוצר מרחב בטוח למסעות פנימיים. חגים ספיריטואליים מקבלים משמעות חדשה תחת ידיו, הופכים לחוויות טרנספורמטיביות המשלבות עומק יהודי עם גישות עכשוויות.
+                </p>
+                <div class="mt-8">
+                    <a href="https://kvish1.co.il/tag/%D7%9E%D7%90%D7%99%D7%A8-%D7%90%D7%91%D7%99%D7%A0%D7%A8/" target="_blank" class="btn-secondary hover:scale-105 transition-transform duration-300">לסדנאות ואירועים</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Street & The Stage Section -->
+        <section id="street-stage" class="section-separator w-full bg-gray-950 text-gray-200" style="background-image: url('https://picsum.photos/id/1080/1920/1080?grayscale');">
+            <div class="gradient-overlay"></div>
+            <div class="content-card">
+                <h3 class="text-4xl amatic-font text-teal-400 mb-6">מבמות הרחוב לבמות הלב</h3>
+                <p class="text-lg rubik-font leading-relaxed mb-4">
+                    תל אביב היא הבמה שלו. בעבר, כשהיה מתפרנס מהופעות רחוב, טיפס על עצים, ניגן על שלטים, עמד על ראשו ופשוט – היה. אמנות הרחוב שלו היא סמל לשבירת מסגרות, להפיכת כל מרחב למקום של יצירה וביטוי.
+                </p>
+                <p class="text-lg rubik-font leading-relaxed">
+                    בין אם זה על עמוד רחוב או בהופעה עם אחיו ואחותו, מאיר מביא את האותנטיות שלו לכל מקום. "העולם צריך צחוק, צבע וחופש" – וזה בדיוק מה שהוא מעניק, בהופעותיו ובחייו.
+                </p>
+                <div class="mt-8">
+                    <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="btn-primary hover:scale-105 transition-transform duration-300">ללוח הופעות</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Philosophy Section -->
+        <section id="contact" class="section-separator min-h-screen w-full flex flex-col justify-center items-center text-center p-8 bg-gray-900" style="background-image: url('https://picsum.photos/id/1053/1920/1080?grayscale');">
+            <div class="gradient-overlay"></div>
+            <div class="relative z-20 max-w-4xl mx-auto p-6 md:p-10 bg-black bg-opacity-70 rounded-xl shadow-lg border border-teal-400 border-opacity-30">
+                <h3 class="text-5xl amatic-font text-teal-300 mb-6 drop-shadow-lg">החופש טמון בנו</h3>
+                <p class="text-xl rubik-font text-gray-200 leading-loose mb-8">
+                    מאיר אבינר מזמין אתכם למסע אל תוך עצמכם. אל תוך החופש, הצחוק והצבע. להישאר בתנועה, לנשום עמוק, ולמצוא את הקול הייחודי שלכם. כי העולם זקוק לו.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10">
+                    <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="btn-primary hover:scale-105 transition-transform duration-300">האזינו לפודקאסט</a>
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" class="btn-secondary hover:scale-105 transition-transform duration-300">עקבו בפייסבוק</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-950 text-gray-400 text-center p-6 text-sm rubik-font border-t border-gray-800">
+        <p>&copy; 2024 מאיר אבינר - יצירת אמנות דיגיטלית בהשראת מסעו. כל הזכויות שמורות.</p>
+        <p class="mt-2">עיצוב ויצירה: אמן קוד וחזון.</p>
+    </footer>
+
+    <script>
+        // Tailwind configuration for custom colors and fonts (must be before custom JS)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-300': '#a7f3d0',
+                        'teal-400': '#6ee7b7',
+                        'dark-bg': '#1a1a1a',
+                        'darker-bg': '#121212',
+                        'light-text': '#f3f4f6',
+                        'gray-medium': '#6b7280',
+                    },
+                    fontFamily: {
+                        amatic: ['Amatic SC', 'cursive'],
+                        frank: ['Frank Ruhl Libre', 'serif'],
+                        rubik: ['Rubik', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const interactiveElements = document.querySelectorAll('a, button, .btn-primary, .btn-secondary');
+
+        // Move cursor
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // Cursor hover effect
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('grow');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('grow');
+            });
+        });
+
+        // Parallax effect (simplified for performance in single file)
+        const sections = document.querySelectorAll('.section-separator');
+        const bgElements = document.querySelectorAll('.bg-element');
+
+        window.addEventListener('scroll', () => {
+            let scrollPosition = window.pageYOffset;
+
+            // Apply slight parallax to overall background elements
+            bgElements.forEach((bg, index) => {
+                bg.style.transform = `translateY(${scrollPosition * (0.02 + index * 0.01)}px) scale(1.02)`;
+            });
+
+            // Apply parallax to section specific backgrounds (subtle effect, uncomment if desired)
+            /*
+            sections.forEach(section => {
+                let sectionTop = section.offsetTop;
+                let sectionHeight = section.offsetHeight;
+                if (scrollPosition > sectionTop - window.innerHeight && scrollPosition < sectionTop + sectionHeight) {
+                    let offset = (scrollPosition - sectionTop + window.innerHeight) * 0.1;
+                    section.style.backgroundPositionY = `${-offset * 0.5}px`;
+                }
+            });
+            */
+        });
+
+        // Add custom button styles to the head so Tailwind can process them
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .btn-primary {
+                @apply bg-teal-400 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg text-lg;
+            }
+            .btn-secondary {
+                @apply bg-transparent text-teal-300 border-2 border-teal-300 font-bold py-3 px-8 rounded-full shadow-lg text-lg;
+            }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>

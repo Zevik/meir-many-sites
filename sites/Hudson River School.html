@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - נהר של חופש</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for Hudson River School aesthetic */
+        body {
+            font-family: 'Heebo', sans-serif; /* Primary text font for readability */
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: #0d1a26; /* Deep dark blue for base background */
+            color: #e0e7ff; /* Light bluish-white for text */
+            line-height: 1.75; /* Improved readability for long texts */
+        }
+
+        h1, h2, h3, h4, .amatic-font {
+            font-family: 'Amatic SC', cursive; /* Decorative header font for artistic flair */
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        /* Fullscreen background layers for parallax and depth */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            will-change: transform; /* Optimize for animation */
+            z-index: -1; /* Place behind all content */
+            filter: brightness(0.6) contrast(1.2); /* Enhance dramatic, painterly mood */
+            transition: opacity 0.5s ease-out; /* Smooth transition for potential changes */
+        }
+
+        /* Specific background images embodying Hudson River School grandeur */
+        /* These URLs are chosen to evoke the visual style: vast landscapes, dramatic light, sublime nature */
+        .bg-layer-1 {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/eb/Albert_Bierstadt_-_Storm_in_the_Mountains_-_Google_Art_Project.jpg'); /* Albert Bierstadt - Storm in the Mountains */
+            opacity: 0.15; /* Subtle base layer */
+        }
+        .bg-layer-2 {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e9/Frederic_Edwin_Church_-_Cotopaxi_-_Google_Art_Project.jpg'); /* Frederic Edwin Church - Cotopaxi */
+            opacity: 0.25;
+            transform: scale(1.05); /* Slight scale for depth */
+        }
+        .bg-layer-3 {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ea/Thomas_Cole_-_The_Voyage_of_Life%2C_Manhood_-_Google_Art_Project.jpg'); /* Thomas Cole - The Voyage of Life, Manhood */
+            opacity: 0.35;
+            transform: scale(1.1);
+        }
+
+        /* Custom cursor styling - MANDATORY: high contrast on all backgrounds */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none; /* Allows clicks to pass through */
+            transition: transform 0.1s ease-out; /* Smooth movement */
+            z-index: 9999; /* Always on top */
+            border: 2px solid #FFFFFF; /* White border for visibility on dark */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow for visibility on light */
+            transform: translate(-50%, -50%); /* Center cursor on its position */
+        }
+        .custom-cursor.text-hover {
+            transform: translate(-50%, -50%) scale(1.5); /* Enlarge on hover */
+            border-color: #fca311; /* Orange accent on hover */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8), 0 0 15px rgba(252, 163, 17, 0.7); /* Subtle glow */
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #d8e2ff;
+            font-size: 0.9rem;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+        .scroll-indicator::after {
+            content: '';
+            width: 2px;
+            height: 40px;
+            background: #d8e2ff;
+            margin-top: 0.5rem;
+            animation: pulse-arrow 1.5s infinite ease-in-out;
+        }
+        .scroll-indicator::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #d8e2ff;
+            border-bottom: 2px solid #d8e2ff;
+            transform: rotate(45deg);
+            margin-top: 5px;
+            animation: bounce-arrow 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-arrow {
+            0%, 100% { opacity: 0.5; height: 40px; }
+            50% { opacity: 1; height: 50px; }
+        }
+        @keyframes bounce-arrow {
+            0%, 100% { transform: translateY(0) rotate(45deg); }
+            50% { transform: translateY(5px) rotate(45deg); }
+        }
+
+        /* Fade-in animations */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 1.2s ease-out forwards;
+        }
+        .animate-fade-in-delay-1 {
+            animation: fade-in 1.2s ease-out 1s forwards;
+            opacity: 0; /* Ensures element is hidden until animation starts */
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 3s infinite ease-in-out;
+        }
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Main content styling */
+        .content-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 1rem;
+            position: relative;
+            z-index: 10; /* Ensures content is above background layers */
+            background: linear-gradient(180deg, rgba(13,26,38,0.7) 0%, rgba(13,26,38,0.9) 100%); /* Subtle gradient overlay */
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.7); /* Inner shadow for depth */
+        }
+
+        .quote-box {
+            border-right: 4px solid #fca311; /* Accent border on the right for RTL */
+            padding-right: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #b7c0d8; /* Slightly muted text for quotes */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        /* Specific content section backgrounds for visual variety and theme integration */
+        /* These also use Hudson River School-like painting URLs */
+        .section-background-1 {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e9/Frederic_Edwin_Church_-_Cotopaxi_-_Google_Art_Project.jpg');
+            background-attachment: fixed; /* Parallax effect for content backgrounds */
+            background-blend-mode: multiply; /* Blends image with solid color for mood */
+            background-color: rgba(13,26,38,0.8);
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
+        }
+        .section-background-2 {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Thomas_Cole_-_The_Picnic_-_Google_Art_Project.jpg'); /* Thomas Cole - The Picnic (calm nature) */
+            background-attachment: fixed;
+            background-blend-mode: multiply;
+            background-color: rgba(13,26,38,0.8);
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
+        }
+        .section-background-3 {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/41/Asher_Brown_Durand_-_Progress_%28The_Advance_of_Civilization%29_-_Google_Art_Project.jpg'); /* Asher Brown Durand - Progress (landscape with human elements) */
+            background-attachment: fixed;
+            background-blend-mode: multiply;
+            background-color: rgba(13,26,38,0.8);
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
+        }
+
+        /* High-contrast text colors */
+        .text-light { color: #e0e7ff; }
+        .text-accent { color: #fca311; } /* Warm orange/gold accent */
+        .text-dark-bg { color: #0d1a26; } /* Dark blue for specific use cases (not general text on dark bg) */
+    </style>
+</head>
+<body class="bg-gradient-to-b from-[#0d1a26] to-[#010c14] text-light min-h-screen">
+
+    <div class="custom-cursor"></div>
+
+    <!-- Parallax Background Layers -->
+    <!-- These layers create a sense of deep, expansive landscape, moving at different speeds -->
+    <div class="background-layer bg-layer-1" data-parallax-speed="0.2"></div>
+    <div class="background-layer bg-layer-2" data-parallax-speed="0.4"></div>
+    <div class="background-layer bg-layer-3" data-parallax-speed="0.6"></div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        גלול למטה
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10">
+
+        <!-- Intro Section: The Grand Landscape of the Soul -->
+        <section class="content-section h-screen text-center bg-gradient-to-b from-transparent to-[#0d1a26] flex flex-col justify-center items-center px-4 md:px-8 lg:px-16">
+            <h1 class="text-7xl md:text-8xl lg:text-9xl amatic-font text-accent drop-shadow-lg leading-tight mb-4 animate-fade-in">מאיר אבינר: נהר של חופש</h1>
+            <p class="text-xl md:text-2xl max-w-3xl leading-relaxed text-light animate-fade-in-delay-1 text-shadow">
+                במקום שבו הרי יהודה פוגשים את קו הרקיע התל-אביבי, אמן אחד מגלה מחדש את משמעות הדרך.
+                סיפור של נדודים, גילוי פנימי, וחיפוש מתמיד אחר אור בלב המדבר והכרך הסוער.
+                זהו מסע אל מעבר למסגרות, אל תוך ליבו הפועם של החופש.
+            </p>
+            <div class="absolute bottom-1/4 left-1/2 -translate-x-1/2">
+                <!-- Placeholder for a stylized flute image, symbolizing music and freedom -->
+                <img src="https://via.placeholder.com/100x150/fca311/0d1a26?text=חליל" alt="איור של חליל צד, סמל לחופש ומוזיקה" class="w-16 h-auto opacity-70 animate-bounce-slow drop-shadow-lg">
+            </div>
+        </section>
+
+        <!-- Section 1: The Shepherd's Journey - Roots in Nature -->
+        <section class="content-section section-background-1" id="roots">
+            <div class="container max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-6xl md:text-7xl amatic-font text-accent mb-8 drop-shadow-lg">מסע הרועה: שורשים בנוף בראשית</h2>
+                <div class="quote-box text-right max-w-2xl mx-auto">
+                    "העולם הוא בד ציור אינסופי, וכל צעד הוא משיכת מכחול אל מול האופק המשתנה."
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light mb-8 text-shadow">
+                    ממרומי הגבעות המוריקות של בית אל, בין עדרי עיזים וגמלים המלחכים עשב בגליל הפראי, נולדה נפשו של מאיר.
+                    ילד שדיבורו היה עם הרוח העתיקה, נשימתו נשאה את אבק הדרכים, ועיניו ראו את אלוהים בשקיעה
+                    אדמונית מול מדבר יהודה האינסופי. שם, בלב הפשטות הקשוחה של חיי רועה, למד את שפת האדמה,
+                    את כוחה העצום של בדידות, ואת קשרי הגורל העמוקים
+                    בין האדם לבין נוף פראי שאינו נכנע.
+                    כל סלע, כל עץ זית עתיק, היה מורה דרך במסע התהוותו כ"נער גבעות" - בונה עולמות קטנים בלב מרחבים עצומים, אחוז חלום.
+                </p>
+                <div class="flex justify-center my-8">
+                    <!-- Placeholder for an image of a shepherd in a vast, dramatic landscape -->
+                    <img src="https://via.placeholder.com/800x500/0a1f33/e0e7ff?text=רועה+בנוף+פראי" alt="רועה קטן בין גבעות רחבות ידיים תחת שמיים דרמטיים" class="w-full md:w-3/4 lg:w-2/3 max-w-lg shadow-2xl rounded-lg border-2 border-accent transform hover:scale-105 transition-transform duration-300">
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light text-shadow">
+                    הנופים המרחביים והשקט האינסופי של המדבר והגליל עיצבו בו לא רק אהבת טבע עמוקה,
+                    אלא גם את הדחף הבלתי נלאה לשבור גבולות, לחפש את הלא נודע שמעבר לאופק,
+                    ולהאמין באותו חופש פנימי שאינו תלוי במסגרות חיצוניות.
+                    כמו עדר העיזים הפורץ דרכים חדשות בהר, כך נפשו חיפשה תמיד נתיבים חופשיים לפרוץ אל האור.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: The Artist's Awakening - Sound & Improv -->
+        <section class="content-section section-background-2" id="awakening">
+            <div class="container max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-6xl md:text-7xl amatic-font text-accent mb-8 drop-shadow-lg">קול הקריאה: אילתור, צליל, וחופש יצירה</h2>
+                <div class="quote-box text-right max-w-2xl mx-auto">
+                    "האילתור הוא התפילה האמיתית. הוא הרגע שבו הלב מדבר ישר אל היקום, ללא מסננים, בקולו הטהור."
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light mb-8 text-shadow">
+                    מן השקט המהדהד של הגבעות אל רחשי הכרך התל-אביבי הסואן, מצא מאיר את קולו הייחודי בעולם האילתור.
+                    שבר חליל צד אחד, וגילה בתוך השבר עולם שלם של צלילים ומוזיקה ברחובות העיר התוססת.
+                    הגיטרה הנאמנה, החליל המזמר, וכלי הנשיפה האלקטרוניים - כולם הפכו לשלוחות של נפש אחת,
+                    שרוקדת על גבול הדמיון ופורצת את גבולות המציאות.
+                    הוא יוצר תפילות ספונטניות המרעידות את הלב, הופך צעקות כואבות למשחקים קומיים משחררים,
+                    וטורף קומדיה ושירה לכדי מעגלים של שמחה, אהבה וריפוי עמוק.
+                </p>
+                <div class="flex justify-center my-8">
+                    <!-- Placeholder for an image of an artist playing music spontaneously in a vibrant setting -->
+                    <img src="https://via.placeholder.com/800x500/0a1f33/e0e7ff?text=אמן+מנגן+בחופשיות" alt="אמן מנגן בכלי נגינה באנרגיה חופשית, אולי על רקע נוף עירוני או טבעי" class="w-full md:w-3/4 lg:w-2/3 max-w-lg shadow-2xl rounded-lg border-2 border-accent transform hover:scale-105 transition-transform duration-300">
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light text-shadow">
+                    בין שמיים פתוחים המתפרשים ללא גבול מעל לראשו, לבין קירות בתי הכלא הסוגרים, מאיר הוא מנצח של רגשות אנושיים.
+                    מוזיקה מתפרצת באנרגיה עצומה, מילים רוקדות על הלשון ומעוררות השראה, הומור פורץ גבולות ומביא קלילות – הכל כלי בידיו לשחרור.
+                    כמו נהר החוצב את דרכו בסלע הקשוח, כך מאיר חותר בעוצמה אל חופש פנימי אמיתי,
+                    מגלה שגם במקומות הכבולים והאפלים ביותר, הרוח האנושית יכולה לעוף למרחקים ולהאיר את דרכה.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Light in Dark Places - Prison Work -->
+        <section class="content-section section-background-3" id="prisons">
+            <div class="container max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-6xl md:text-7xl amatic-font text-accent mb-8 drop-shadow-lg">אור בצל כותלי הכלא: חופש פנימי מעבר לסורגים</h2>
+                <div class="quote-box text-right max-w-2xl mx-auto">
+                    "בכל אדם ואדם ישנו נהר סמוי של אור, וגם בלב הכלא האפל אפשר למצוא את המעיין שפורץ החוצה ומשקה את הצמא."
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light mb-8 text-shadow">
+                    שלוש וארבע פעמים בשבוע, מאיר נכנס בצעד בוטח אל בתי הכלא בארץ - רמלה, שרון ואחרים.
+                    ללא ליווי, רק עם גיטרה, חליל, ולב פתוח ורחב מלא חמלה. הוא מגיע אל המקומות האפלים ביותר,
+                    אל פינות נשכחות שבהן האור כמעט נעלם, כדי להביא צבע, צחוק מתגלגל, ושמחה אמיתית.
+                    הוא מזמין אסירים לשיר בחוזקה, לצעוק את מה שהצטבר בפנים, לחבק בחום, ולדבר את המילים שלא נאמרו מעולם.
+                    רגעים של אנושיות טהורה פורצים מבין הסורגים הכבדים, מסיפורו המרגש של אסיר אילם הנושך גיטרה כאילו דיבר דרכה,
+                    ועד תפילות משותפות ששוברות לבבות סגורים ומעלות חיוך של תקווה.
+                </p>
+                <div class="flex justify-center my-8">
+                    <div class="relative w-full md:w-3/4 lg:w-2/3 max-w-lg aspect-video shadow-2xl rounded-lg border-2 border-accent overflow-hidden group">
+                        <!-- Placeholder for an image or visual representation of hope in a dark place -->
+                        <div class="absolute inset-0 bg-gray-900 bg-opacity-80 flex flex-col justify-center items-center text-center text-white p-4">
+                            <span class="text-4xl amatic-font mb-2 text-accent group-hover:text-white transition-colors duration-300">קולות מן הכלא</span>
+                            <p class="text-lg text-shadow group-hover:text-gray-200 transition-colors duration-300">שמעו את הסיפורים המרגשים ואת הנגינות המרפאות.
+                                <br>
+                                "לברוח מהכלא לשעה" – דרך הצחוק והיצירה.</p>
+                            <span class="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm text-gray-500 group-hover:text-accent transition-colors duration-300">הפכו את המסך לציור</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light text-shadow">
+                    הוא מאמין באמונה שלמה שהחופש אינו מצב פיזי חיצוני, אלא מצב פנימי עמוק, נשמתי.
+                    ובתוך הכלא, המקום המסוגר ביותר, הוא מראה לאסירים שישנה דרך אמיתית לברוח - אל תוך עצמם, אל תוך האמנות, אל תוך הצחוק המרפא.
+                    מאיר ממומן כולו על ידי תרומות פרטיות קטנות, שומר בקנאות על עצמאותו,
+                    וממשיך לחפור תעלות של תקווה ושינוי בכל פינה אפלה, בונה גשרים של אור.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: The Path Forward - Breath & Being -->
+        <section class="content-section section-background-2" id="path">
+            <div class="container max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-6xl md:text-7xl amatic-font text-accent mb-8 drop-shadow-lg">נשימה ונוף פנימי: דרך אל חופש אמיתי</h2>
+                <div class="quote-box text-right max-w-2xl mx-auto">
+                    "העולם צמא לצחוק, לצבע, ולחופש אמיתי. ואת שלושתם אפשר למצוא בנשימה אחת עמוקה, מודעת ומשחררת."
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light mb-8 text-shadow">
+                    מעבר לפעילותו המרטיטה בבתי הכלא ועל הבמות הסואנות, מאיר חוקר את עומקי התודעה האנושית
+                    דרך סדנאות נשימה מודעת ומרפאת.
+                    הוא מנחה מסעות פנימיים אל הנשמה, שם הנשימה הופכת לנהר שוצף שמנקה את הנפש מכל משקע,
+                    ומובילה את המשתתפים אל מרחבים חדשים של שלווה, צלילות וגילוי עצמי עמוק.
+                    חיים ללא מסגרות כובלות, תנועה פיזית מתמדת - הליכות ארוכות, שחייה בים הפתוח - הכל חלק מפילוסופיה שלמה
+                    המעודדת חופש תנועה, מחשבה, וביטוי רגשי ללא מעצורים.
+                </p>
+                <div class="flex justify-center my-8">
+                    <!-- Placeholder for an image of a meditating figure in a serene, natural landscape -->
+                    <img src="https://via.placeholder.com/800x500/0a1f33/e0e7ff?text=מדיטציה+בטבע" alt="דמות מדיטטיבית בנוף טבעי שליו, אולי על רקע שקיעה" class="w-full md:w-3/4 lg:w-2/3 max-w-lg shadow-2xl rounded-lg border-2 border-accent transform hover:scale-105 transition-transform duration-300">
+                </div>
+                <p class="text-lg md:text-xl leading-loose text-light text-shadow">
+                    מאיר אבינר הוא לא רק אמן רב-גוני; הוא תופעת טבע אנושית נדירה.
+                    הוא הר איתן של יצירה מתפרצת, נהר שוצף של חופש שאינו נגמר, וקרן שמש בהירה
+                    החודרת בעוצמה אל המקומות החשוכים והנסתרים ביותר בנפש האדם.
+                    מסע חייו הוא עדות מרגשת לכוחה הבלתי נדלה של הרוח האנושית לחתור תמיד אל האופק,
+                    ולמצוא יופי, משמעות ותקווה גם בשבילים הפחות סלולים והיותר מאתגרים.
+                </p>
+            </div>
+        </section>
+
+        <!-- Links Section: The Map of Connection -->
+        <section class="content-section bg-gradient-to-t from-[#010c14] to-[#0d1a26] py-16" id="links">
+            <div class="container max-w-4xl mx-auto text-center px-4">
+                <h2 class="text-6xl md:text-7xl amatic-font text-accent mb-12 drop-shadow-lg">מפת החיבור: הדרכים אל מאיר</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" class="block p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700 hover:border-accent group text-shadow">
+                        <h3 class="text-3xl amatic-font text-accent mb-2 group-hover:text-white transition-colors duration-300">פייסבוק אישי</h3>
+                        <p class="text-lg text-gray-300 group-hover:text-gray-100">סיפורים מהכלא, הופעות ויומן מסע פתוח.</p>
+                    </a>
+                    <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="block p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700 hover:border-accent group text-shadow">
+                        <h3 class="text-3xl amatic-font text-accent mb-2 group-hover:text-white transition-colors duration-300">פודקאסט "עושים שינוי"</h3>
+                        <p class="text-lg text-gray-300 group-hover:text-gray-100">ראיון עומק מרתק על דרכו הייחודית ופילוסופיית חייו.</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="block p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700 hover:border-accent group text-shadow">
+                        <h3 class="text-3xl amatic-font text-accent mb-2 group-hover:text-white transition-colors duration-300">יוטיוב - שיר "פלואו"</h3>
+                        <p class="text-lg text-gray-300 group-hover:text-gray-100">טעימה מרגשת מעולמו המוזיקלי העשיר והזורם.</p>
+                    </a>
+                    <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700 hover:border-accent group text-shadow">
+                        <h3 class="text-3xl amatic-font text-accent mb-2 group-hover:text-white transition-colors duration-300">לוח הופעות וכרטיסים</h3>
+                        <p class="text-lg text-gray-300 group-hover:text-gray-100">מתי ואיפה תפגשו את הקסם החי ונושם של מאיר?</p>
+                    </a>
+                    <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="block p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700 hover:border-accent group text-shadow">
+                        <h3 class="text-3xl amatic-font text-accent mb-2 group-hover:text-white transition-colors duration-300">מאמר במאקו</h3>
+                        <p class="text-lg text-gray-300 group-hover:text-gray-100">סיפור משפחתי מרתק ויציאה בשאלה - מנקודת מבט אישית.</p>
+                    </a>
+                    <a href="https://timeout.co.il/%D7%94%D7%97%D7%9C%D7%99%D7%9C%D7%9F/" target="_blank" class="block p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700 hover:border-accent group text-shadow">
+                        <h3 class="text-3xl amatic-font text-accent mb-2 group-hover:text-white transition-colors duration-300">כתבה בטיים אאוט</h3>
+                        <p class="text-lg text-gray-300 group-hover:text-gray-100">תיאור אמנות רחוב נועזת וביצועיו הייחודיים בתל אביב.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-12 bg-[#010c14] text-gray-400 text-sm border-t border-gray-800">
+            <p>&copy; 2024 מאיר אבינר - כל הזכויות שמורות לרוח החופשית.</p>
+            <p>עיצוב ויצירה בהשראת מסע חייו והנופים הפנימיים המתגלים בו.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Custom Cursor Logic
+            const customCursor = document.querySelector('.custom-cursor');
+            document.addEventListener('mousemove', e => {
+                customCursor.style.left = `${e.clientX}px`;
+                customCursor.style.top = `${e.clientY}px`;
+            });
+
+            // Elements that trigger cursor hover effect
+            const interactiveElements = 'a, button, input[type="submit"], input[type="button"], .group, h1, h2, h3, h4, p, span, .text-shadow'; // Expanded list for more interactivity
+            document.querySelectorAll(interactiveElements).forEach(el => {
+                el.addEventListener('mouseenter', () => customCursor.classList.add('text-hover'));
+                el.addEventListener('mouseleave', () => customCursor.classList.remove('text-hover'));
+            });
+
+            // Parallax Scroll Logic for background layers
+            const parallaxLayers = document.querySelectorAll('.background-layer');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            const introSectionHeight = window.innerHeight; // Height of the initial view
+
+            function updateParallax() {
+                const scrollPos = window.scrollY;
+
+                parallaxLayers.forEach(layer => {
+                    const speed = parseFloat(layer.dataset.parallaxSpeed);
+                    layer.style.transform = `translateY(${scrollPos * speed}px)`;
+                });
+
+                // Hide scroll indicator after scrolling past a certain point
+                if (scrollPos > introSectionHeight * 0.5) { // Hide after scrolling half of intro section
+                    scrollIndicator.classList.add('opacity-0', 'pointer-events-none');
+                } else {
+                    scrollIndicator.classList.remove('opacity-0', 'pointer-events-none');
+                }
+            }
+
+            // Initial call and event listener for parallax
+            window.addEventListener('scroll', updateParallax);
+            updateParallax(); // Set initial position on load
+
+            // Optional: Smooth Scroll for Navigation (if internal links are added)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Staggered fade-in animation for initial load elements
+            const fadeInElements = document.querySelectorAll('.animate-fade-in');
+            fadeInElements.forEach((el, index) => {
+                el.style.opacity = '0'; // Ensure it's hidden before animation
+                setTimeout(() => {
+                    el.style.animationDelay = `${0.2 * index}s`; // Stagger delay
+                    el.style.opacity = '1'; // Let animation take over opacity
+                }, 100); // Small initial delay to ensure CSS is applied
+            });
+
+            // Specific delayed fade-in for the introductory paragraph
+            const fadeInDelayElements = document.querySelectorAll('.animate-fade-in-delay-1');
+            fadeInDelayElements.forEach((el) => {
+                el.style.opacity = '0'; // Ensure it's hidden
+                setTimeout(() => {
+                    el.style.animationDelay = '1s'; // 1 second delay
+                    el.style.opacity = '1'; // Let animation take over opacity
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

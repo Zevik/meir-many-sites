@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - שביל החופש הפנימי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700&family=Noto+Serif+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* הגדרת משתני צבעים בהשראת אמנות רומנסקית */
+        :root {
+            --color-stone: #a8a29e; /* אפור אבן */
+            --color-ochre: #cc8800; /* אוכרה עמוקה / זהב עתיק */
+            --color-dark-red: #8b0000; /* אדום כהה / יין */
+            --color-deep-blue: #1a2a4b; /* כחול עמוק, כמעט שחור - כמו שמי לילה או פסיפס כהה */
+            --color-parchment: #fdf5e6; /* לבן-שמנת, כמו קלף ישן */
+            --color-shadow: rgba(0,0,0,0.8); /* צל כהה לבולטות */
+        }
+
+        body {
+            font-family: 'Frank Ruhl Libre', serif;
+            cursor: none; /* הסתרת סמן העכבר המוגדר כברירת מחדל */
+            color: var(--color-parchment);
+            background-color: var(--color-deep-blue); /* רקע כהה */
+            line-height: 1.8; /* רווח שורות משופר לקריאות יתרה */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif Hebrew', serif;
+            color: var(--color-ochre);
+        }
+
+        /* סגנון סמן עכבר מותאם אישית */
+        .custom-cursor-inner, .custom-cursor-outer {
+            position: fixed;
+            pointer-events: none; /* גורם לסמן להתעלם מלחיצות ולהעבירן לאלמנטים שמתחתיו */
+            z-index: 9999;
+            will-change: transform; /* אופטימיזציה לביצועי אנימציה */
+            transition: transform 0.1s linear; /* תנועה חלקה יותר */
+        }
+
+        .custom-cursor-inner {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--color-parchment); /* גבול בהיר (לנראות על רקע כהה) */
+            transform: translate(-50%, -50%); /* ממקם את הסמן במרכז הנקודה של העכבר */
+        }
+
+        .custom-cursor-outer {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--color-shadow); /* צל כהה (לנראות על רקע בהיר) */
+            transform: translate(-50%, -50%); /* ממקם את הסמן במרכז הנקודה של העכבר */
+            opacity: 0.8;
+        }
+
+        /* רקע בהשראת תבליטי אבן רומנסקיים - דוגמה גאומטרית עדינה */
+        .romanesque-background {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239e9e9e' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed; /* מאפשר אפקט פרלקס */
+            background-size: 60px 60px;
+            background-repeat: repeat;
+        }
+
+        /* סגנון פס גלילה מותאם אישית */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-deep-blue);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-ochre);
+            border-radius: 6px;
+            border: 3px solid var(--color-deep-blue);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-dark-red);
+        }
+    </style>
+</head>
+<body class="selection:bg-ochre selection:text-deep-blue bg-deep-blue text-parchment antialiased relative romanesque-background">
+    <!-- אלמנטי סמן עכבר מותאמים אישית -->
+    <div class="custom-cursor-outer"></div>
+    <div class="custom-cursor-inner"></div>
+
+    <div id="main-content" class="relative z-10 min-h-screen p-4 md:p-8 lg:p-12">
+        <!-- כותרת ראשית - שער כניסה מונומנטלי -->
+        <header class="text-center mb-16 mt-8 p-6 rounded-lg bg-stone bg-opacity-10 shadow-2xl border-b-4 border-ochre border-opacity-70">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-tight text-ochre drop-shadow-lg">מאיר אבינר: שביל החופש הפנימי</h1>
+            <p class="text-xl md:text-2xl italic text-parchment leading-relaxed border-t-2 border-b-2 border-ochre py-4">
+                <span class="block">"העולם צריך צחוק, צבע וחופש"</span>
+                <span class="block text-lg mt-2">— מאיר אבינר</span>
+            </p>
+        </header>
+
+        <!-- קטעים ראשיים, בנויים כלוחות מגולפים או פרסקו עתיק -->
+        <main class="max-w-4xl mx-auto space-y-20">
+
+            <!-- מגילה ראשונה: האמן והמסע - אבן יסוד -->
+            <section class="bg-deep-blue p-8 rounded-xl shadow-xl border-2 border-ochre border-opacity-50 hover:border-ochre-light transition-all duration-300 transform hover:scale-[1.01]">
+                <h2 class="text-4xl font-bold mb-6 text-ochre text-right border-b-2 border-dark-red pb-3">מגילה ראשונה: האמן והמסע</h2>
+                <p class="text-lg leading-relaxed mb-4 text-parchment">
+                    בארץ הקודש, בין גבעות של התנחלות ומרחבי גליל פרועים, נולדה נשמה שחיפשה דרור. מאיר אבינר, בן לרב בולט, צמח מתוך עולם של מסורת קשוחה אל דרכים לא סלולות. מגיל צעיר, כנער גבעות ורועה צאן, למד את שפת האדמה והרוח, הרחק ממסגרות. סיפורו הוא מסע עתיק-יומין של אדם המחפש את קולו האמיתי, דרך עזיבת הדת אל החופש הגמור של האמנות. זוהי דרך של שבירה ובנייה מחדש, שבה כל צעד הוא אילתור, כל נשימה שיר.
+                </p>
+                <div class="text-center py-4">
+                    <div class="w-full h-48 bg-stone bg-opacity-20 flex items-center justify-center text-stone text-2xl italic border border-stone-400">
+                        <p>
+                            <span class="block">"חופש אינו עניין של מקום, אלא של רוח"</span>
+                            <span class="block text-lg mt-2">— תבליט דמיוני, כלא שרון</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- מגילה שנייה: מלאכות הנפש - עמודי היצירה -->
+            <section class="bg-deep-blue p-8 rounded-xl shadow-xl border-2 border-ochre border-opacity-50 hover:border-ochre-light transition-all duration-300 transform hover:scale-[1.01]">
+                <h2 class="text-4xl font-bold mb-6 text-ochre text-right border-b-2 border-dark-red pb-3">מגילה שנייה: מלאכות הנפש</h2>
+                <p class="text-lg leading-relaxed mb-4 text-parchment">
+                    כישרונותיו של מאיר הם כמו גילופים באבן - כל אחד מהם יצירה בפני עצמה, אך כולם יחד יוצרים פסיפס חי של השראה. הוא אמן אילתור, רואה בכל רגע הזדמנות ליצור תפילה ספונטנית או לשחרר רגש בצליל ומילה. המוזיקה זורמת בעורקיו, מגיטרה וחליל צד ועד כלי נשיפה אלקטרוניים, יוצר טראנסים שמחברים עולמות. ההומור הוא כלי ריפוי, כובע עם נוצה בכלא, צחוק ששובר קירות. והשירה, תמיד שם, מילים היוצאות מהנפש כדי לבטא עומק ופשטות גם יחד.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-stone bg-opacity-15 p-6 rounded-lg border border-ochre border-opacity-30">
+                        <h3 class="text-2xl font-bold mb-3 text-ochre">נגינת החופש</h3>
+                        <p class="text-parchment">
+                            מניגן ברחובות תל אביב ועד יצירת תפילות מוזיקליות עם אסירים, מאיר פורט על מיתרי הנפש ועל כלי הנגינה כאחד. כל צליל הוא קריאה לחופש, לחיבור, לשחרור.
+                        </p>
+                    </div>
+                    <div class="bg-stone bg-opacity-15 p-6 rounded-lg border border-ochre border-opacity-30">
+                        <h3 class="text-2xl font-bold mb-3 text-ochre">צחוק כתפילה</h3>
+                        <p class="text-parchment">
+                            במקומות האפלים ביותר, מאיר מביא אור של הומור. צחוקו ומשחקיו הופכים צעקות למנגינות ומאפשרים לברוח מהכלא - לפחות לשעה - אל מרחבי הנפש.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- מגילה שלישית: פועליו בארץ ובנפש - הפרסקאות של חייו -->
+            <section class="bg-deep-blue p-8 rounded-xl shadow-xl border-2 border-ochre border-opacity-50 hover:border-ochre-light transition-all duration-300 transform hover:scale-[1.01]">
+                <h2 class="text-4xl font-bold mb-6 text-ochre text-right border-b-2 border-dark-red pb-3">מגילה שלישית: פועליו בארץ ובנפש</h2>
+                <div class="text-lg leading-relaxed mb-8 text-parchment">
+                    פועליו של מאיר אינם עסקאות או מוסדות, אלא אריגים של חיבור אנושי ויצירה חופשית.
+                    <ul class="list-disc pr-6 mt-4 space-y-3">
+                        <li>
+                            <strong class="text-ochre">שליח האור לכלא:</strong> הוא מבקר בבתי כלא 3-4 פעמים בשבוע, נכנס לבדו, ללא ליווי, ומביא עמו גיטרה וחליל. שם, עם האסירים, הוא שר, מנגן ומאלתר, ויוצר "לברוח מהכלא לשעה" - רגעים של אמת, בכי ושמחה. סיפוריו משם הם עדויות נוגעות ללב על כוחו של הריפוי באמנות.
+                        </li>
+                        <li>
+                            <strong class="text-ochre">אמן הרחוב הנודד:</strong> לפני שנים, התפרנס מנגינת רחוב, מטפס על עצים ושלטים בתל אביב, עומד על ראשו ומנגן. זוהי אמנות חופשית, בלתי תלויה, המזכירה את נוודות הרועים של נעוריו, אך הפעם בלב הכרך הסואן.
+                        </li>
+                        <li>
+                            <strong class="text-ochre">סדנאות נשימה מודעת:</strong> כחלק ממסע הריפוי העצמי והקולקטיבי שלו, מאיר מנחה סדנאות נשימה (Breathwork), דרך נוספת לשחרור כבלים פנימיים וחיבור לעצמי עמוק יותר.
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-center py-4">
+                    <div class="w-full h-48 bg-stone bg-opacity-20 flex items-center justify-center text-stone text-2xl italic border border-stone-400">
+                        <p>
+                            <span class="block">"לנשום את החופש, גם בתוך כלוב"</span>
+                            <span class="block text-lg mt-2">— דיוקן פנימי</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- מגילה רביעית: תורת החופש - הטקסטים הרוחניים -->
+            <section class="bg-deep-blue p-8 rounded-xl shadow-xl border-2 border-ochre border-opacity-50 hover:border-ochre-light transition-all duration-300 transform hover:scale-[1.01]">
+                <h2 class="text-4xl font-bold mb-6 text-ochre text-right border-b-2 border-dark-red pb-3">מגילה רביעית: תורת החופש</h2>
+                <p class="text-lg leading-relaxed mb-4 text-parchment">
+                    הפילוסופיה של מאיר היא תפילה לחיים ללא מסגרות, חיפוש בלתי פוסק אחר חופש - פנימי וחיצוני כאחד. הוא מאמין כי העולם זקוק לצחוק, צבע וחופש, וכי האותנטיות היא השער לריפוי. דרך יצירתו ופועלו, הוא מזמין כל אחד ואחת לשבור את הכבלים הבלתי נראים, למצוא את המנגינה הפנימית שלו, ולרקוד את ריקוד החיים במלואו, ללא פחד וללא שיפוט. זהו מסר של תקווה, של שחרור ושל אהבה - אהבה לאדם, לטבע, וליצירה שבכל אחד מאיתנו.
+                </p>
+            </section>
+
+            <!-- מגילה חמישית: שערי ההתחברות - כתבי היד המוארים -->
+            <section class="bg-deep-blue p-8 rounded-xl shadow-xl border-2 border-ochre border-opacity-50 hover:border-ochre-light transition-colors duration-300 transform hover:scale-[1.01] mb-16">
+                <h2 class="text-4xl font-bold mb-6 text-ochre text-right border-b-2 border-dark-red pb-3">מגילה חמישית: שערי ההתחברות</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                    <a href="https://www.facebook.com/meiraviner/" target="_blank" class="block bg-stone bg-opacity-20 p-6 rounded-lg shadow-md hover:bg-ochre hover:text-deep-blue transition-colors duration-300 border border-ochre border-opacity-40">
+                        <h3 class="text-xl font-bold mb-2 text-ochre hover:text-deep-blue">פייסבוק</h3>
+                        <p class="text-parchment text-sm">סיפורים מכלא, הופעות ויומן אישי</p>
+                    </a>
+                    <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="block bg-stone bg-opacity-20 p-6 rounded-lg shadow-md hover:bg-ochre hover:text-deep-blue transition-colors duration-300 border border-ochre border-opacity-40">
+                        <h3 class="text-xl font-bold mb-2 text-ochre hover:text-deep-blue">פודקאסט "עושים שינוי"</h3>
+                        <p class="text-parchment text-sm">ראיון מעמיק על חייו ופועלו</p>
+                    </a>
+                    <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block bg-stone bg-opacity-20 p-6 rounded-lg shadow-md hover:bg-ochre hover:text-deep-blue transition-colors duration-300 border border-ochre border-opacity-40">
+                        <h3 class="text-xl font-bold mb-2 text-ochre hover:text-deep-blue">לוח הופעות וכרטיסים</h3>
+                        <p class="text-parchment text-sm">הצטרפו לחוויה חיה</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="block bg-stone bg-opacity-20 p-6 rounded-lg shadow-md hover:bg-ochre hover:text-deep-blue transition-colors duration-300 border border-ochre border-opacity-40">
+                        <h3 class="text-xl font-bold mb-2 text-ochre hover:text-deep-blue">יוטיוב - שיר "פלואו"</h3>
+                        <p class="text-parchment text-sm">טעימה מהיצירה המוזיקלית</p>
+                    </a>
+                    <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="block bg-stone bg-opacity-20 p-6 rounded-lg shadow-md hover:bg-ochre hover:text-deep-blue transition-colors duration-300 border border-ochre border-opacity-40">
+                        <h3 class="text-xl font-bold mb-2 text-ochre hover:text-deep-blue">כתבה במאקו (2018)</h3>
+                        <p class="text-parchment text-sm">סיפור משפחתי ויציאה בשאלה</p>
+                    </a>
+                    <a href="https://timeout.co.il/%D7%94%D7%97%D7%9C%D7%99%D7%9C%D7%9F/" target="_blank" class="block bg-stone bg-opacity-20 p-6 rounded-lg shadow-md hover:bg-ochre hover:text-deep-blue transition-colors duration-300 border border-ochre border-opacity-40">
+                        <h3 class="text-xl font-bold mb-2 text-ochre hover:text-deep-blue">כתבה בטיים אאוט (2016)</h3>
+                        <p class="text-parchment text-sm">אמנות רחוב ייחודית בתל אביב</p>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- פוטר - בסיס יציב ופשוט -->
+        <footer class="text-center mt-20 p-8 text-parchment text-sm bg-stone bg-opacity-10 border-t-4 border-ochre border-opacity-70">
+            <p>
+                <span class="block mb-2">"חופש אמיתי הוא היכולת לרקוד את דרכך בעולם, גם כשהכל סביבך קופא"</span>
+                <span class="block">© 2024 מאיר אבינר. כל הזכויות שמורות.</span>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const customCursorInner = document.querySelector('.custom-cursor-inner');
+        const customCursorOuter = document.querySelector('.custom-cursor-outer');
+
+        // עדכון מיקום הסמן המותאם אישית
+        document.addEventListener('mousemove', e => {
+            customCursorInner.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+            customCursorOuter.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+        });
+
+        // אפקט ריחוף על אלמנטים אינטראקטיביים עבור הסמן
+        document.querySelectorAll('a, button, input[type="submit"], .block, .custom-cursor-inner, .custom-cursor-outer').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                customCursorInner.style.transform = customCursorInner.style.transform.replace('scale(1)', 'scale(1.5)');
+                customCursorOuter.style.transform = customCursorOuter.style.transform.replace('scale(1)', 'scale(1.5)');
+                customCursorInner.style.borderColor = 'var(--color-dark-red)';
+                customCursorOuter.style.boxShadow = '0 0 0 2px var(--color-ochre)';
+            });
+            el.addEventListener('mouseleave', () => {
+                customCursorInner.style.transform = customCursorInner.style.transform.replace('scale(1.5)', 'scale(1)');
+                customCursorOuter.style.transform = customCursorOuter.style.transform.replace('scale(1.5)', 'scale(1)');
+                customCursorInner.style.borderColor = 'var(--color-parchment)';
+                customCursorOuter.style.boxShadow = '0 0 0 2px var(--color-shadow)';
+            });
+        });
+
+        // אפקט פרלקס עדין לרקע התבליטים
+        const romanesqueBg = document.querySelector('.romanesque-background');
+        if (romanesqueBg) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                romanesqueBg.style.backgroundPosition = `center ${-scrollY * 0.1}px`; /* תנועה איטית יותר של הרקע */
+            });
+        }
+    </script>
+</body>
+</html>

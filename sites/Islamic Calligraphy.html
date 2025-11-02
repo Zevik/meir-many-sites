@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: קליגרפיה של נשמה חופשית</title>
+    <meta name="description" content="מסע אמנותי אל עולמו של מאיר אבינר - אמן, יוצר ומשחרר נשמות, מילדותו בבית אל ועד עבודתו עם אסירים בתל אביב.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-ink': '#131111', /* Near black, slight warmth */
+                        'parchment-light': '#F5F5DC', /* Creamy off-white for text */
+                        'gold-accent': '#FFD700', /* Gold */
+                        'deep-blue': '#0A2A4A', /* Dark, rich blue */
+                        'emerald-green': '#005C4B', /* Deep green */
+                        'ruby-red': '#8A0F2B', /* Deep red */
+                        'amethyst-purple': '#4B0082', /* Deep purple */
+                        'ink-glow': 'rgba(255, 255, 255, 0.05)', /* Subtle background glow */
+                    },
+                    fontFamily: {
+                        'frank-ruhl': ['"Frank Ruhl Libre"', 'serif'],
+                        'rubik': ['Rubik', 'sans-serif'],
+                    },
+                    animation: {
+                        'flow-ink': 'flow-ink 60s linear infinite',
+                        'pulse-glow': 'pulse-glow 4s infinite alternate',
+                        'cursor-pulse': 'cursor-pulse 1.5s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        'flow-ink': {
+                            '0%': { backgroundPosition: '0% 0%, 50% 100%, 100% 50%' },
+                            '100%': { backgroundPosition: '100% 100%, 0% 0%, 50% 0%' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { filter: 'blur(10px) brightness(1)', opacity: 0.1 },
+                            '50%': { filter: 'blur(20px) brightness(1.2)', opacity: 0.25 },
+                        },
+                        'cursor-pulse': {
+                            '0%, 100%': { transform: 'scale(1) translate(-50%, -50%)', opacity: 1 },
+                            '50%': { transform: 'scale(1.2) translate(-50%, -50%)', opacity: 0.8 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts for Hebrew -->
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for scroll animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+
+        .scroll-animate.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar styling (optional, for artistic consistency) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #222;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+    </style>
+</head>
+<body class="bg-dark-ink text-parchment-light font-rubik leading-relaxed overflow-x-hidden cursor-none">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="fixed rounded-full pointer-events-none z-[9999] transition-transform duration-100 ease-out transform -translate-x-1/2 -translate-y-1/2 border-2 border-parchment-light shadow-[0_0_0_2px_rgba(0,0,0,0.8)] w-5 h-5 animate-cursor-pulse"></div>
+
+    <!-- Background Layer - Dynamic Calligraphy Ink Flow -->
+    <div class="fixed inset-0 z-[-1] opacity-60 bg-gradient-to-br from-dark-ink to-deep-blue">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-deep-blue via-emerald-green to-dark-ink opacity-10 blur-3xl animate-flow-ink"
+             style="background-size: 300% 300%; background-image: radial-gradient(circle at 10% 20%, #0A2A4A 0%, #005C4B 50%, #131111 100%), radial-gradient(circle at 90% 80%, #4B0082 0%, #8A0F2B 50%, #131111 100%), radial-gradient(circle at 50% 50%, #FFD700 0%, #131111 100%);">
+        </div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-amethyst-purple via-ruby-red to-dark-ink opacity-10 blur-3xl animate-flow-ink"
+             style="background-size: 300% 300%; animation-delay: -30s; background-image: radial-gradient(circle at 10% 20%, #4B0082 0%, #8A0F2B 50%, #131111 100%), radial-gradient(circle at 90% 80%, #0A2A4A 0%, #005C4B 50%, #131111 100%), radial-gradient(circle at 50% 50%, #FFD700 0%, #131111 100%);">
+        </div>
+    </div>
+
+
+    <main class="relative z-10 max-w-4xl mx-auto py-16 px-4 md:px-8 text-right">
+
+        <!-- Header - Title -->
+        <header class="text-center mb-20 scroll-animate">
+            <h1 class="font-frank-ruhl text-5xl md:text-7xl font-bold text-gold-accent mb-4 leading-tight drop-shadow-lg" style="text-shadow: 0 0 15px #FFD700;">
+                מאיר אבינר: קליגרפיה של נשמה חופשית
+            </h1>
+            <p class="font-rubik text-xl md:text-2xl text-parchment-light opacity-80 italic">
+                לכתוב את החופש, משיחה אחר משיחה
+            </p>
+        </header>
+
+        <!-- Section 1: הקדמה - הדיו הזורם -->
+        <section class="mb-24 relative p-8 bg-dark-ink/50 backdrop-blur-sm rounded-lg shadow-lg border border-deep-blue/30 scroll-animate">
+            <h2 class="font-frank-ruhl text-4xl font-bold text-deep-blue mb-6 border-b-2 border-deep-blue/50 pb-2 inline-block relative pr-10 before:absolute before:right-0 before:top-1/2 before:-translate-y-1/2 before:w-8 before:h-1 before:bg-gold-accent before:rounded-full" style="text-shadow: 0 0 8px #0A2A4A;">
+                הדיו הזורם: סיפורו של אמן
+            </h2>
+            <p class="text-lg md:text-xl text-parchment-light mb-4 leading-loose">
+                חייו של מאיר אבינר הם קלף דינמי, בו נכתבת מסה אפימרית של חופש. מילדות דתית בהתיישבות, דרך מרחבי הנגב כרועה צאן, ועד למדרכות תל אביב ולמסדרונות הכלא – מסעו הוא תרגיל בריקוד בין גבולות להשתחררות. הוא כותב את עצמו מחדש, במשיכות מכחול עזות של יצירה, הומור ואהבה.
+            </p>
+            <p class="text-lg md:text-xl text-parchment-light leading-loose">
+                כל צעד הוא מילה, כל נשימה – פסוק, במגילה הגדולה של קיומו. דרכו משמשת השראה לחיפוש אחר משמעות וחירות פנימית, גם במקומות הכבולים ביותר.
+            </p>
+        </section>
+
+        <!-- Section 2: משיחות המכחול - כישרונות האמן -->
+        <section class="mb-24 p-8 bg-dark-ink/50 backdrop-blur-sm rounded-lg shadow-lg border border-emerald-green/30 scroll-animate">
+            <h2 class="font-frank-ruhl text-4xl font-bold text-emerald-green mb-6 border-b-2 border-emerald-green/50 pb-2 inline-block relative pr-10 before:absolute before:right-0 before:top-1/2 before:-translate-y-1/2 before:w-8 before:h-1 before:bg-gold-accent before:rounded-full" style="text-shadow: 0 0 8px #005C4B;">
+                משיחות המכחול: כישרונות האמן
+            </h2>
+            <p class="text-lg md:text-xl text-parchment-light mb-8 leading-loose">
+                כמו אמן קליגרפיה המשלב דיוק עם נשמה, מאיר פורט על מיתרי קיום שונים, ובכל אחד מהם הוא חושף פן אחר של חירות:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="relative p-6 bg-dark-ink/70 rounded-md shadow-inner border border-parchment-light/10 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold text-gold-accent mb-3">אילתור: הפעימה הקיומית</h3>
+                    <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                        לא רק נגינה, אלא פעימה קיומית. תפילה ספונטנית הנולדת ברגע, שיר שמפוגג כעס, ריקוד שמזמן שמחה. בכל מילה נחבא שער לשחרור. מאיר יוצר תפילות ספונטניות, מבטא רגשות דרך צלילים ומילים, ומשתמש באילתור כדי לשחרר כעס או שמחה.
+                    </p>
+                </div>
+                <div class="relative p-6 bg-dark-ink/70 rounded-md shadow-inner border border-parchment-light/10 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold text-gold-accent mb-3">מוזיקה: קול הרוח</h3>
+                    <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                        הגיטרה כנבל עשרה, החליל כקול הרוח. צלילים פורצים מחוץ לכלוב, הופכים לטראנס משחרר המאחד לבבות, בין אם ברחוב הומה או בתא כלא. הוא נגן גיטרה, חליל, חליל צד וכלי נשיפה אלקטרוניים, ויוצר אקורדים ומזמין לצעוק יחד.
+                    </p>
+                </div>
+                <div class="relative p-6 bg-dark-ink/70 rounded-md shadow-inner border border-parchment-light/10 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold text-gold-accent mb-3">קומדיה: חיוך ששובר חומות</h3>
+                    <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                        חיוך ששובר חומות, הומור המפיר שרשראות. הוא מביא "הפוך" - צבע ותקווה - למקומות החשוכים ביותר, הופך צעקה לצחוק. מאיר משלב הומור בפעילויותיו, כמו להפוך צעקות למשחקים מצחיקים.
+                    </p>
+                </div>
+                <div class="relative p-6 bg-dark-ink/70 rounded-md shadow-inner border border-parchment-light/10 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold text-gold-accent mb-3">שירה: מילים על דפי החיים</h3>
+                    <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                        מילים נבחרות בקפידה, או נשפכות כנהר, יוצרות תפילות אישיות וסיפורים הנוגעים בנפש, כתובות בכתב ידו הייחודי על דפי החיים. הוא כותב שירים ותפילות אישיות, ומשלב אותם בהופעות.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: קווי הגורל - פועלו בעולם -->
+        <section class="mb-24 p-8 bg-dark-ink/50 backdrop-blur-sm rounded-lg shadow-lg border border-ruby-red/30 scroll-animate">
+            <h2 class="font-frank-ruhl text-4xl font-bold text-ruby-red mb-6 border-b-2 border-ruby-red/50 pb-2 inline-block relative pr-10 before:absolute before:right-0 before:top-1/2 before:-translate-y-1/2 before:w-8 before:h-1 before:bg-gold-accent before:rounded-full" style="text-shadow: 0 0 8px #8A0F2B;">
+                קווי הגורל: פועלו בעולם
+            </h2>
+            <p class="text-lg md:text-xl text-parchment-light mb-8 leading-loose">
+                פעולותיו של מאיר הן קווים המצטרפים לדגם חיים מורכב, מעבר לעסקים מסורתיים, וכולן נועדו לשחרר ולהביא אור:
+            </p>
+            <div class="space-y-10">
+                <div class="flex flex-col md:flex-row items-start gap-6 bg-dark-ink/70 p-6 rounded-md shadow-inner border border-parchment-light/10 group">
+                    <div class="flex-shrink-0 text-gold-accent text-5xl md:text-6xl group-hover:rotate-6 transition-transform duration-300">
+                        &#x270E; <!-- Pen emoji for ink/writing -->
+                    </div>
+                    <div>
+                        <h3 class="font-frank-ruhl text-3xl font-semibold text-gold-accent mb-3">בלב הכלא: שבירת חומות הבדידות</h3>
+                        <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                            מאיר פורץ את חומות הבדידות, נכנס ללא מורא לבתי כלא, נושא עמו גיטרה, חליל ובעיקר - נוכחות חופשית. "לברוח מהכלא לשעה" - שעה של אילתור, מוזיקה, שיחה, המזכירה לאסיר את חירותו הפנימית. סיפורים מתגלים, דמעות זורמות, שמחה פורצת.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row items-start gap-6 bg-dark-ink/70 p-6 rounded-md shadow-inner border border-parchment-light/10 group">
+                    <div class="flex-shrink-0 text-gold-accent text-5xl md:text-6xl group-hover:rotate-6 transition-transform duration-300">
+                        &#x1F30C; <!-- Night with stars/moon for street art -->
+                    </div>
+                    <div>
+                        <h3 class="font-frank-ruhl text-3xl font-semibold text-gold-accent mb-3">אמנות הרחוב: הבמה הפתוחה</h3>
+                        <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                            הרחוב כבמה, עצים כעמודים. מאיר עומד על ראשו, מתחפש, מנגן. הוא מחזיר את היומיום לממלכת הפלא, מזמין את העוברים והשבים להשתחרר לרגע ולראות את העולם בעיניים חדשות.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row items-start gap-6 bg-dark-ink/70 p-6 rounded-md shadow-inner border border-parchment-light/10 group">
+                    <div class="flex-shrink-0 text-gold-accent text-5xl md:text-6xl group-hover:rotate-6 transition-transform duration-300">
+                        &#x1F32A; <!-- Wind blowing face for breathwork -->
+                    </div>
+                    <div>
+                        <h3 class="font-frank-ruhl text-3xl font-semibold text-gold-accent mb-3">סדנאות הנשימה: המסע הפנימי</h3>
+                        <p class="text-md text-parchment-light opacity-90 leading-relaxed">
+                            נשימה מעגלית, תנועה וקול - אלה הכלים לשחרור מהדפוסים הכובלים. מאיר מנחה מסעות עמוקים אל העצמי הפנימי, אל החופש הטמון בכל נשימה, ומאפשר למשתתפים לגלות כוחות ריפוי עתיקים.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: קלפי ההזמנה - נתיבים נוספים -->
+        <section class="mb-24 p-8 bg-dark-ink/50 backdrop-blur-sm rounded-lg shadow-lg border border-amethyst-purple/30 scroll-animate">
+            <h2 class="font-frank-ruhl text-4xl font-bold text-amethyst-purple mb-6 border-b-2 border-amethyst-purple/50 pb-2 inline-block relative pr-10 before:absolute before:right-0 before:top-1/2 before:-translate-y-1/2 before:w-8 before:h-1 before:bg-gold-accent before:rounded-full" style="text-shadow: 0 0 8px #4B0082;">
+                קלפי ההזמנה: נתיבים נוספים
+            </h2>
+            <p class="text-lg md:text-xl text-parchment-light mb-8 leading-loose">
+                דרכים נוספות להצטרף למסע, לגעת במשיחות המכחול של מאיר, ולחוות את קסם החופש:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="block p-5 bg-deep-blue/70 hover:bg-deep-blue/90 rounded-md shadow-md transition-colors duration-300 transform hover:-translate-y-1 text-parchment-light hover:text-gold-accent text-center">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold mb-2">עקבו בפייסבוק</h3>
+                    <p class="text-md opacity-90">לסיפורים, הגיגים ומועדי הופעות.</p>
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="block p-5 bg-emerald-green/70 hover:bg-emerald-green/90 rounded-md shadow-md transition-colors duration-300 transform hover:-translate-y-1 text-parchment-light hover:text-gold-accent text-center">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold mb-2">פודקאסט "עושים שינוי"</h3>
+                    <p class="text-md opacity-90">הקשיבו לשיחות עומק על חופש ויצירה.</p>
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="block p-5 bg-ruby-red/70 hover:bg-ruby-red/90 rounded-md shadow-md transition-colors duration-300 transform hover:-translate-y-1 text-parchment-light hover:text-gold-accent text-center">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold mb-2">לוח הופעות וכרטיסים</h3>
+                    <p class="text-md opacity-90">חוו את הקסם באילתור, מוזיקה ומילים.</p>
+                </a>
+                <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" rel="noopener noreferrer" class="block p-5 bg-amethyst-purple/70 hover:bg-amethyst-purple/90 rounded-md shadow-md transition-colors duration-300 transform hover:-translate-y-1 text-parchment-light hover:text-gold-accent text-center">
+                    <h3 class="font-frank-ruhl text-2xl font-semibold mb-2">כתבות ומאמרים</h3>
+                    <p class="text-md opacity-90">קראו עוד על מסעו הייחודי.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-10 border-t border-parchment-light/20 scroll-animate">
+            <p class="font-rubik text-md text-parchment-light opacity-70">
+                מאיר אבינר - חופש הוא מצב פנימי. <span class="text-gold-accent">&copy; 2024</span>
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // Scroll Animation Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2, // Trigger when 20% of the element is visible
+            rootMargin: '0px 0px -10% 0px' // Adjust sensitivity
+        });
+
+        document.querySelectorAll('.scroll-animate').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

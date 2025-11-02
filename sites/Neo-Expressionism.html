@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: קולות בתוך הכאוס</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cursor-size: 20px;
+            --cursor-border-color: #FFFFFF;
+            --cursor-shadow-color: rgba(0,0,0,0.8);
+            --cursor-hover-color: #FFEA00; /* Vibrant yellow */
+        }
+        body {
+            cursor: none; /* Hide default cursor */
+            background-color: #1a1a1a; /* Dark background */
+            font-family: 'Heebo', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll from overflow elements */
+        }
+        h1, h2, h3 {
+            font-family: 'Rubik Mono One', monospace;
+            text-shadow: 2px 2px #d43d3d; /* Red shadow for intensity */
+        }
+        #custom-cursor {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border-radius: 50%;
+            border: 2px solid var(--cursor-border-color);
+            box-shadow: 0 0 0 2px var(--cursor-shadow-color);
+            transition: transform 0.15s ease-out, width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+            transform: translate(-50%, -50%); /* Center cursor */
+        }
+        .cursor-active {
+            width: calc(var(--cursor-size) * 1.8);
+            height: calc(var(--cursor-size) * 1.8);
+            background-color: var(--cursor-hover-color);
+            border-color: var(--cursor-shadow-color);
+            box-shadow: 0 0 0 2px var(--cursor-hover-color), 0 0 15px rgba(255, 234, 0, 0.6); /* Glow effect */
+        }
+
+        /* Neo-Expressionist background elements */
+        .neo-bg-element {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.15; /* Subtler background */
+            filter: saturate(1.5) contrast(1.2); /* Enhance colors, contrast */
+        }
+        .neo-bg-1 {
+            background: radial-gradient(circle at 10% 20%, #4a0000 0%, #000000 70%, #200020 100%);
+            transform: rotate(-15deg) scale(1.2);
+        }
+        .neo-bg-2 {
+            background: linear-gradient(135deg, #1f0000 0%, #301a00 50%, #150015 100%);
+            transform: rotate(25deg) scale(1.1);
+            opacity: 0.1;
+            animation: shiftBackground 30s infinite alternate linear;
+        }
+        .neo-bg-3 {
+            background: conic-gradient(from 90deg at 50% 50%, #440000 0%, #0a0a0a 45%, #220022 55%, #0a0a0a 100%);
+            transform: scale(1.3) rotate(45deg);
+            opacity: 0.08;
+            animation: pulseBackground 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes shiftBackground {
+            from { transform: rotate(25deg) scale(1.1) translate(0, 0); }
+            to { transform: rotate(27deg) scale(1.15) translate(10%, 5%); }
+        }
+
+        @keyframes pulseBackground {
+            0% { transform: scale(1.3) rotate(45deg); opacity: 0.08; }
+            50% { transform: scale(1.25) rotate(47deg); opacity: 0.12; }
+            100% { transform: scale(1.3) rotate(45deg); opacity: 0.08; }
+        }
+
+        /* Text distortion on hover */
+        .distort-on-hover:hover {
+            transform: skewX(-5deg) scale(1.02);
+            color: var(--cursor-hover-color);
+            filter: brightness(1.2);
+        }
+        .distort-on-hover {
+            transition: transform 0.2s ease-out, color 0.2s ease-out, filter 0.2s ease-out;
+        }
+        .link-style {
+            position: relative;
+            display: inline-block;
+        }
+        .link-style::after {
+            content: '';
+            position: absolute;
+            right: 0; /* RTL */
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: var(--cursor-hover-color);
+            transition: width 0.3s ease-out;
+        }
+        .link-style:hover::after {
+            width: 100%;
+            left: 0; /* RTL */
+            right: auto;
+        }
+    </style>
+</head>
+<body class="bg-stone-900 text-gray-100 min-h-screen relative overflow-x-hidden">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Neo-Expressionist Background Elements -->
+    <div class="neo-bg-element neo-bg-1"></div>
+    <div class="neo-bg-element neo-bg-2"></div>
+    <div class="neo-bg-element neo-bg-3"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10 p-4 md:p-8 lg:p-16 max-w-screen-xl mx-auto min-h-screen flex flex-col justify-center">
+
+        <!-- Header - Bold and Expressive -->
+        <header class="text-center mb-16 md:mb-24 mt-12 md:mt-24">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl text-yellow-400 leading-tight mb-4 distort-on-hover">
+                מאיר אבינר
+            </h1>
+            <p class="text-xl md:text-2xl lg:text-3xl text-gray-200 font-heebo font-light italic mb-8 distort-on-hover">
+                קולות בתוך הכאוס - מחולל חופש
+            </p>
+            <div class="border-b-4 border-red-700 w-2/3 md:w-1/2 mx-auto my-8 opacity-70"></div>
+            <p class="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                "העולם צריך צחוק, צבע וחופש. אני מחפש חופש פנימי, גם במקומות כבולים כמו כלא, ומשלב הומור, מוזיקה ויצירה כדי לשבור מסגרות."
+            </p>
+        </header>
+
+        <!-- Sections - Asymmetrical and layered -->
+        <section class="mb-20 md:mb-32 relative bg-stone-800 p-6 md:p-10 shadow-lg border-2 border-red-900 -rotate-2 transform hover:rotate-0 transition-transform duration-300 ease-in-out">
+            <h2 class="text-4xl md:text-5xl text-red-400 mb-6 font-bold distort-on-hover">הקריאה הפרועה</h2>
+            <p class="text-lg md:text-xl text-gray-200 leading-loose mb-4">
+                בין קירות נשמות אבודות נצעק לחופש. בתוך המרחב הפרוע של הנשמה, מאיר אבינר פורט על מיתרי הגבול. הוא נביא של קולות שבורים, אמן שמצייר בצליל, צבע ותנועה את דרכו אל הלב. ליבו פועם בקצב האילתור, שפתיו לוחשות שירים שנולדים מתוך הרגע, ועיניו רואות יופי בשיגעון.
+            </p>
+            <p class="text-base md:text-lg text-gray-400 italic">
+                חיים מלאים בבחירות לא שגרתיות, יציאה בשאלה והפיכה לאמן חופשי ומשוחרר ממסגרות.
+            </p>
+        </section>
+
+        <section class="mb-20 md:mb-32 relative bg-purple-900 bg-opacity-30 p-6 md:p-10 shadow-lg border-2 border-yellow-700 rotate-3 transform hover:rotate-0 transition-transform duration-300 ease-in-out self-end w-full md:w-2/3 -mr-8 md:-mr-16">
+            <h2 class="text-4xl md:text-5xl text-yellow-400 mb-6 font-bold distort-on-hover">בין גבעות לכלא</h2>
+            <p class="text-lg md:text-xl text-gray-200 leading-loose mb-4">
+                ילד גבעות שהפך לרועה נשמות. מתוך אדמת בית אל, דרך מרד של צעקות ותווים, פרץ לחופשי. עזב את מסגרות הזהב כדי למצוא את האלוהים בתוך הסערה, בתוך תל אביב הרועשת, בתוך בתי כלא שקופים. מסעו הוא סיפור של קרע וחיבור מחדש - חיבור עמוק יותר, פראי יותר, אמיתי יותר.
+            </p>
+            <p class="text-base md:text-lg text-gray-300 italic">
+                כבנו של הרב שלמה אבינר, גדל בעולם של מסגרות, אך מצא את ייעודו בשבירתם.
+            </p>
+        </section>
+
+        <section class="mb-20 md:mb-32 relative bg-stone-700 p-6 md:p-10 shadow-xl border-4 border-red-600 -rotate-1 transform hover:rotate-0 transition-transform duration-300 ease-in-out w-full md:w-4/5 mx-auto">
+            <h2 class="text-4xl md:text-5xl text-red-300 mb-6 font-bold distort-on-hover">אילתור החופש</h2>
+            <div class="grid md:grid-cols-2 gap-8 text-lg md:text-xl leading-relaxed">
+                <div class="border-r-2 border-dashed border-gray-600 pr-6">
+                    <h3 class="text-3xl text-yellow-300 mb-3 distort-on-hover">מוזיקה: צלילי שבירה</h3>
+                    <p class="text-gray-200 mb-4">
+                        גיטרה שבורה מולידה מנגינת עולם, חליל צד לוחש סודות בחדרי כלא. מאיר יוצר טראנסים מוזיקליים, מזמין אסירים לצעוק יחד, פורט על מיתרי הנשמה בכל כלי. המוזיקה היא שער, היא תפילה ללא מילים, היא הצעקה הטהורה של חופש.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-3xl text-purple-300 mb-3 distort-on-hover">אילתור: ריקוד על התהום</h3>
+                    <p class="text-gray-200 mb-4">
+                        האילתור שלו - ריקוד על סף התהום. יוצר תפילות ספונטניות, מבטא רגשות דרך צלילים ומילים. בכלא, זורק כדור עם מילים אקראיות, יוצר מעגלי חיבוק. זהו כלי לשחרור כעס ושמחה, להפוך כאוס להרמוניה רגעית.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t-2 border-dashed border-gray-600">
+                <h3 class="text-3xl text-red-300 mb-3 distort-on-hover">קומדיה ושירה: אור בתוך החושך</h3>
+                <p class="text-gray-200 mb-4">
+                    קומדיה - קרן אור צהובה בתוך החושך, הופך צעקות למשחקים מצחיקים. שירה - צרחה אילמת, תפילה ללא מילים, קריעה של הלב על נייר. משלב הומור בפעילויותיו, מביא "הפוך" - צבע והומור למקומות חשוכים.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-20 md:mb-32 relative bg-purple-800 bg-opacity-40 p-6 md:p-10 shadow-lg border-2 border-red-700 rotate-1 transform hover:rotate-0 transition-transform duration-300 ease-in-out self-start w-full md:w-2/3 ml-8 md:ml-16">
+            <h2 class="text-4xl md:text-5xl text-yellow-400 mb-6 font-bold distort-on-hover">שבירת קירות</h2>
+            <p class="text-lg md:text-xl text-gray-200 leading-loose mb-4">
+                הכלא אינו קיר, הוא מצב תודעה. שם, בין סורגים, מאיר בונה גשרים של צחוק, שירה ונגינה. מגיע 3-4 פעמים בשבוע לבתי כלא, שר, מנגן ומאלתר עם אסירים. "לברוח מהכלא לשעה" - זו לא בריחה, זו יצירה. זה לזרוע זרעי תקווה באדמה צחיחה, להפוך צעקה לחיבוק משותף. הוא נכנס לבדו, ללא ליווי, ומביא הקלה, חופש פנימי.
+            </p>
+            <p class="text-base md:text-lg text-gray-400 italic">
+                ממומן מתרומות פרטיות לשמירה על עצמאות, ללא מימון ממשלתי.
+            </p>
+        </section>
+
+        <section class="mb-20 md:mb-32 relative bg-stone-800 p-6 md:p-10 shadow-xl border-4 border-yellow-600 -rotate-3 transform hover:rotate-0 transition-transform duration-300 ease-in-out w-full md:w-3/4 mx-auto">
+            <h2 class="text-4xl md:text-5xl text-red-400 mb-6 font-bold distort-on-hover">החופש הפנימי</h2>
+            <p class="text-lg md:text-xl text-gray-200 leading-loose mb-4">
+                החופש אינו יעד, הוא תנועה. הוא בנשימה, בצעד ברחוב, בציור על קיר. לשבור את המוסכמות, לצבוע את העולם בצבעים פרועים של נשמה. מאיר רואה בכישרונותיו כלי לשינוי, להבאת אור למקומות חשוכים. חיים ללא מסגרות, עם דגש על תנועה פיזית (הליכות, שחייה) וחופש פנימי. כי העולם זקוק לצחוק, לצבע, ולחופש אמיתי - החופש להיות מי שאתה באמת, גם בתוך כלוב.
+            </p>
+            <p class="text-base md:text-lg text-gray-300 italic">
+                פעילויותיו כוללות סדנאות נשימה מודעת ואמנות רחוב ייחודית בתל אביב.
+            </p>
+        </section>
+
+        <!-- Call to Engagement - Stylized Links -->
+        <section class="text-center mt-20 mb-20">
+            <h2 class="text-4xl md:text-5xl text-yellow-400 mb-8 font-bold distort-on-hover">פתח שערים: הזמנה למסע</h2>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="link-style text-xl md:text-2xl text-gray-200 hover:text-yellow-400 transform hover:scale-105 transition-all duration-200">
+                    <span class="font-heebo">פייסבוק</span> - סיפורים מהכלא
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="link-style text-xl md:text-2xl text-gray-200 hover:text-yellow-400 transform hover:scale-105 transition-all duration-200">
+                    <span class="font-heebo">פודקאסט</span> - להיות חופשי בכלא
+                </a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" rel="noopener noreferrer" class="link-style text-xl md:text-2xl text-gray-200 hover:text-yellow-400 transform hover:scale-105 transition-all duration-200">
+                    <span class="font-heebo">יוטיוב</span> - שיר "פלואו"
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="link-style text-xl md:text-2xl text-gray-200 hover:text-yellow-400 transform hover:scale-105 transition-all duration-200">
+                    <span class="font-heebo">הופעות חיות</span> - לוח אירועים
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer - Minimal and Symbolic -->
+    <footer class="text-center py-8 text-gray-500 text-sm italic relative z-10">
+        <div class="border-t-2 border-red-900 w-1/3 mx-auto my-4 opacity-50"></div>
+        <p>יצירה דיגיטלית בהשראת מאיר אבינר - מוקדש לחופש ולשבירת מסגרות.</p>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const interactiveElements = document.querySelectorAll('a, button, .distort-on-hover, .link-style');
+
+        // Initial position check to prevent FOUC for cursor
+        cursor.style.visibility = 'hidden';
+
+        document.addEventListener('mousemove', e => {
+            if (cursor.style.visibility === 'hidden') {
+                cursor.style.visibility = 'visible';
+            }
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+        });
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('cursor-active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('cursor-active');
+            });
+        });
+
+        // Parallax effect for background elements
+        const neoBgElements = document.querySelectorAll('.neo-bg-element');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            // Adjust the speed and direction for each background layer
+            neoBgElements.forEach((el, index) => {
+                let speed = 0.05 + (index * 0.02); // Different speeds for layers
+                el.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+
+    </script>
+</body>
+</html>

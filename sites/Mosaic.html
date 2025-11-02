@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - פסיפס של חופש</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Tailwind Configuration */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'meir-dark': '#1A110A', /* Deep earthy brown-black */
+                        'meir-medium': '#4A413A', /* Muted stone grey */
+                        'meir-light': '#8A7D6D', /* Warm grey-brown */
+                        'meir-accent-gold': '#D4AF37', /* Rich gold */
+                        'meir-accent-blue': '#4C9DBE', /* Deep turquoise-blue */
+                        'meir-accent-red': '#9C3F46', /* Terracotta red */
+                        'meir-text-primary': '#E0E0E0', /* Off-white for readability */
+                        'meir-text-secondary': '#BDBDBD', /* Lighter grey for subtle text */
+                    },
+                    fontFamily: {
+                        alef: ['Alef', 'sans-serif'],
+                        amatic: ['Amatic SC', 'cursive'],
+                    },
+                }
+            }
+        }
+
+        /* Base Styles & Custom Scrollbar */
+        body {
+            font-family: 'Alef', sans-serif;
+            background-color: #1A110A; /* Fallback */
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden;
+            color: #E0E0E0;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar - Artistic Touch */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #2a1f11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #D4AF37 0%, #4C9DBE 100%);
+            border-radius: 10px;
+            border: 2px solid #1A110A;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #4C9DBE 0%, #D4AF37 100%);
+        }
+
+        /* Mosaic Pattern Background Layers */
+        .mosaic-bg-layer-1 {
+            background-image:
+                linear-gradient(rgba(26, 17, 10, 0.7) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 17, 10, 0.7) 1px, transparent 1px),
+                linear-gradient(rgba(26, 17, 10, 0.7) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(26, 17, 10, 0.7) 2px, transparent 2px);
+            background-size: 20px 20px, 20px 20px, 60px 60px, 60px 60px;
+            background-color: #1A110A;
+        }
+
+        .mosaic-bg-layer-2 {
+            background-image:
+                radial-gradient(ellipse at center, rgba(74, 65, 58, 0.2) 0%, transparent 70%),
+                repeating-linear-gradient(45deg, rgba(74, 65, 58, 0.1) 0%, rgba(74, 65, 58, 0.1) 5px, transparent 5px, transparent 10px);
+            background-size: 100% 100%, 80px 80px;
+            background-blend-mode: overlay;
+        }
+
+        /* Specific tile styling */
+        .content-tile {
+            @apply bg-meir-medium bg-opacity-80 rounded-lg p-6 md:p-8 shadow-2xl transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-meir-accent-gold/40 relative overflow-hidden;
+        }
+        .content-tile::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: linear-gradient(45deg, rgba(212,175,55,0.05) 0%, rgba(76,157,190,0.05) 50%, rgba(156,63,70,0.05) 100%);
+            background-size: 200% 200%;
+            animation: tile-shimmer 15s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .content-tile > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes tile-shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-title-shadow {
+            text-shadow: 0 0 15px rgba(212,175,55,0.7), 0 0 30px rgba(76,157,190,0.5);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden cursor-none">
+
+    <!-- Custom Cursor - High Contrast & Immersive -->
+    <div id="custom-cursor" class="pointer-events-none fixed z-[9999] rounded-full border-2 border-white shadow-[0_0_0_2px_rgba(0,0,0,0.8)] transition-transform duration-100 ease-out h-6 w-6 -ml-3 -mt-3"></div>
+
+    <!-- Background Layers - Mosaic & Parallax -->
+    <div class="fixed inset-0 mosaic-bg-layer-1 opacity-70 z-[-3]"></div>
+    <div id="mosaic-layer-1" class="fixed inset-0 mosaic-bg-layer-2 opacity-15 z-[-2] transform scale-[1.05]"></div>
+    <div id="mosaic-layer-2" class="fixed inset-0 bg-gradient-to-br from-meir-dark via-meir-dark to-meir-medium opacity-80 z-[-1] transform scale-[1.1]"></div>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 min-h-screen text-meir-text-primary font-alef pb-20">
+
+        <!-- Hero Section - The Grand Tile -->
+        <section class="h-screen flex items-center justify-center text-center p-4 bg-meir-dark/50 backdrop-blur-sm relative overflow-hidden">
+            <div class="relative z-10 p-8 rounded-xl bg-black/30 shadow-xl border-2 border-meir-accent-gold/30">
+                <h1 class="font-amatic text-7xl md:text-8xl lg:text-9xl mb-4 leading-none hero-title-shadow">
+                    מאיר אבינר
+                </h1>
+                <p class="text-3xl md:text-4xl font-alef font-light text-meir-text-secondary drop-shadow-md">
+                    פסיפס של חופש, אילתור ויצירה
+                </p>
+                <div class="mt-8">
+                    <svg class="animate-bounce mx-auto" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21L12 3M12 21L17 16M12 21L7 16" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+        </section>
+
+        <!-- Thematic Sections - Interlocking Tiles -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 md:mt-24">
+            <!-- הולדת החופש: השורשים -->
+            <section class="content-tile mb-24 md:mb-32">
+                <h2 class="font-amatic text-5xl md:text-6xl text-meir-accent-gold mb-6 md:mb-8 text-right border-b border-meir-accent-gold/50 pb-4">
+                    הולדת החופש: השורשים
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 text-lg md:text-xl text-meir-text-primary">
+                    <p>
+                        בין אבני ההתנחלות בית אל, מוקף במסורת ובשתיקת המדבר, צמח מאיר. מנער גבעות שרעה צאן בגליל, חייו היו טבולים באדמה, בשורשים עמוקים של אמונה ועבודה. אך מתחת לפני השטח, כבר בערו ניצוצות של מרד, של כמיהה לחופש רחב יותר מכל מסגרת. זוהי ההתחלה, הפסיפס הראשון שבו צבעי המסורת והטבע החלו להתמזג עם צללים של שאלה.
+                    </p>
+                    <p>
+                        החיים הכפריים והדתיים העניקו לו בסיס איתן, אך גם גבולות. בגיל צעיר, נחשף למסעות פנימיים וחיצוניים כאחד – מחיפוש אחר מים לעדרים ועד התמודדות עם עולם רוחני עשיר. אך הנשמה, כמו הנחל שסלל את דרכו בסלע, כבר ביקשה לפרוץ, לגלות נתיבים חדשים, משוחררים יותר. זה היה הקונפליקט היפהפה שהוביל אותו למסע חייו המרתק.
+                    </p>
+                </div>
+            </section>
+
+            <!-- הדרך החדשה: לפרוץ את הגבולות -->
+            <section class="content-tile mb-24 md:mb-32 bg-meir-medium/90">
+                <h2 class="font-amatic text-5xl md:text-6xl text-meir-accent-blue mb-6 md:mb-8 text-left border-b border-meir-accent-blue/50 pb-4">
+                    הדרך החדשה: לפרוץ את הגבולות
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 text-lg md:text-xl text-meir-text-primary">
+                    <p>
+                        כשחליל הצד נשבר, לא רק כלי נגינה הלך לאיבוד, אלא דרך חיים חדשה נולדה. מאיר בחר באילתור, באמנות הרחוב, כדרך חיים וכפרנסה. הוא עזב את אורח החיים הדתי, עבר לתל אביב, והפך לאמן חופשי ומשוחרר ממוסכמות. בחירה אמיצה לחיות מתוך תשוקה, להפוך את האתגרים לבמה, ואת החופש הפנימי לכוח מניע.
+                    </p>
+                    <p>
+                        חייו החדשים הם פסיפס של בחירות לא שגרתיות: טיפוס על עצים בשביל הופעה, נגינה בעיניים כבולות, עמידה על ראש באמצע הרחוב. כל אלו אינם רק פעלולים, אלא ביטוי עמוק לתפיסת עולם שדוחה מסגרות ומחפשת את האמת הפנימית. הוא מוצא את יופיו של הקיום באותנטיות, בתנועה ובשבירת הטבואים – אמנות כפילוסופיה של חיים.
+                    </p>
+                </div>
+            </section>
+
+            <!-- קול האילתור: מנגינת הנשמה -->
+            <section class="content-tile mb-24 md:mb-32">
+                <h2 class="font-amatic text-5xl md:text-6xl text-meir-accent-gold mb-6 md:mb-8 text-right border-b border-meir-accent-gold/50 pb-4">
+                    קול האילתור: מנגינת הנשמה
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 text-lg md:text-xl text-meir-text-primary">
+                    <p>
+                        מאיר הוא אמן אילתור ראשון במעלה. בין אם זה תפילות ספונטניות, הלחנת צלילים מן הרגע, או משחקי קומדיה עם הקהל, הוא חי בתוך ה"כאן ועכשיו" של היצירה. נגן גיטרה, חליל וכלי נשיפה אלקטרוניים, הוא יוצר חוויה רב-חושית שבה הרגש הוא המנצח והחופש הוא המוטו. האילתור עבורו הוא כלי לשחרור, להתמודדות ולביטוי עמוק.
+                    </p>
+                    <p>
+                        מעבר למוזיקה, הוא משלב הומור (קומדיה) ושירה בפעילויותיו. הוא הופך צעקות למשחקים מצחיקים, מביא כובע נוצה לכלא, וכותב שירים אישיים שמהדהדים את מסעו. מאיר רואה בכישרונותיו כלי לשינוי: "העולם צריך צחוק, צבע וחופש". הוא מנגיש אמנות שמחברת אנשים, משחררת ויוצרת שמחה גם במקומות הלא צפויים ביותר.
+                    </p>
+                </div>
+            </section>
+
+            <!-- בתי הכלא: חופש פנימי -->
+            <section class="content-tile mb-24 md:mb-32 bg-meir-medium/90">
+                <h2 class="font-amatic text-5xl md:text-6xl text-meir-accent-red mb-6 md:mb-8 text-left border-b border-meir-accent-red/50 pb-4">
+                    בתי הכלא: חופש פנימי
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 text-lg md:text-xl text-meir-text-primary">
+                    <p>
+                        פעילותו בבתי כלא היא הליבה של שליחותו. 3-4 פעמים בשבוע, הוא נכנס לבדו למקומות האפלים ביותר בחברה הישראלית, מביא מוזיקה, צחוק ואילתור לאסירים. "לברוח מהכלא לשעה" – כך הוא מתאר את החוויה שהוא יוצר. דרך שיחות, נגינה משותפת ותפילות ספונטניות, הוא מאפשר לאסירים לגעת לרגע בחופש פנימי, מעבר לסורגים.
+                    </p>
+                    <p>
+                        פרויקט "סיפורים מכלא" בפייסבוק חושף את העוצמה של המפגשים הללו: אסיר אילם שנושך גיטרה כאילו מנסה לדבר דרכה, תפילות משותפות ששוברות לבבות ומחברות נשמות. מאיר מוכיח שחופש אינו מצב חיצוני, אלא תודעה פנימית שניתן למצוא ולטפח בכל מקום, גם בכלא. הוא פועל ללא מימון ממשלתי, נתמך בתרומות פרטיות כדי לשמור על עצמאותו האמנותית והרוחנית.
+                    </p>
+                </div>
+            </section>
+
+            <!-- אמנות ברחוב: הבמה היא העולם -->
+            <section class="content-tile mb-24 md:mb-32">
+                <h2 class="font-amatic text-5xl md:text-6xl text-meir-accent-blue mb-6 md:mb-8 text-right border-b border-meir-accent-blue/50 pb-4">
+                    אמנות ברחוב: הבמה היא העולם
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 text-lg md:text-xl text-meir-text-primary">
+                    <p>
+                        אמנות הרחוב של מאיר היא חוויה בלתי נשכחת. לפני שנים, היא שימשה ככפרנסה כשהיה צריך לשלם על חליל שבור. הוא התחפש לקרקס, טיפס על עצים ושלטי רחוב, ונגן חליל או גיטרה בצורה מפתיעה. בתל אביב, הוא הפך להיות אייקון של חופש ויצירה ספונטנית, שמפרקת את הגבולות שבין אמן לקהל, בין במה לרחוב.
+                    </p>
+                    <p>
+                        הופעותיו ברחוב משלבות פעלולים, הומור, ומוזיקה, ומשאירות חותם בלב העוברים והשבים. הוא יכול לנגן שירי שבת בלבוש לבן, לעמוד על ראשו תוך כדי נגינה, או פשוט להיות שם – ליצור רגע של קסם, של השראה ושל חופש בעומס חיי העיר. אמנות רחוב עבורו היא לא רק בידור, אלא קריאה להתבוננות, לשבירת שגרה ולחיבור אנושי אמיתי.
+                    </p>
+                </div>
+            </section>
+
+            <!-- סדנאות וטקסים: תנועה, נשימה וריפוי -->
+            <section class="content-tile mb-24 md:mb-32 bg-meir-medium/90">
+                <h2 class="font-amatic text-5xl md:text-6xl text-meir-accent-red mb-6 md:mb-8 text-left border-b border-meir-accent-red/50 pb-4">
+                    סדנאות וטקסים: תנועה, נשימה וריפוי
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 text-lg md:text-xl text-meir-text-primary">
+                    <p>
+                        מעבר להופעות, מאיר מנחה סדנאות נשימה מודעת (Breathwork) וטקסי ריפוי. מפגשים אלו, לעיתים בנוכחות מאות משתתפים, מאפשרים חקירה עמוקה של הגוף והנפש. דרך נשימה מעגלית, מדיטציה, ניגונים וריפוי קולי, הוא מוביל אנשים למסע של שחרור רגשי, מציאת חופש פנימי וחיבור מחודש לעצמי.
+                    </p>
+                    <p>
+                        הוא משלב את מסורת ישראל עם גישות טיפוליות מודרניות, ומציע תכניות מיוחדות לחגים ספיריטואליים כמו יום כיפור, ט"ו בשבט ותשעה באב. פעילויותיו הן עדות נוספת לרב-גוניותו, ולשאיפתו העמוקה להביא ריפוי, אותנטיות וחופש לעולם, בכל דרך אפשרית. מאיר מאמין בכוחה של התנועה הפיזית והנפשית לשבור כל כלא.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- הזמנה לחוויה: פסיפס של חיבור -->
+        <section class="py-24 text-center bg-meir-dark/90 shadow-inner shadow-meir-accent-gold/20">
+            <h2 class="font-amatic text-6xl md:text-7xl text-meir-accent-gold mb-12 drop-shadow-lg">
+                הזמנה לחוויה: הצטרפו למסע
+            </h2>
+            <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto px-4 text-meir-text-secondary">
+                מאיר אבינר מזמין אתכם לגעת בפסיפס חייו, לחוות את עוצמת האילתור, לצלול למעמקי החופש הפנימי ולגלות את הכוח שבכם. הנה כמה דרכים להצטרף לסיפור:
+            </p>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8 max-w-5xl mx-auto px-4">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" rel="noopener noreferrer" class="mosaic-link-tile bg-meir-accent-blue hover:bg-meir-accent-blue/80">
+                    פייסבוק אישי
+                </a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" rel="noopener noreferrer" class="mosaic-link-tile bg-meir-accent-gold hover:bg-meir-accent-gold/80">
+                    פודקאסט "עושים שינוי"
+                </a>
+                <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" rel="noopener noreferrer" class="mosaic-link-tile bg-meir-accent-red hover:bg-meir-accent-red/80">
+                    יוטיוב - ראיון מלא
+                </a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" rel="noopener noreferrer" class="mosaic-link-tile bg-meir-accent-blue hover:bg-meir-accent-blue/80">
+                    לוח הופעות וכרטיסים
+                </a>
+                <a href="https://creators.spotify.com/pod/profile/doingchange/episodes/182--------e2jajj9" target="_blank" rel="noopener noreferrer" class="mosaic-link-tile bg-meir-accent-gold hover:bg-meir-accent-gold/80">
+                    פודקאסט בספוטיפיי
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-meir-text-secondary text-sm bg-meir-dark/95 border-t border-meir-accent-gold/10">
+            <p>&copy; 2024 פסיפס של מאיר אבינר. כל הזכויות שמורות ליצירה זו.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        const speed = 0.2; // Smoothing factor for cursor movement
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Start animation
+        animateCursor();
+
+        // Parallax Effect for Background Layers
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const layer1 = document.getElementById('mosaic-layer-1');
+            const layer2 = document.getElementById('mosaic-layer-2');
+
+            if (layer1) {
+                layer1.style.transform = `translateY(${scrollY * 0.1}px) scale(1.05)`;
+            }
+            if (layer2) {
+                layer2.style.transform = `translateY(${scrollY * 0.05}px) scale(1.1)`;
+            }
+        });
+
+        // Add class for link tiles
+        const linkTiles = document.querySelectorAll('.mosaic-link-tile');
+        linkTiles.forEach(tile => {
+            tile.classList.add('block', 'min-w-[200px]', 'text-xl', 'font-alef', 'font-bold', 'py-4', 'px-6', 'rounded-full', 'shadow-xl', 'transform', 'transition-all', 'duration-200', 'ease-in-out', 'hover:scale-105', 'hover:shadow-2xl', 'text-white', 'hover:text-meir-text-primary');
+        });
+    </script>
+</body>
+</html>

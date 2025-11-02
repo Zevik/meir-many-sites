@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר: הדים בצללים – אודות חופש</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Noto+Serif+Hebrew:wght@303;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --goya-dark: #1a1a1a;
+            --goya-medium: #333333;
+            --goya-light: #f5f5f5;
+            --goya-accent: #b8860b; /* Dark goldenrod */
+            --goya-red-accent: #8b0000; /* Dark red */
+            --goya-text-primary: #e0e0e0;
+            --goya-text-secondary: #aaaaaa;
+        }
+
+        body {
+            font-family: 'Noto Serif Hebrew', serif;
+            background-color: var(--goya-dark);
+            color: var(--goya-text-primary);
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Frank Ruhl Libre', serif;
+            color: var(--goya-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .goya-background {
+            background: radial-gradient(circle at top left, var(--goya-medium) 0%, transparent 70%),
+                        radial-gradient(circle at bottom right, var(--goya-medium) 0%, transparent 70%),
+                        linear-gradient(135deg, var(--goya-dark) 0%, #0d0d0d 100%);
+            background-blend-mode: multiply;
+            filter: sepia(0.2) saturate(0.8) contrast(1.2);
+            transition: background-position 0.8s ease-out;
+        }
+
+        .goya-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM16 14v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm32 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 14v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM16 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm32 32v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM16 54v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm32 52v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 54v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM16 74v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm32 72v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 74v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM16 94v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm32 92v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 94v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM16 114v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm32 112v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 114v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 0v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .custom-cursor {
+            border: 2px solid var(--goya-light); /* White border */
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark shadow */
+            transition: transform 0.1s ease-out, opacity 0.3s ease-out;
+            transform: translate(-50%, -50%); /* Center the cursor on its coordinates */
+            z-index: 9999; /* Always on top */
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .text-goya-accent {
+            color: var(--goya-accent);
+        }
+        .bg-goya-dark {
+            background-color: var(--goya-dark);
+        }
+        .bg-goya-medium {
+            background-color: var(--goya-medium);
+        }
+        .text-goya-text-primary {
+            color: var(--goya-text-primary);
+        }
+        .text-goya-text-secondary {
+            color: var(--goya-text-secondary);
+        }
+    </style>
+</head>
+<body class="relative text-goya-text-primary min-h-screen">
+
+    <!-- Goya-esque Fixed Background -->
+    <div id="goya-bg" class="goya-background goya-texture fixed inset-0 z-[-1]"></div>
+
+    <!-- Custom Cursor Element -->
+    <div id="custom-cursor" class="custom-cursor fixed pointer-events-none rounded-full w-6 h-6 opacity-0"></div>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 p-6 md:p-12 lg:p-24 max-w-6xl mx-auto space-y-24">
+
+        <!-- Header - Intro -->
+        <header class="text-center py-16 md:py-24 section-hidden">
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 text-goya-accent">
+                מאיר אבינר: צללים של חופש, הדים של נשמה
+            </h1>
+            <p class="text-xl md:text-2xl text-goya-text-secondary max-w-3xl mx-auto leading-relaxed opacity-90">
+                בנפש סוערת, בין קודש לחול, בין כלא למרחב אינסופי – נפרש סיפורו של אמן.
+                מסע בנבכי ההוויה, דרך משיחות מכחול כהות ובהירות של חייו של מאיר אבינר,
+                איש שפיצח את כבלי המוסכמות וחי את האמת הפרועה שבו.
+            </p>
+        </header>
+
+        <!-- Section 1: ילדות בצל ההר (Childhood in the Shadow of the Mountain) -->
+        <section class="min-h-screen flex items-center justify-center section-hidden">
+            <div class="bg-goya-medium p-8 md:p-12 shadow-lg max-w-3xl border border-gray-700">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-center text-goya-light">
+                    ילדות בצל ההר: שירת הרועה, גבולות הנשמה
+                </h2>
+                <p class="text-lg md:text-xl leading-loose mb-4">
+                    בהרי יהודה, בין שתילי בראשית ואבן ירושלמית, גדל מאיר.
+                    בן למשפחת מופת, שורשיו נטועים עמוק באדמת קודש,
+                    נפשו רעדה עם צאן עזים וגמלים.
+                    רועה צאן צעיר, אילם בתפילת בוקר אך משתוקק לנגן את לחן רוח הבריות.
+                    המרחבים היו כבתי כלא שקופים, הגבולות ברורים, אך בתוכו כבר בערו זיקוקי פראות וחופש.
+                </p>
+                <p class="text-lg md:text-xl leading-loose text-goya-text-secondary">
+                    "מהו חופש, אם לא הדהוד הנשמה בין סלעים עתיקים וציוץ ציפורי בוקר?" לחש לעצמו,
+                    עת עמד לבדו מול השמש השוקעת, מחפש מעבר לאופק המוגדר.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: הקריעה: פריצת המסגרות (The Rupture: Breaking the Frameworks) -->
+        <section class="min-h-screen flex items-center justify-center section-hidden">
+            <div class="relative max-w-4xl mx-auto p-8 md:p-12 bg-goya-dark shadow-xl border-t-4 border-goya-red-accent">
+                <div class="absolute inset-0 bg-gradient-to-br from-goya-red-accent/20 to-transparent z-0"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-center text-goya-red-accent">
+                        הקריעה: פריצת המסגרות, לידת האמן
+                    </h2>
+                    <p class="text-lg md:text-xl leading-loose mb-4">
+                        היה זה קול שבר, לא רק של חליל שבור, אלא של אשליית ביטחון.
+                        בגיל צעיר, המיר את גדרות ההלכה למרחבי הנפש הפרועים.
+                        "יציאה בשאלה" קראו לזה, אך עבורו הייתה זו כניסה -
+                        כניסה אל פנימיות חסרת גבולות, אל מבוך האילתור.
+                        הצורך לחיות, לנשום, ליצור ללא כבלים, דחף אותו אל הרחוב,
+                        אל הבמה הפתוחה של החיים, שם שילם את חובו לא רק לחליל, אלא לעצמו.
+                    </p>
+                    <p class="text-lg md:text-xl leading-loose text-goya-text-secondary">
+                        כמו דמות מציור של גויה, מורד בייאוש ובקונפורמיות,
+                        קם אדם חדש מתוך ההריסות, עם גיטרה ככלי נשק וחיוך ככלי עבודה.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: בתי כלא ונשמות כלואות (Prisons and Imprisoned Souls) -->
+        <section class="min-h-screen flex items-center justify-center section-hidden">
+            <div class="relative max-w-3xl mx-auto p-8 md:p-12 bg-goya-medium shadow-xl border-r-4 border-goya-accent">
+                <div class="absolute inset-0 bg-gradient-to-tl from-goya-accent/20 to-transparent z-0"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-center text-goya-light">
+                        בתי כלא ונשמות כלואות: אור בקמרון אפל
+                    </h2>
+                    <p class="text-lg md:text-xl leading-loose mb-4">
+                        הפרדוקס בחייו של מאיר: הוא מצא את ייעודו האמיתי במקומות הצרים ביותר -
+                        בבתי כלא, בין קירות עבים, אזיקים וייאוש.
+                        שם, ללא ליווי, עם גיטרה, חליל וכובע נוצה, הוא מביא שמחה, צחוק ואילתור.
+                        "לברוח מהכלא לשעה," הוא מתאר זאת.
+                        הוא משליך כדור של מילים אקראיות, יוצר מעגלי חיבוק ספונטניים,
+                        הופך צעקות למשחקים ומוזיקה לטרנס של תקווה.
+                    </p>
+                    <p class="text-lg md:text-xl leading-loose text-goya-text-secondary">
+                        כמו במלאכת אמן של ציור קיר בצינוק, מביא מאיר את "ההפוך" - צבע והומור
+                        לנשמות כלואות, מראה שגם בתוך גבולות, החופש הפנימי אינו יודע סורג ובריח.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: הבמה כזירת קרב: אמנות הרחוב (The Stage as a Battlefield: Street Art) -->
+        <section class="min-h-screen flex items-center justify-center section-hidden">
+            <div class="relative max-w-3xl mx-auto p-8 md:p-12 bg-goya-dark shadow-xl border-l-4 border-goya-text-primary">
+                <div class="absolute inset-0 bg-gradient-to-br from-goya-text-primary/10 to-transparent z-0"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-center text-goya-accent">
+                        הבמה כזירת קרב: אמנות הרחוב של הפרובוקטור
+                    </h2>
+                    <p class="text-lg md:text-xl leading-loose mb-4">
+                        תל אביב - לא רק עיר, אלא קנווס חי.
+                        מאיר, בתחפושת של קרקס, עמד ללא ניע על שלטים, ניגן חליל על עצים,
+                        או על עמודים, לעיתים בעיניים כבולות, לעיתים עומד על ראשו.
+                        זוהי אמנות רחוב פרובוקטיבית, שוברת מוסכמות,
+                        מחפשת את התהודה בין המהומה האורבנית.
+                        הופעות רחוב אימפרוביזטוריות, ספונטניות,
+                        מכניסות יופי פראי ושאלה נוקבת: מהי אמנות? מהו חופש?
+                    </p>
+                    <p class="text-lg md:text-xl leading-loose text-goya-text-secondary">
+                        "העולם צריך צחוק, צבע וחופש," הוא קורא, קולו נבלע בהמולה,
+                        אך חותמו נותר חרוט בזיכרון, כמו חריטה עוצמתית בלוח נחושת.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: נשימה, צחוק, חופש: הפילוסופיה (Breath, Laughter, Freedom: The Philosophy) -->
+        <section class="min-h-screen flex items-center justify-center section-hidden">
+            <div class="relative max-w-4xl mx-auto p-8 md:p-12 bg-goya-medium shadow-xl border-t-4 border-goya-red-accent">
+                <div class="absolute inset-0 bg-gradient-to-br from-goya-red-accent/20 to-transparent z-0"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-center text-goya-light">
+                        נשימה, צחוק, חופש: הפילוסופיה של אמן
+                    </h2>
+                    <p class="text-lg md:text-xl leading-loose mb-4">
+                        חייו של מאיר הם תרגום חי לפילוסופיה של חופש פנימי.
+                        הוא מנחה סדנאות נשימה מודעת, מאמין בכוח הריפוי של הצליל והתנועה.
+                        כל אילתור, כל בדיחה, כל צליל גיטרה או חליל -
+                        הם כלים לשבירת דפוסים, לשחרור רגשי, למציאת "אור" גם במקומות החשוכים ביותר.
+                        הוא חי ללא מסגרות, בתנועה מתמדת, מחפש את האותנטיות שמעבר למוסכם.
+                    </p>
+                    <p class="text-lg md:text-xl leading-loose text-goya-text-secondary">
+                        "האם אנו באמת חופשיים, או רק כלואים בתפיסותינו?" הוא שואל,
+                        ומזמין כל אחד לצאת למסע אל תוך נשמתו, אל החופש האמיתי.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: הד האחרון: עולם שצריך צבע (The Final Echo: A World That Needs Color) -->
+        <section class="min-h-screen flex flex-col items-center justify-center section-hidden">
+            <div class="relative max-w-5xl mx-auto p-8 md:p-12 bg-goya-dark shadow-xl border-b-4 border-goya-accent text-center">
+                <div class="absolute inset-0 bg-gradient-to-tl from-goya-accent/10 to-transparent z-0"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-goya-light">
+                        הד אחרון: עולם שצריך צחוק, צבע וחופש
+                    </h2>
+                    <p class="text-lg md:text-xl leading-loose mb-8">
+                        מאיר אבינר הוא לא רק אמן; הוא תופעה.
+                        הוא ההוכחה לכך שגבולות הם רק אשליה, ושרוח האדם יכולה לפרוץ כל כלא, פנימי או חיצוני.
+                        בעולם שזועק לשחרור, לקשר אנושי אמיתי,
+                        מאיר הוא מגדלור של תקווה, קול המזמין אותנו להתבונן בצללים שלנו
+                        ולמצוא בהם את האור החבוי, את החופש הבלתי מתפשר.
+                        אמן החיים, המלחין את סיפורו בתווים של מרד, חמלה ושמחה אמיתית.
+                    </p>
+                    <div class="mt-8 pt-8 border-t border-gray-700">
+                        <h3 class="text-2xl font-bold mb-4 text-goya-accent">להמשיך את המסע:</h3>
+                        <ul class="space-y-3 text-lg md:text-xl text-goya-text-secondary">
+                            <li><a href="https://www.facebook.com/meiraviner/" target="_blank" class="hover:text-goya-light transition-colors duration-300">פייסבוק אישי (סיפורים מהכלא ועוד)</a></li>
+                            <li><a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="hover:text-goya-light transition-colors duration-300">פודקאסט "עושים שינוי" (פרק 182)</a></li>
+                            <li><a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="hover:text-goya-light transition-colors duration-300">לוח הופעות וכרטיסים</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="hover:text-goya-light transition-colors duration-300">יוטיוב – שיר "פלואו"</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            cursor.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+        });
+
+        // Background Parallax / Subtle Movement
+        const goyaBg = document.getElementById('goya-bg');
+        let mouseX = 0, mouseY = 0;
+        let bgPosX = 0, bgPosY = 0;
+        const speed = 0.015; // How fast the background moves relative to mouse
+
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateBg() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            bgPosX += (-(mouseX - centerX) * speed - bgPosX) * 0.1;
+            bgPosY += (-(mouseY - centerY) * speed - bgPosY) * 0.1;
+
+            goyaBg.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
+            requestAnimationFrame(animateBg);
+        }
+        animateBg();
+
+        // Section Scroll Reveal
+        const sections = document.querySelectorAll('section, header');
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of element visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('section-hidden');
+                    entry.target.classList.add('section-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.classList.add('section-hidden'); // Ensure hidden by default
+            sectionObserver.observe(section);
+        });
+    </script>
+</body>
+</html>

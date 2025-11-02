@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאיר אבינר - חופש בשעווה נמסה</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            cursor: none; /* Hide default cursor */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: #1c1917; /* stone-900 */
+        }
+        .custom-cursor-border, .custom-cursor-shadow {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: all 0.05s ease-out; /* Smoother movement */
+        }
+        .custom-cursor-border {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #FFFFFF; /* White border */
+            opacity: 0.9;
+        }
+        .custom-cursor-shadow {
+            width: 36px;
+            height: 36px;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.8); /* Dark, high-opacity shadow */
+            opacity: 0.9;
+        }
+
+        /* Encaustic-inspired CSS */
+        .encaustic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background-color: #1c1917; /* Base dark color */
+            overflow: hidden;
+        }
+        .encaustic-layer {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            opacity: 0.1;
+            background-size: cover;
+            filter: blur(2px) sepia(0.3);
+            animation: subtle-move 30s infinite alternate ease-in-out;
+        }
+        .layer-1 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(#noise)" fill="%236b7280"/></svg>'); /* Gray noise */
+            top: -10%; left: -10%;
+            transform: rotate(5deg) scale(1.1);
+            animation-delay: 0s;
+            opacity: 0.08;
+        }
+        .layer-2 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.4" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(#noise)" fill="%23b45309"/></svg>'); /* Amber noise */
+            top: -5%; left: -5%;
+            transform: rotate(-3deg) scale(1.05);
+            animation-delay: 5s;
+            opacity: 0.06;
+            filter: blur(3px) sepia(0.5) brightness(0.8);
+        }
+        .layer-3 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(#noise)" fill="%234b5563"/></svg>'); /* Darker gray noise */
+            top: 0; left: 0;
+            transform: rotate(2deg) scale(1.02);
+            animation-delay: 10s;
+            opacity: 0.05;
+            filter: blur(1px) contrast(1.2);
+        }
+        .layer-4 {
+            background: radial-gradient(circle at 80% 20%, rgba(253,186,116,0.1), transparent),
+                        radial-gradient(circle at 20% 80%, rgba(250,204,21,0.08), transparent); /* Soft glows */
+            top: 0; left: 0;
+            animation-delay: 15s;
+            opacity: 0.2;
+            filter: blur(5px);
+        }
+        .layer-5 {
+            background: linear-gradient(135deg, rgba(120,53,15,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(253,224,71,0.1) 100%);
+            top: 0; left: 0;
+            transform: rotate(10deg);
+            animation-delay: 20s;
+            opacity: 0.07;
+            filter: blur(2px) contrast(1.1);
+        }
+
+        @keyframes subtle-move {
+            0% { transform: translate(0, 0) scale(1.0); opacity: 0.05; }
+            50% { transform: translate(5%, 5%) scale(1.05) rotate(1deg); opacity: 0.1; }
+            100% { transform: translate(0, 0) scale(1.0) rotate(0deg); opacity: 0.05; }
+        }
+
+        /* Typography */
+        .font-frank { font-family: 'Frank Ruhl Libre', serif; }
+        .font-rubik { font-family: 'Rubik', sans-serif; }
+        .font-amatic { font-family: 'Amatic SC', cursive; }
+
+        /* Custom scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 50px;
+            border: 2px solid #a8a29e; /* stone-400 */
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 8px;
+            z-index: 50;
+            animation: bounce-scroll 2s infinite;
+        }
+        .scroll-indicator::after {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background-color: #a8a29e;
+            border-radius: 2px;
+            animation: scroll-dot 2s infinite;
+        }
+
+        @keyframes bounce-scroll {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes scroll-dot {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(15px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive text sizes for readability */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem !important; }
+            h2 { font-size: 2rem !important; }
+            h3 { font-size: 2.2rem !important; }
+            p, a { font-size: 1.1rem !important; }
+            .text-lg { font-size: 1.1rem !important; }
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: blur(20px) brightness(1); }
+            50% { filter: blur(30px) brightness(1.2); transform: scale(1.05); }
+        }
+        @keyframes animate-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+        }
+        @keyframes animate-pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor-shadow"></div>
+    <div class="custom-cursor-border"></div>
+
+    <div class="encaustic-bg">
+        <div class="encaustic-layer layer-1"></div>
+        <div class="encaustic-layer layer-2"></div>
+        <div class="encaustic-layer layer-3"></div>
+        <div class="encaustic-layer layer-4"></div>
+        <div class="encaustic-layer layer-5"></div>
+    </div>
+
+    <div class="relative z-10 p-8 md:p-16 lg:p-24 min-h-screen text-stone-100 antialiased max-w-5xl mx-auto">
+
+        <header class="text-center mb-20 mt-12 md:mt-24">
+            <h1 class="text-6xl md:text-7xl font-frank font-bold mb-4 text-amber-200 drop-shadow-lg leading-tight">מאיר אבינר</h1>
+            <h2 class="text-3xl md:text-4xl font-amatic font-bold text-yellow-500 drop-shadow-md">חופש בשעווה נמסה</h2>
+        </header>
+
+        <section class="mb-24 relative p-6 md:p-8 bg-stone-800/60 rounded-lg shadow-xl border border-yellow-700/30 backdrop-blur-sm">
+            <h3 class="text-4xl font-frank font-semibold mb-6 text-amber-300 border-b-2 border-yellow-700/50 pb-2">הרועה שידע לזרוע חופש</h3>
+            <p class="text-xl font-rubik leading-relaxed mb-6 text-stone-200">
+                בנפח שעווה עתיק נכתב סיפורו של מאיר, רועה צאן לשעבר, שבין גבעות יהודה לשכונות תל אביב, חיפש והגדיר מחדש את משמעות החופש.
+                בן למשפחה שהיא יסוד איתן, יצא למסע אישי של המסה ובנייה מחדש.
+                כמו צבעים חמים הנארגים לשכבות שעווה, כך נשזרו חייו של מאיר- מחיי כפר תמימים, דרך נעורים סוערים כ"נער גבעות", ועד ליצירה אמנותית חסרת גבולות.
+            </p>
+            <p class="text-xl font-rubik leading-relaxed text-stone-200">
+                קירות הכלא הפכו עבורו לקנבס, ושירי האסירים למנגינות חופש.
+                הוא מחבר בין עולמות, שובר מחיצות דקות ועבות, ומוכיח שגם במקומות כבולים- החופש הפנימי הוא האמת היחידה.
+            </p>
+            <div class="absolute -top-4 -left-4 w-12 h-12 bg-yellow-700/70 rounded-full blur-md opacity-70"></div>
+            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-amber-600/70 rounded-full blur-md opacity-70"></div>
+        </section>
+
+        <section class="mb-24 relative p-6 md:p-8 bg-stone-800/60 rounded-lg shadow-xl border border-yellow-700/30 backdrop-blur-sm">
+            <h3 class="text-4xl font-frank font-semibold mb-6 text-amber-300 border-b-2 border-yellow-700/50 pb-2">האילתור כשפת הנשמה</h3>
+            <p class="text-xl font-rubik leading-relaxed mb-6 text-stone-200">
+                כמו אמן אנקאוסטיק המצייר ללא תוכנית ברורה, מאיר הוא אמן האילתור.
+                הוא יוצר תפילות ספונטניות, מנגן צלילים שנובעים מעומק הרגע, והופך כל מפגש למופע חי של רגשות.
+                בבתי כלא, כדור פשוט עם מילים אקראיות הופך לכלי לשחרור, ומעגלי חיבוק מאולתרים פורצים את בדידותם של הכלואים.
+            </p>
+            <p class="text-xl font-rubik leading-relaxed text-stone-200">
+                גיטרה, חליל, כלי נשיפה אלקטרוניים- כולם הופכים לכלים בידיו לשינוי, לטראנס מוזיקלי שסוחף את הקהל, ושובר את השגרה האפורה.
+                גם צעקות הופכות למשחקים קומיים, ונוצה בכובע יכולה להביא "הפוך" של צבע וחיוך למקומות הכי חשוכים.
+            </p>
+            <div class="absolute -top-6 right-6 w-10 h-10 bg-red-700/70 rounded-full blur-md opacity-70 animate-pulse"></div>
+            <div class="absolute bottom-4 left-4 w-8 h-8 bg-cyan-600/70 rounded-full blur-md opacity-70 animate-pulse-slow"></div>
+        </section>
+
+        <section class="mb-24 relative p-6 md:p-8 bg-stone-800/60 rounded-lg shadow-xl border border-yellow-700/30 backdrop-blur-sm">
+            <h3 class="text-4xl font-frank font-semibold mb-6 text-amber-300 border-b-2 border-yellow-700/50 pb-2">אור בקירות הכלא</h3>
+            <p class="text-xl font-rubik leading-relaxed mb-6 text-stone-200">
+                פועלו המרכזי של מאיר הוא בבתי הכלא, מקומות של כליאה פיזית ורגשית.
+                שם, ללא ליווי, הוא מביא עמו צחוק, מוזיקה וסיפורים, משמש כגשר בין עולמות.
+                הוא מאמין שהאמנות יכולה להיות "בריחה מהכלא לשעה", רגע של חופש פנימי המאפשר לאסירים להתחבר מחדש לעצמם.
+            </p>
+            <p class="text-xl font-rubik leading-relaxed text-stone-200">
+                סיפורים מרגשים על אסיר אילם הנושך בגיטרה, או תפילות משותפות הפורצות בבכי ושמחה- מעידים על כוחו המרפא של מאיר.
+                הוא ממומן מתרומות פרטיות קטנות, שומר על עצמאותו, וממשיך במסעו להביא אור למקומות שזקוקים לו יותר מכל.
+            </p>
+             <div class="absolute -top-4 -right-4 w-10 h-10 bg-yellow-400/70 rounded-lg blur-sm opacity-70 transform rotate-45"></div>
+            <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-amber-500/70 rounded-lg blur-sm opacity-70 transform -rotate-30"></div>
+        </section>
+
+        <section class="mb-24 relative p-6 md:p-8 bg-stone-800/60 rounded-lg shadow-xl border border-yellow-700/30 backdrop-blur-sm">
+            <h3 class="text-4xl font-frank font-semibold mb-6 text-amber-300 border-b-2 border-yellow-700/50 pb-2">הבמה היא העולם כולו</h3>
+            <p class="text-xl font-rubik leading-relaxed mb-6 text-stone-200">
+                לאורך השנים, תל אביב שימשה כבמת הרחוב שלו.
+                הוא התחפש לקרקס, ניגן על עצים, עמד ללא ניע על שלטים- מבצעי אמנות ספונטניים שהפכו את העיר לקנבס חי.
+                "העולם צריך צחוק, צבע וחופש", הוא מצהיר, וחי את הפילוסופיה הזו בכל הופעה, בכל מפגש, ובכל נשימה.
+            </p>
+            <p class="text-xl font-rubik leading-relaxed text-stone-200">
+                הוא מטפל מוסמך בנשימה מעגלית, מנחה סדנאות תרפיית קול בתנועה, וממשיך לחפש את השחרור בכל מסגרת, ולשבור אותה באומץ לב.
+                המסע שלו הוא יצירה מתמשכת, שכבה על שכבה, כמו ציור אנקאוסטיק שמתגלה מחדש עם כל מבט.
+            </p>
+             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-700/30 rounded-full blur-2xl opacity-50 animate-glow"></div>
+        </section>
+
+        <section class="text-center p-8 bg-stone-900/70 rounded-lg shadow-lg border border-yellow-700/30 backdrop-blur-sm">
+            <h3 class="text-3xl font-frank font-semibold mb-6 text-amber-300">חיבורים וקישורים</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg font-rubik text-yellow-200">
+                <a href="https://www.facebook.com/meiraviner/" target="_blank" class="block p-4 bg-stone-700/50 hover:bg-yellow-700/40 transition-colors duration-300 rounded-md shadow-md border border-stone-600">פייסבוק אישי</a>
+                <a href="https://www.eranstern.co.il/episode-182/" target="_blank" class="block p-4 bg-stone-700/50 hover:bg-yellow-700/40 transition-colors duration-300 rounded-md shadow-md border border-stone-600">פודקאסט "עושים שינוי"</a>
+                <a href="https://www.youtube.com/watch?v=LB3VpkqIZZ4" target="_blank" class="block p-4 bg-stone-700/50 hover:bg-yellow-700/40 transition-colors duration-300 rounded-md shadow-md border border-stone-600">יוטיוב - פרק הפודקאסט</a>
+                <a href="https://www.youtube.com/watch?v=fptfll4_yKE" target="_blank" class="block p-4 bg-stone-700/50 hover:bg-yellow-700/40 transition-colors duration-300 rounded-md shadow-md border border-stone-600">יוטיוב - שיר "פלואו"</a>
+                <a href="https://live.tickchak.co.il/meir-aviner" target="_blank" class="block p-4 bg-stone-700/50 hover:bg-yellow-700/40 transition-colors duration-300 rounded-md shadow-md border border-stone-600">לוח הופעות וכרטיסים</a>
+                <a href="https://www.mako.co.il/weekend/Article-d7aa99d07424561006.htm" target="_blank" class="block p-4 bg-stone-700/50 hover:bg-yellow-700/40 transition-colors duration-300 rounded-md shadow-md border border-stone-600">מאמר על חייו (מאקו, 2018)</a>
+            </div>
+        </section>
+
+        <footer class="text-center mt-20 text-sm text-stone-400 font-rubik">
+            <p>אתר זה נוצר בהשראת מסעו של מאיר אבינר.</p>
+        </footer>
+    </div>
+
+    <div class="scroll-indicator"></div>
+
+    <script>
+        const customCursorBorder = document.querySelector('.custom-cursor-border');
+        const customCursorShadow = document.querySelector('.custom-cursor-shadow');
+        const encausticLayers = document.querySelectorAll('.encaustic-layer');
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Apply slight parallax to background layers
+            encausticLayers.forEach((layer, index) => {
+                const speed = (index + 1) * 0.005; // Different speeds for each layer
+                const xOffset = (mouseX - window.innerWidth / 2) * speed;
+                const yOffset = (mouseY - window.innerHeight / 2) * speed;
+                layer.style.transform = `translate(${xOffset}px, ${yOffset}px) rotate(${5 * Math.sin(index)}deg) scale(1.05)`;
+            });
+        });
+
+        function animateCursor() {
+            // Lerp the cursor position for a smoother effect
+            cursorX += (mouseX - cursorX) * 0.2;
+            cursorY += (mouseY - cursorY) * 0.2;
+
+            customCursorBorder.style.left = `${cursorX}px`;
+            customCursorBorder.style.top = `${cursorY}px`;
+            customCursorShadow.style.left = `${cursorX}px`;
+            customCursorShadow.style.top = `${cursorY}px`;
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
+        // Add a subtle hover effect to clickable elements
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                customCursorBorder.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                customCursorShadow.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                customCursorBorder.style.opacity = '1';
+                customCursorShadow.style.opacity = '1';
+            });
+            el.addEventListener('mouseleave', () => {
+                customCursorBorder.style.transform = 'translate(-50%, -50%) scale(1)';
+                customCursorShadow.style.transform = 'translate(-50%, -50%) scale(1)';
+                customCursorBorder.style.opacity = '0.9';
+                customCursorShadow.style.opacity = '0.9';
+            });
+        });
+
+        // Simple scroll detection to fade out scroll indicator
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollIndicator.style.opacity = '0';
+            scrollIndicator.style.transition = 'opacity 0.3s ease-out';
+
+            scrollTimeout = setTimeout(() => {
+                if (window.scrollY < 100) { // Only show if near top
+                    scrollIndicator.style.opacity = '1';
+                }
+            }, 1000); // Re-show after 1 second if not scrolled far
+        });
+        // Initial check
+        if (window.scrollY > 100) {
+            scrollIndicator.style.opacity = '0';
+        }
+
+        // Generate dynamic wax-like elements on click (simple version)
+        document.body.addEventListener('click', (e) => {
+            const waxDrip = document.createElement('div');
+            waxDrip.classList.add('absolute', 'w-4', 'h-4', 'bg-yellow-700/50', 'rounded-full', 'blur-sm', 'opacity-0', 'pointer-events-none');
+            waxDrip.style.left = `${e.clientX}px`;
+            waxDrip.style.top = `${e.clientY}px`;
+            waxDrip.style.transition = 'all 0.5s ease-out';
+            waxDrip.style.transform = 'scale(0)';
+            waxDrip.style.zIndex = '9998'; // Below cursor but above content
+
+            document.body.appendChild(waxDrip);
+
+            // Animate it
+            setTimeout(() => {
+                waxDrip.style.opacity = '1';
+                waxDrip.style.transform = 'scale(1) rotate(45deg)';
+            }, 10);
+            setTimeout(() => {
+                waxDrip.style.opacity = '0';
+                waxDrip.style.transform = 'scale(1.2) rotate(90deg)';
+                waxDrip.style.width = '8px';
+                waxDrip.style.height = '8px';
+            }, 400);
+            setTimeout(() => {
+                waxDrip.remove();
+            }, 900);
+        });
+    </script>
+</body>
+</html>
